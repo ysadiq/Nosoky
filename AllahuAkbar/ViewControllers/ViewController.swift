@@ -8,10 +8,36 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var prayerName: UILabel!
+    @IBOutlet weak var prayerTime: UILabel!
+
+    lazy var viewModel = {
+        ViewModel()
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        initViewModel()
+    }
+
+    func initViewModel() {
+        viewModel.updateLoadingStatus = { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            switch self.viewModel.contentState {
+            case .populated:
+                DispatchQueue.main.async {
+                    self.prayerName.text = self.viewModel.nextPrayer?.prayerName
+                    self.prayerTime.text = self.viewModel.nextPrayer?.time
+                }
+            default:
+                break
+            }
+        }
+
+        viewModel.fetchData()
     }
 }
 

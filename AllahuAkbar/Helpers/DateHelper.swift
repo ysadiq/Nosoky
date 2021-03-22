@@ -16,10 +16,6 @@ enum DateHelper {
     ) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = dateFormat
-
-        formatter.locale = locale
-
-        formatter.dateFormat = format
         return formatter.string(from: date)
     }
 }
