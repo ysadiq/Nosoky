@@ -107,10 +107,10 @@
 		76219F1826084E8700FE3B83 /* AllahuAkbar */ = {
 			isa = PBXGroup;
 			children = (
-				76219F652608501200FE3B83 /* Model.swift */,
-				76219F6026084FD000FE3B83 /* DataProvider.swift */,
-				76219F6A260852C800FE3B83 /* ViewModel.swift */,
 				76219F1926084E8700FE3B83 /* AppDelegate.swift */,
+				76219F782608614E00FE3B83 /* DataProvider */,
+				76219F742608614800FE3B83 /* Model */,
+				76219F7C2608615500FE3B83 /* ViewModel */,
 				76219F5B26084F3500FE3B83 /* ViewControllers */,
 				76219F5626084EFE00FE3B83 /* Managers */,
 				76219F5A26084F1700FE3B83 /* Interface+Assets */,
@@ -162,6 +162,30 @@
 				76219F1D26084E8700FE3B83 /* ViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		76219F742608614800FE3B83 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76219F652608501200FE3B83 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		76219F782608614E00FE3B83 /* DataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				76219F6026084FD000FE3B83 /* DataProvider.swift */,
+			);
+			path = DataProvider;
+			sourceTree = "<group>";
+		};
+		76219F7C2608615500FE3B83 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				76219F6A260852C800FE3B83 /* ViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
