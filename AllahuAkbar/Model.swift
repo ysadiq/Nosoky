@@ -5,7 +5,6 @@
 //  Created by Yahya Saddiq on 3/22/21.
 //
 
-// MARK: - Welcome
 struct Model: Codable {
     let code: Int
     let status: String
