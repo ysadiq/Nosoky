@@ -19,6 +19,7 @@
 		76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6026084FD000FE3B83 /* DataProvider.swift */; };
 		76219F662608501200FE3B83 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F652608501200FE3B83 /* Model.swift */; };
 		76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6A260852C800FE3B83 /* ViewModel.swift */; };
+		76219F84260872F200FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		76219F6026084FD000FE3B83 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		76219F652608501200FE3B83 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		76219F6A260852C800FE3B83 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		76219F83260872F200FE3B83 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				76219F7C2608615500FE3B83 /* ViewModel */,
 				76219F5B26084F3500FE3B83 /* ViewControllers */,
 				76219F5626084EFE00FE3B83 /* Managers */,
+				76219F882608730100FE3B83 /* Helpers */,
 				76219F5A26084F1700FE3B83 /* Interface+Assets */,
 				76219F2726084E8800FE3B83 /* Info.plist */,
 			);
@@ -186,6 +189,14 @@
 				76219F6A260852C800FE3B83 /* ViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		76219F882608730100FE3B83 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				76219F83260872F200FE3B83 /* DateHelper.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */,
+				76219F84260872F200FE3B83 /* DateHelper.swift in Sources */,
 				76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */,
 				76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */,
 				76219F662608501200FE3B83 /* Model.swift in Sources */,

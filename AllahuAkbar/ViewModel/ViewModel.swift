@@ -5,6 +5,8 @@
 //  Created by Yahya Saddiq on 3/22/21.
 //
 
+import Foundation
+
 public enum ContentState {
     case loading
     case error
@@ -14,7 +16,7 @@ public enum ContentState {
 
 class ViewModel {
     private let dataProvider = DataProvider()
-    var dateTimes: [Datetime] = []
+    private(set) var dateTimes: [Datetime] = []
     var updateLoadingStatus: (() -> Void)?
     var contentState: ContentState = .empty {
         didSet {
