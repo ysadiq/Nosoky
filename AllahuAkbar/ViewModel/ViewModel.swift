@@ -35,9 +35,7 @@ class ViewModel {
             return nil
         }
 
-        if todaysPrayers.imsak > currentTime {
-            return ("Imsak", todaysPrayers.imsak, nil)
-        } else if todaysPrayers.fajr > currentTime {
+        if todaysPrayers.fajr > currentTime {
             return ("Fajr", todaysPrayers.fajr, nil)
         } else if todaysPrayers.sunrise > currentTime {
             return ("Sunrise", todaysPrayers.sunrise, nil)
@@ -47,9 +45,11 @@ class ViewModel {
             return ("Asr", todaysPrayers.asr, nil)
         } else if todaysPrayers.maghrib > currentTime {
             return ("Maghrib", todaysPrayers.maghrib, nil)
+        } else if todaysPrayers.isha > currentTime {
+            return ("Isha", todaysPrayers.isha, nil)
         }
 
-        return ("Isha", todaysPrayers.isha, nil)
+        return ("Imsak", todaysPrayers.imsak, nil)
     }()
 
     func fetchData() {
