@@ -28,7 +28,7 @@ class ViewModel {
         DateHelper.string(dateFormat: "HH:mm")
     }()
 
-    lazy var nextPrayer: (prayerName: String, time: String)? = {
+    lazy var nextPrayer: (prayerName: String, time: String, timeLeft: String?)? = {
         guard let todaysPrayers = dateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times else {
@@ -36,20 +36,20 @@ class ViewModel {
         }
 
         if todaysPrayers.imsak > currentTime {
-            return ("Imsak", todaysPrayers.imsak)
+            return ("Imsak", todaysPrayers.imsak, nil)
         } else if todaysPrayers.fajr > currentTime {
-            return ("Fajr", todaysPrayers.fajr)
+            return ("Fajr", todaysPrayers.fajr, nil)
         } else if todaysPrayers.sunrise > currentTime {
-            return ("Sunrise", todaysPrayers.sunrise)
+            return ("Sunrise", todaysPrayers.sunrise, nil)
         } else if todaysPrayers.dhuhr > currentTime {
-            return ("Dhuhr", todaysPrayers.dhuhr)
+            return ("Dhuhr", todaysPrayers.dhuhr, nil)
         } else if todaysPrayers.asr > currentTime {
-            return ("Asr", todaysPrayers.asr)
+            return ("Asr", todaysPrayers.asr, nil)
         } else if todaysPrayers.maghrib > currentTime {
-            return ("Maghrib", todaysPrayers.maghrib)
+            return ("Maghrib", todaysPrayers.maghrib, nil)
         }
 
-        return ("Isha", todaysPrayers.isha)
+        return ("Isha", todaysPrayers.isha, nil)
     }()
 
     func fetchData() {
