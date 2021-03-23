@@ -7,6 +7,8 @@
 
 import Foundation
 
+// API Doc: https://prayertimes.date/api/docs/this_month
+
 class DataProvider {
     enum APIError: String, Error {
         case noNetwork = "No Network"
