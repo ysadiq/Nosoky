@@ -18,6 +18,9 @@ class ViewModel {
     private let dataProvider = DataProvider()
     private(set) var dateTimes: [Datetime] = []
     var updateLoadingStatus: (() -> Void)?
+    lazy var lastUpdated: Date? = {
+        dataProvider.lastUpdated
+    }()
     var contentState: ContentState = .empty {
         didSet {
             self.updateLoadingStatus?()

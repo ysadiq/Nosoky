@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AllahuAkbar" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Muzzammil" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,15 +39,33 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Kj-uY3">
+                                <rect key="frame" x="165.5" y="802.5" width="83" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                <color key="textColor" red="0.40067061659999997" green="0.40067061659999997" blue="0.40067061659999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday, 12 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jm3-OP-bkm">
+                                <rect key="frame" x="148" y="828" width="118" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="0.40067061659999997" green="0.40067061659999997" blue="0.40067061659999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="jm3-OP-bkm" firstAttribute="top" secondItem="e6E-Kj-uY3" secondAttribute="bottom" constant="8.5" id="KrG-nP-FGV"/>
                             <constraint firstItem="jbU-Wh-hyi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ctx-cj-do7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jm3-OP-bkm" secondAttribute="bottom" constant="17" id="iji-Zh-xtM"/>
+                            <constraint firstItem="jm3-OP-bkm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="itZ-9A-26c"/>
                             <constraint firstItem="jbU-Wh-hyi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-50" id="n6r-hf-CKK"/>
+                            <constraint firstItem="e6E-Kj-uY3" firstAttribute="centerX" secondItem="jm3-OP-bkm" secondAttribute="centerX" id="sYN-cQ-mJn"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lastUpdated" destination="e6E-Kj-uY3" id="DYr-gg-w7R"/>
+                        <outlet property="lastUpdatedDate" destination="jm3-OP-bkm" id="vXt-fK-5RF"/>
                         <outlet property="prayerName" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
                         <outlet property="prayerTime" destination="VlA-Cu-2PY" id="r9w-BS-dC7"/>
                     </connections>

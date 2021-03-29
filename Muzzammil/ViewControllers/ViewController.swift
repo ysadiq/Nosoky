@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var prayerName: UILabel!
     @IBOutlet weak var prayerTime: UILabel!
+    @IBOutlet weak var lastUpdated: UILabel!
+    @IBOutlet weak var lastUpdatedDate: UILabel!
 
     lazy var viewModel = {
         ViewModel()
@@ -31,6 +33,11 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.prayerName.text = self.viewModel.nextPrayer?.prayerName
                     self.prayerTime.text = self.viewModel.nextPrayer?.time
+                    if let lastUpdated = self.viewModel.lastUpdated {
+                        self.lastUpdatedDate.text = DateHelper.string(from: lastUpdated, dateFormat: "EEEE, MMM d, yyyy")
+                        self.lastUpdated.isHidden = false
+                        self.lastUpdatedDate.isHidden = false
+                    }
                 }
             default:
                 break
