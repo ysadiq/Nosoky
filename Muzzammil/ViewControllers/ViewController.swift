@@ -33,11 +33,9 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.prayerName.text = self.viewModel.nextPrayer?.prayerName
                     self.prayerTime.text = self.viewModel.nextPrayer?.time
-                    if let lastUpdated = self.viewModel.lastUpdated {
-                        self.lastUpdatedDate.text = DateHelper.string(from: lastUpdated, dateFormat: "EEEE, MMM d, yyyy")
-                        self.lastUpdated.isHidden = false
-                        self.lastUpdatedDate.isHidden = false
-                    }
+                    self.lastUpdatedDate.text = self.viewModel.lastUpdated
+                    self.lastUpdated.isHidden = false
+                    self.lastUpdatedDate.isHidden = false
                 }
             default:
                 break

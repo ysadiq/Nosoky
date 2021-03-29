@@ -18,8 +18,12 @@ class ViewModel {
     private let dataProvider = DataProvider()
     private(set) var dateTimes: [Datetime] = []
     var updateLoadingStatus: (() -> Void)?
-    lazy var lastUpdated: Date? = {
-        dataProvider.lastUpdated
+    lazy var lastUpdated: String? = {
+        guard let lastUpdated = dataProvider.lastUpdated else {
+            return nil
+        }
+
+        return DateHelper.string(from: lastUpdated, dateFormat: "EEEE, MMM d, yyyy")
     }()
     var contentState: ContentState = .empty {
         didSet {
