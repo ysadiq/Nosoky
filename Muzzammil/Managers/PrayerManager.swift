@@ -41,9 +41,13 @@ class PrayerManager {
 
     var otherPrayers: [Prayer] {
         if let nextPrayer = nextPrayer {
-            return todaysPrayers.filter { $0.name != nextPrayer.name }
+            var prayers = todaysPrayers.filter { $0.name != nextPrayer.name }
+            if prayers.count > 4 {
+                _ = prayers.popLast()
+            }
+            return prayers
         } else {
-            return tomorrowsPrayers.filter { $0.name != "Isha" }
+            return tomorrowsPrayers.filter { $0.name != "Isha" && $0.name != "Night" }
         }
     }
 
@@ -72,6 +76,10 @@ class PrayerManager {
 
     private func buildPrayersList(_ prayers: Times) -> [Prayer] {
         [
+            Prayer(
+                "Night",
+                lastNightThird ?? Time(0, 0)
+            ),
             Prayer(
                 "Fajr",
                 (Int(prayers.fajr.split(separator: ":").first ?? "") ?? 0,

@@ -56,7 +56,8 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = PrayerManager.shared.nextPrayer else {
+        guard let nextPrayer = PrayerManager.shared.nextPrayer,
+              PrayerManager.shared.nextPrayer?.name != "Night" else {
             configureLastThirdNight()
             return
         }
