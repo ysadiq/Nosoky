@@ -140,9 +140,9 @@
 		76219F0D26084E8700FE3B83 = {
 			isa = PBXGroup;
 			children = (
-				76219F1826084E8700FE3B83 /* AllahuAkbar */,
-				76219F2F26084E8800FE3B83 /* AllahuAkbarTests */,
-				76219F3A26084E8800FE3B83 /* AllahuAkbarUITests */,
+				76219F1826084E8700FE3B83 /* Muzzammil */,
+				76219F2F26084E8800FE3B83 /* MuzzammilTests */,
+				76219F3A26084E8800FE3B83 /* MuzzammilUITests */,
 				76219F9926087D4B00FE3B83 /* Static Widget */,
 				76219F9426087D4B00FE3B83 /* Frameworks */,
 				76219F1726084E8700FE3B83 /* Products */,
@@ -160,7 +160,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		76219F1826084E8700FE3B83 /* AllahuAkbar */ = {
+		76219F1826084E8700FE3B83 /* Muzzammil */ = {
 			isa = PBXGroup;
 			children = (
 				76219F1926084E8700FE3B83 /* AppDelegate.swift */,
@@ -173,27 +173,24 @@
 				76219F5A26084F1700FE3B83 /* Interface+Assets */,
 				76219F2726084E8800FE3B83 /* Info.plist */,
 			);
-			name = AllahuAkbar;
 			path = Muzzammil;
 			sourceTree = "<group>";
 		};
-		76219F2F26084E8800FE3B83 /* AllahuAkbarTests */ = {
+		76219F2F26084E8800FE3B83 /* MuzzammilTests */ = {
 			isa = PBXGroup;
 			children = (
 				76219F3026084E8800FE3B83 /* AllahuAkbarTests.swift */,
 				76219F3226084E8800FE3B83 /* Info.plist */,
 			);
-			name = AllahuAkbarTests;
 			path = MuzzammilTests;
 			sourceTree = "<group>";
 		};
-		76219F3A26084E8800FE3B83 /* AllahuAkbarUITests */ = {
+		76219F3A26084E8800FE3B83 /* MuzzammilUITests */ = {
 			isa = PBXGroup;
 			children = (
 				76219F3B26084E8800FE3B83 /* AllahuAkbarUITests.swift */,
 				76219F3D26084E8800FE3B83 /* Info.plist */,
 			);
-			name = AllahuAkbarUITests;
 			path = MuzzammilUITests;
 			sourceTree = "<group>";
 		};
