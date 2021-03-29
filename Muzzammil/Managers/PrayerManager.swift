@@ -100,7 +100,7 @@ class PrayerManager {
         ]
     }
 
-    func timeLeftTo(_ time: Time) -> Time {
+    func timeLeftTo(_ time: Time) -> (time: Time, timeUnit: String) {
         let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
 
         var hoursDifference = differenceInHours(time.hour,
@@ -108,7 +108,7 @@ class PrayerManager {
         let minutesDifference = differenceInMinutes(time.minute,
                                                     currentTime.minute ?? 0,
                                                     &hoursDifference)
-        return (hoursDifference, minutesDifference)
+        return ((hoursDifference, minutesDifference), hoursDifference > 0 ? "hr" : "min")
     }
 
 

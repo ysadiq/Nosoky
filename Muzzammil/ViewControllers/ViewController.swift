@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var nextPrayerTitleLabel: UILabel!
     @IBOutlet weak var prayerNameLabel: UILabel!
     @IBOutlet weak var prayerTimeLabel: UILabel!
+    @IBOutlet weak var prayerTimeUnitLabel: UILabel!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var lastUpdatedDateLabel: UILabel!
     @IBOutlet var otherPrayersStackView: [PrayerStackView]!
@@ -60,9 +61,8 @@ class ViewController: UIViewController {
             return
         }
 
-        let timeLeft = PrayerManager.shared.timeLeftTo(nextPrayer.time)
         prayerNameLabel.text = nextPrayer.name
-        prayerTimeLabel.text = "\(timeLeft.hour):\(timeLeft.minute)"
+        setPrayerTimeLabel(nextPrayer.time)
     }
 
     func updateOtherPrayers() {
@@ -90,12 +90,16 @@ class ViewController: UIViewController {
         }
 
         nextPrayerTitleLabel.text = "The last third of the night starts in"
-
-        let timeLeft = PrayerManager.shared.timeLeftTo(lastNightThird)
-        prayerTimeLabel.text = "\(timeLeft.hour):\(timeLeft.minute)"
+        setPrayerTimeLabel(lastNightThird)
 
         prayerNameLabel.isHidden = true
         lastThirdNightStackView.isHidden = true
+    }
+
+    func setPrayerTimeLabel(_ time: Time) {
+        let timeLeft = PrayerManager.shared.timeLeftTo(time)
+        prayerTimeLabel.text = timeLeft.time.hour != 0 ? "\(timeLeft.time.hour):\(timeLeft.time.minute)" : "\(timeLeft.time.minute)"
+        prayerTimeUnitLabel.text = timeLeft.timeUnit
     }
 
     func startShimmering() {
