@@ -34,7 +34,7 @@ class ViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.updateNextPrayer()
                     self.updateOtherPrayers()
-                    self.updateLastUpdate()
+                    self.updateLastUpdated()
                 }
             default:
                 break
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         }
     }
 
-    func updateLastUpdate() {
+    func updateLastUpdated() {
         self.lastUpdatedDate.text = self.viewModel.lastUpdated
         self.lastUpdated.isHidden = false
         self.lastUpdatedDate.isHidden = false
