@@ -7,6 +7,8 @@
 
 import Foundation
 
+typealias Prayer = (name: String, time: String, timeLeft: String?)
+
 public enum ContentState {
     case loading
     case error
@@ -35,7 +37,7 @@ class ViewModel {
         DateHelper.string(dateFormat: "HH:mm")
     }()
 
-    lazy var nextPrayer: (prayerName: String, time: String, timeLeft: String?)? = {
+    lazy var nextPrayer: Prayer? = {
         guard let todaysPrayers = dateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times else {
@@ -57,6 +59,38 @@ class ViewModel {
         }
 
         return ("Imsak", todaysPrayers.imsak, nil)
+    }()
+
+    lazy var otherPrayers: [Prayer] = {
+        guard let todaysPrayers = dateTimes.filter({ dateTime in
+            dateTime.date.gregorian == DateHelper.string()
+        }).first?.times else {
+            return []
+        }
+
+        var otherPrayers: [Prayer] = []
+
+        if todaysPrayers.fajr != nextPrayer?.time {
+            otherPrayers.append(("Fajr", todaysPrayers.fajr, nil))
+        }
+
+        if todaysPrayers.dhuhr != nextPrayer?.time {
+            otherPrayers.append(("Dhuhr", todaysPrayers.dhuhr, nil))
+        }
+
+        if todaysPrayers.asr != nextPrayer?.time {
+            otherPrayers.append(("Asr", todaysPrayers.asr, nil))
+        }
+
+        if todaysPrayers.maghrib != nextPrayer?.time {
+            otherPrayers.append(("Maghrib", todaysPrayers.maghrib, nil))
+        }
+
+        if todaysPrayers.isha != nextPrayer?.time {
+            otherPrayers.append(("Isha", todaysPrayers.isha, nil))
+        }
+
+        return otherPrayers
     }()
 
     func fetchData() {
