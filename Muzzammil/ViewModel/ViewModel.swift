@@ -20,13 +20,14 @@ class ViewModel {
     private let dataProvider = DataProvider()
     private(set) var dateTimes: [Datetime] = []
     var updateLoadingStatus: (() -> Void)?
-    lazy var lastUpdated: String? = {
+    var lastUpdated: String? {
         guard let lastUpdated = dataProvider.lastUpdated else {
             return nil
         }
 
         return DateHelper.string(from: lastUpdated, dateFormat: "EEEE, MMM d, yyyy")
-    }()
+    }
+
     var contentState: ContentState = .empty {
         didSet {
             self.updateLoadingStatus?()
@@ -37,7 +38,7 @@ class ViewModel {
         DateHelper.string(dateFormat: "HH:mm")
     }()
 
-    lazy var nextPrayer: Prayer? = {
+    var nextPrayer: Prayer? {
         guard let todaysPrayers = dateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times else {
@@ -59,9 +60,9 @@ class ViewModel {
         }
 
         return ("Imsak", todaysPrayers.imsak, nil)
-    }()
+    }
 
-    lazy var otherPrayers: [Prayer] = {
+    var otherPrayers: [Prayer] {
         guard let todaysPrayers = dateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times else {
@@ -91,7 +92,7 @@ class ViewModel {
         }
 
         return otherPrayers
-    }()
+    }
 
     func fetchData() {
         contentState = .loading
