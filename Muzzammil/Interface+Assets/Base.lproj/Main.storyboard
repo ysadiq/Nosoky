@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NBw-Hr-K9B" userLabel="Next Prayer">
-                                <rect key="frame" x="80" y="205" width="254.5" height="257.5"/>
+                                <rect key="frame" x="80" y="144" width="254.5" height="257.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Prayer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-SZ-Q4I">
                                         <rect key="frame" x="0.0" y="0.0" width="254.5" height="66"/>
@@ -45,7 +45,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="nbv-nM-Z8n" userLabel="Other Prayers">
-                                <rect key="frame" x="50" y="512.5" width="314" height="43"/>
+                                <rect key="frame" x="50" y="451.5" width="314" height="43"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gVE-gm-x2W" userLabel="Other Prayer 1">
                                         <rect key="frame" x="0.0" y="0.5" width="41.5" height="42"/>
@@ -130,7 +130,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="84J-Uy-hS1" userLabel="Third Night">
-                                <rect key="frame" x="149.5" y="596.5" width="115" height="44.5"/>
+                                <rect key="frame" x="149.5" y="535.5" width="115" height="44.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last night third" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y5-f5-ft9">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="19.5"/>
@@ -160,7 +160,7 @@
                             <constraint firstItem="84J-Uy-hS1" firstAttribute="top" secondItem="nbv-nM-Z8n" secondAttribute="bottom" constant="41" id="fOn-EA-d9T"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jm3-OP-bkm" secondAttribute="bottom" constant="17" id="iji-Zh-xtM"/>
                             <constraint firstItem="jm3-OP-bkm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="itZ-9A-26c"/>
-                            <constraint firstItem="NBw-Hr-K9B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="161" id="sW7-gB-FlL"/>
+                            <constraint firstItem="NBw-Hr-K9B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="sW7-gB-FlL"/>
                             <constraint firstItem="e6E-Kj-uY3" firstAttribute="centerX" secondItem="jm3-OP-bkm" secondAttribute="centerX" id="sYN-cQ-mJn"/>
                         </constraints>
                     </view>
