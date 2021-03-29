@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 typealias Prayer = (name: String, time: String, timeLeft: String?)
 
@@ -33,10 +34,10 @@ class ViewModel {
         }
     }
 
-    func fetchData() {
+    func fetchData(with locationCoordinate: CLLocationCoordinate2D) {
         contentState = .loading
 
-        dataProvider.fetchPrayerTimes { [weak self] result, error in
+        dataProvider.fetchPrayerTimes(with: locationCoordinate) { [weak self] result, error in
             guard let self = self,
                   let result = result else {
                 return

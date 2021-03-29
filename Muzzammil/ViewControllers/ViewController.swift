@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
     @IBOutlet weak var prayerNameLabel: UILabel!
@@ -15,16 +16,20 @@ class ViewController: UIViewController {
     @IBOutlet var otherPrayersStackView: [PrayerStackView]!
     @IBOutlet var lastThirdNightTimeLabel: UILabel!
 
+    let locationManager = CLLocationManager()
+    var currentCoordination: CLLocationCoordinate2D?
+
     lazy var viewModel = {
         ViewModel()
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initViewModel()
+        startShimmering()
+        configureLocation()
     }
 
-    func initViewModel() {
+    func initViewModel(with locationCoordinate: CLLocationCoordinate2D) {
         viewModel.updateLoadingStatus = { [weak self] in
             guard let self = self else {
                 return
@@ -37,13 +42,14 @@ class ViewController: UIViewController {
                     self.updateOtherPrayers()
                     self.updateLastUpdated()
                     self.updateLastNightThird()
+                    self.stopShimmering()
                 }
             default:
                 break
             }
         }
 
-        viewModel.fetchData()
+        viewModel.fetchData(with: locationCoordinate)
     }
 
     func updateNextPrayer() {
@@ -75,6 +81,35 @@ class ViewController: UIViewController {
         self.lastUpdatedDateLabel.text = self.viewModel.lastUpdated
         self.lastUpdatedLabel.isHidden = false
         self.lastUpdatedDateLabel.isHidden = false
+    }
+
+    func startShimmering() {
+
+    }
+
+    func stopShimmering() {
+
+    }
+
+    func configureLocation() {
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+}
+
+extension ViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let currentLocation = locations.first else {
+            return
+        }
+
+        initViewModel(with: currentLocation.coordinate)
     }
 }
 

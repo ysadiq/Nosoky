@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 // API Doc: https://prayertimes.date/api/docs/this_month
 
@@ -15,11 +16,10 @@ class DataProvider {
         case serverOverload = "Server is overloaded"
         case notFound = "Page Not Found"
     }
-
     var lastUpdated: Date?
 
-    func fetchPrayerTimes(completion: @escaping (_ data: Results?, _ error: APIError?) -> Void) {
-        guard let url = URL(string: "https://api.pray.zone/v2/times/this_month.json?latitude=30.0865936&longitude=31.3445356&elevation=30&school=5") else {
+    func fetchPrayerTimes(with locationCoordinate: CLLocationCoordinate2D, completion: @escaping (_ data: Results?, _ error: APIError?) -> Void) {
+        guard let url = URL(string: "https://api.pray.zone/v2/times/this_month.json?latitude=\(locationCoordinate.latitude)&longitude=\(locationCoordinate.longitude)&elevation=30&school=5") else {
             completion(nil, .notFound)
             return
         }
