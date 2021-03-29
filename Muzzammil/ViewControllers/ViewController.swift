@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     func updateNextPrayer() {
         guard let nextPrayer = PrayerManager.shared.nextPrayer,
               PrayerManager.shared.nextPrayer?.name != "Night" else {
-            configureLastThirdNight()
+            configureLastThirdNightView()
             return
         }
 
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
 
     }
 
-    func configureLastThirdNight() {
+    func configureLastThirdNightView() {
         guard let lastNightThird = PrayerManager.shared.lastNightThird else {
             return
         }
