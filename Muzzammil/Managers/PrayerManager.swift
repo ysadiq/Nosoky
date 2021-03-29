@@ -121,20 +121,10 @@ class PrayerManager {
             minute: Int(todaysPrayers?.fajr.split(separator: ":").last ?? "") ?? 0
         )
 
-        var hoursDifference = fajrTime.hour - maghribTime.hour
-        if hoursDifference < 0 {
-            hoursDifference += 24
-            if hoursDifference == 24 {
-                hoursDifference -= 1
-            }
-        }
-
-        var minutesDifference = fajrTime.minute - maghribTime.minute
-        if minutesDifference < 0 {
-            minutesDifference += 60
-            hoursDifference -= 1
-        }
-
+        var hoursDifference = differenceInHours(fajrTime.hour, maghribTime.hour)
+        let minutesDifference = differenceInMinutes(fajrTime.minute,
+                                                    maghribTime.minute,
+                                                    &hoursDifference)
         let nightLong = (
             hour: hoursDifference,
             minute: minutesDifference
@@ -144,5 +134,27 @@ class PrayerManager {
         let lastThirdNightLong = nightLong.hour / 3
 
         return "\(fajrTime.hour - lastThirdNightLong):00"
+    }
+
+    func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {
+        var minutesDifference = max(minute, otherMinute) - min(minute, otherMinute)
+        if minutesDifference < 0 {
+            minutesDifference += 60
+            hoursDifference -= 1
+        }
+
+        return minutesDifference
+    }
+
+    func differenceInHours(_ hour: Int, _ otherHour: Int) -> Int {
+        var hoursDifference = min(hour, otherHour) - max(hour, otherHour)
+        if hoursDifference < 0 {
+            hoursDifference += 24
+            if hoursDifference == 24 {
+                hoursDifference -= 1
+            }
+        }
+
+        return hoursDifference
     }
 }
