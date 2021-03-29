@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var lastUpdatedDateLabel: UILabel!
     @IBOutlet var otherPrayersStackView: [PrayerStackView]!
+    @IBOutlet var lastThirdNightTimeLabel: UILabel!
 
     lazy var viewModel = {
         ViewModel()
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
                     self.updateNextPrayer()
                     self.updateOtherPrayers()
                     self.updateLastUpdated()
+                    self.updateLastNightThird()
                 }
             default:
                 break
@@ -63,6 +65,10 @@ class ViewController: UIViewController {
             otherPrayersStackView[index].time.text = prayer.time
             otherPrayersStackView[index].isHidden = false
         }
+    }
+
+    func updateLastNightThird() {
+        lastThirdNightTimeLabel.text = PrayerManager.shared.lastNightThird?.time
     }
 
     func updateLastUpdated() {

@@ -181,6 +181,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lastThirdNightTimeLabel" destination="zmY-fg-mL7" id="TL2-mU-sds"/>
                         <outlet property="lastUpdatedDateLabel" destination="jm3-OP-bkm" id="vXt-fK-5RF"/>
                         <outlet property="lastUpdatedLabel" destination="e6E-Kj-uY3" id="DYr-gg-w7R"/>
                         <outlet property="prayerNameLabel" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
