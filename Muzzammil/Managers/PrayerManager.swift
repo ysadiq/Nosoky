@@ -10,18 +10,16 @@ class PrayerManager {
     private init() {}
 
     var prayerDateTimes: [Datetime] = []
+    var nextPrayer: Prayer?
+    var otherPrayers: [Prayer] = []
     lazy var currentTime =  {
         DateHelper.string(dateFormat: "HH:mm")
     }()
-
     lazy var todaysPrayers: Times? = {
         prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times
     }()
-    
-    var nextPrayer: Prayer?
-    var otherPrayers: [Prayer] = []
 
     func getNextPrayer() -> Prayer? {
         guard let todaysPrayers = todaysPrayers else {
