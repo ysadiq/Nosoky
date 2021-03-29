@@ -1,6 +1,6 @@
 //
 //  WidgetView.swift
-//  AllahuAkbar
+//  Muzzammil
 //
 //  Created by Yahya Saddiq on 3/22/21.
 //

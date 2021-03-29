@@ -74,17 +74,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		76219F1626084E8700FE3B83 /* AllahuAkbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AllahuAkbar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76219F1626084E8700FE3B83 /* Muzzammil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Muzzammil.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F1926084E8700FE3B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76219F1D26084E8700FE3B83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		76219F2026084E8700FE3B83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76219F2226084E8800FE3B83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76219F2526084E8800FE3B83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76219F2726084E8800FE3B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76219F2C26084E8800FE3B83 /* AllahuAkbarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllahuAkbarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76219F2C26084E8800FE3B83 /* MuzzammilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuzzammilTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F3026084E8800FE3B83 /* AllahuAkbarTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllahuAkbarTests.swift; sourceTree = "<group>"; };
 		76219F3226084E8800FE3B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76219F3726084E8800FE3B83 /* AllahuAkbarUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AllahuAkbarUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76219F3726084E8800FE3B83 /* MuzzammilUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MuzzammilUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F3B26084E8800FE3B83 /* AllahuAkbarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllahuAkbarUITests.swift; sourceTree = "<group>"; };
 		76219F3D26084E8800FE3B83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76219F4C26084EDC00FE3B83 /* PrayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManager.swift; sourceTree = "<group>"; };
@@ -152,9 +152,9 @@
 		76219F1726084E8700FE3B83 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76219F1626084E8700FE3B83 /* AllahuAkbar.app */,
-				76219F2C26084E8800FE3B83 /* AllahuAkbarTests.xctest */,
-				76219F3726084E8800FE3B83 /* AllahuAkbarUITests.xctest */,
+				76219F1626084E8700FE3B83 /* Muzzammil.app */,
+				76219F2C26084E8800FE3B83 /* MuzzammilTests.xctest */,
+				76219F3726084E8800FE3B83 /* MuzzammilUITests.xctest */,
 				76219F9326087D4B00FE3B83 /* Static WidgetExtension.appex */,
 			);
 			name = Products;
@@ -173,7 +173,8 @@
 				76219F5A26084F1700FE3B83 /* Interface+Assets */,
 				76219F2726084E8800FE3B83 /* Info.plist */,
 			);
-			path = AllahuAkbar;
+			name = AllahuAkbar;
+			path = Muzzammil;
 			sourceTree = "<group>";
 		};
 		76219F2F26084E8800FE3B83 /* AllahuAkbarTests */ = {
@@ -182,7 +183,8 @@
 				76219F3026084E8800FE3B83 /* AllahuAkbarTests.swift */,
 				76219F3226084E8800FE3B83 /* Info.plist */,
 			);
-			path = AllahuAkbarTests;
+			name = AllahuAkbarTests;
+			path = MuzzammilTests;
 			sourceTree = "<group>";
 		};
 		76219F3A26084E8800FE3B83 /* AllahuAkbarUITests */ = {
@@ -191,7 +193,8 @@
 				76219F3B26084E8800FE3B83 /* AllahuAkbarUITests.swift */,
 				76219F3D26084E8800FE3B83 /* Info.plist */,
 			);
-			path = AllahuAkbarUITests;
+			name = AllahuAkbarUITests;
+			path = MuzzammilUITests;
 			sourceTree = "<group>";
 		};
 		76219F5626084EFE00FE3B83 /* Managers */ = {
@@ -277,9 +280,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		76219F1526084E8700FE3B83 /* AllahuAkbar */ = {
+		76219F1526084E8700FE3B83 /* Muzzammil */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76219F4026084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbar" */;
+			buildConfigurationList = 76219F4026084E8800FE3B83 /* Build configuration list for PBXNativeTarget "Muzzammil" */;
 			buildPhases = (
 				76219F1226084E8700FE3B83 /* Sources */,
 				76219F1326084E8700FE3B83 /* Frameworks */,
@@ -291,14 +294,14 @@
 			dependencies = (
 				76219FA326087D4D00FE3B83 /* PBXTargetDependency */,
 			);
-			name = AllahuAkbar;
+			name = Muzzammil;
 			productName = AllahuAkbar;
-			productReference = 76219F1626084E8700FE3B83 /* AllahuAkbar.app */;
+			productReference = 76219F1626084E8700FE3B83 /* Muzzammil.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76219F2B26084E8800FE3B83 /* AllahuAkbarTests */ = {
+		76219F2B26084E8800FE3B83 /* MuzzammilTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76219F4326084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbarTests" */;
+			buildConfigurationList = 76219F4326084E8800FE3B83 /* Build configuration list for PBXNativeTarget "MuzzammilTests" */;
 			buildPhases = (
 				76219F2826084E8800FE3B83 /* Sources */,
 				76219F2926084E8800FE3B83 /* Frameworks */,
@@ -309,14 +312,14 @@
 			dependencies = (
 				76219F2E26084E8800FE3B83 /* PBXTargetDependency */,
 			);
-			name = AllahuAkbarTests;
+			name = MuzzammilTests;
 			productName = AllahuAkbarTests;
-			productReference = 76219F2C26084E8800FE3B83 /* AllahuAkbarTests.xctest */;
+			productReference = 76219F2C26084E8800FE3B83 /* MuzzammilTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		76219F3626084E8800FE3B83 /* AllahuAkbarUITests */ = {
+		76219F3626084E8800FE3B83 /* MuzzammilUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76219F4626084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbarUITests" */;
+			buildConfigurationList = 76219F4626084E8800FE3B83 /* Build configuration list for PBXNativeTarget "MuzzammilUITests" */;
 			buildPhases = (
 				76219F3326084E8800FE3B83 /* Sources */,
 				76219F3426084E8800FE3B83 /* Frameworks */,
@@ -327,9 +330,9 @@
 			dependencies = (
 				76219F3926084E8800FE3B83 /* PBXTargetDependency */,
 			);
-			name = AllahuAkbarUITests;
+			name = MuzzammilUITests;
 			productName = AllahuAkbarUITests;
-			productReference = 76219F3726084E8800FE3B83 /* AllahuAkbarUITests.xctest */;
+			productReference = 76219F3726084E8800FE3B83 /* MuzzammilUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		76219F9226087D4B00FE3B83 /* Static WidgetExtension */ = {
@@ -374,7 +377,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 76219F1126084E8700FE3B83 /* Build configuration list for PBXProject "AllahuAkbar" */;
+			buildConfigurationList = 76219F1126084E8700FE3B83 /* Build configuration list for PBXProject "Muzzammil" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -387,9 +390,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				76219F1526084E8700FE3B83 /* AllahuAkbar */,
-				76219F2B26084E8800FE3B83 /* AllahuAkbarTests */,
-				76219F3626084E8800FE3B83 /* AllahuAkbarUITests */,
+				76219F1526084E8700FE3B83 /* Muzzammil */,
+				76219F2B26084E8800FE3B83 /* MuzzammilTests */,
+				76219F3626084E8800FE3B83 /* MuzzammilUITests */,
 				76219F9226087D4B00FE3B83 /* Static WidgetExtension */,
 			);
 		};
@@ -483,12 +486,12 @@
 /* Begin PBXTargetDependency section */
 		76219F2E26084E8800FE3B83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76219F1526084E8700FE3B83 /* AllahuAkbar */;
+			target = 76219F1526084E8700FE3B83 /* Muzzammil */;
 			targetProxy = 76219F2D26084E8800FE3B83 /* PBXContainerItemProxy */;
 		};
 		76219F3926084E8800FE3B83 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76219F1526084E8700FE3B83 /* AllahuAkbar */;
+			target = 76219F1526084E8700FE3B83 /* Muzzammil */;
 			targetProxy = 76219F3826084E8800FE3B83 /* PBXContainerItemProxy */;
 		};
 		76219FA326087D4D00FE3B83 /* PBXTargetDependency */ = {
@@ -642,12 +645,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbar/Info.plist;
+				INFOPLIST_FILE = Muzzammil/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.Muzzammil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -662,12 +665,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbar/Info.plist;
+				INFOPLIST_FILE = Muzzammil/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbar;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.Muzzammil;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -681,18 +684,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbarTests/Info.plist;
+				INFOPLIST_FILE = MuzzammilTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbarTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.MuzzammilTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AllahuAkbar.app/AllahuAkbar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muzzammil.app/Muzzammil";
 			};
 			name = Debug;
 		};
@@ -703,18 +706,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbarTests/Info.plist;
+				INFOPLIST_FILE = MuzzammilTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbarTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.MuzzammilTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AllahuAkbar.app/AllahuAkbar";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Muzzammil.app/Muzzammil";
 			};
 			name = Release;
 		};
@@ -724,17 +727,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbarUITests/Info.plist;
+				INFOPLIST_FILE = MuzzammilUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbarUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.MuzzammilUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AllahuAkbar;
+				TEST_TARGET_NAME = Muzzammil;
 			};
 			name = Debug;
 		};
@@ -744,17 +747,17 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 93L23JH8CL;
-				INFOPLIST_FILE = AllahuAkbarUITests/Info.plist;
+				INFOPLIST_FILE = MuzzammilUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.AllahuAkbarUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vodafone.MuzzammilUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AllahuAkbar;
+				TEST_TARGET_NAME = Muzzammil;
 			};
 			name = Release;
 		};
@@ -771,7 +774,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vodafone.AllahuAkbar.Static-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vodafone.Muzzammil.Static-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -792,7 +795,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vodafone.AllahuAkbar.Static-Widget";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vodafone.Muzzammil.Static-Widget";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -803,7 +806,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		76219F1126084E8700FE3B83 /* Build configuration list for PBXProject "AllahuAkbar" */ = {
+		76219F1126084E8700FE3B83 /* Build configuration list for PBXProject "Muzzammil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76219F3E26084E8800FE3B83 /* Debug */,
@@ -812,7 +815,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76219F4026084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbar" */ = {
+		76219F4026084E8800FE3B83 /* Build configuration list for PBXNativeTarget "Muzzammil" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76219F4126084E8800FE3B83 /* Debug */,
@@ -821,7 +824,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76219F4326084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbarTests" */ = {
+		76219F4326084E8800FE3B83 /* Build configuration list for PBXNativeTarget "MuzzammilTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76219F4426084E8800FE3B83 /* Debug */,
@@ -830,7 +833,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76219F4626084E8800FE3B83 /* Build configuration list for PBXNativeTarget "AllahuAkbarUITests" */ = {
+		76219F4626084E8800FE3B83 /* Build configuration list for PBXNativeTarget "MuzzammilUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76219F4726084E8800FE3B83 /* Debug */,
