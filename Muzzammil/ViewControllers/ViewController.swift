@@ -45,7 +45,7 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = viewModel.getNextPrayer() else {
+        guard let nextPrayer = PrayerManager.shared.getNextPrayer() else {
             return
         }
 
@@ -54,11 +54,11 @@ class ViewController: UIViewController {
     }
 
     func updateOtherPrayers() {
-        guard !viewModel.otherPrayers.isEmpty else {
+        guard !PrayerManager.shared.otherPrayers.isEmpty else {
             return
         }
 
-        for (index, prayer) in viewModel.otherPrayers.enumerated() {
+        for (index, prayer) in PrayerManager.shared.otherPrayers.enumerated() {
             otherPrayersStackView[index].name.text = prayer.name
             otherPrayersStackView[index].time.text = prayer.time
             otherPrayersStackView[index].isHidden = false

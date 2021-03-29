@@ -34,6 +34,7 @@
 		76219FBA26088A5600FE3B83 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6026084FD000FE3B83 /* DataProvider.swift */; };
 		76219FBF26088A5F00FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 		767EA24026119F7400CAC126 /* PrayerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EA23F26119F7400CAC126 /* PrayerStackView.swift */; };
+		767EA24D2611AE6000CAC126 /* PrayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F4C26084EDC00FE3B83 /* PrayerManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -476,6 +477,7 @@
 				76219FB926088A5600FE3B83 /* Model.swift in Sources */,
 				76219FAF2608802400FE3B83 /* WidgetView.swift in Sources */,
 				76219FA026087D4D00FE3B83 /* Static_Widget.intentdefinition in Sources */,
+				767EA24D2611AE6000CAC126 /* PrayerManager.swift in Sources */,
 				76219FB426088A4000FE3B83 /* ViewModel.swift in Sources */,
 				76219FBF26088A5F00FE3B83 /* DateHelper.swift in Sources */,
 				76219F9B26087D4B00FE3B83 /* Static_Widget.swift in Sources */,
