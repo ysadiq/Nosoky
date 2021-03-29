@@ -157,7 +157,7 @@ class PrayerManager {
         // calculate how long is the last third of the night
         let lastThirdNightLong = nightLong.hour / 3
 
-        lastNightThird = Time(fajrTime.hour - lastThirdNightLong, 0)
+        lastNightThird = Time(fajrTime.hour - lastThirdNightLong, minutesDifference)
     }
 
     func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {
