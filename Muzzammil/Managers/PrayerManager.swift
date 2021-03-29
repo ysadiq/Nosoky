@@ -12,7 +12,7 @@ class PrayerManager {
     private init() {}
 
     var prayerDateTimes: [Datetime] = []
-    var nextPrayer: Prayer?
+    private var nextPrayer: Prayer?
     var otherPrayers: [Prayer] = []
     var lastNightThird: Prayer?
     lazy var currentTime =  {
@@ -33,16 +33,14 @@ class PrayerManager {
             return nextPrayer
         }
 
-        var prayer: Prayer?
-
         if todaysPrayers.fajr > currentTime {
-            prayer = ("Fajr", todaysPrayers.fajr, nil)
+            nextPrayer = ("Fajr", todaysPrayers.fajr, nil)
         }
 
         if todaysPrayers.sunrise > currentTime {
             let sunrise: Prayer = ("Sunrise", todaysPrayers.sunrise, nil)
-            if prayer == nil {
-                prayer = sunrise
+            if nextPrayer == nil {
+                nextPrayer = sunrise
             } else {
                 otherPrayers.append(sunrise)
             }
@@ -50,8 +48,8 @@ class PrayerManager {
 
         if todaysPrayers.dhuhr > currentTime {
             let dhuhr: Prayer = ("Dhuhr", todaysPrayers.dhuhr, nil)
-            if prayer == nil {
-                prayer = dhuhr
+            if nextPrayer == nil {
+                nextPrayer = dhuhr
             } else {
                 otherPrayers.append(dhuhr)
             }
@@ -59,8 +57,8 @@ class PrayerManager {
 
         if todaysPrayers.asr > currentTime {
             let asr: Prayer = ("Asr", todaysPrayers.asr, nil)
-            if prayer == nil {
-                prayer = asr
+            if nextPrayer == nil {
+                nextPrayer = asr
             } else {
                 otherPrayers.append(asr)
             }
@@ -68,8 +66,8 @@ class PrayerManager {
 
         if todaysPrayers.maghrib > currentTime {
             let maghrib: Prayer = ("Maghrib", todaysPrayers.maghrib, nil)
-            if prayer == nil {
-                prayer = maghrib
+            if nextPrayer == nil {
+                nextPrayer = maghrib
             } else {
                 otherPrayers.append(maghrib)
             }
@@ -77,8 +75,8 @@ class PrayerManager {
 
         if todaysPrayers.isha > currentTime {
             let isha: Prayer = ("Isha", todaysPrayers.isha, nil)
-            if prayer == nil {
-                prayer = isha
+            if nextPrayer == nil {
+                nextPrayer = isha
             } else {
                 otherPrayers.append(isha)
             }
@@ -86,7 +84,7 @@ class PrayerManager {
 
         lastNightThird = Prayer("", lastThirdTime, nil)
 
-        return prayer
+        return nextPrayer
     }
 
     /*
