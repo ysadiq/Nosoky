@@ -14,13 +14,14 @@ class DataProvider {
     enum APIError: String, Error {
         case noNetwork = "No Network"
         case serverOverload = "Server is overloaded"
-        case notFound = "Page Not Found"
+        case unableToDecode = "Failed to decode"
+        case urlFailure = "Failed to build url"
     }
     var lastUpdated: Date?
 
     func fetchPrayerTimes(with locationCoordinate: CLLocationCoordinate2D, completion: @escaping (_ data: Results?, _ error: APIError?) -> Void) {
         guard let url = URL(string: "https://api.pray.zone/v2/times/this_month.json?latitude=\(locationCoordinate.latitude)&longitude=\(locationCoordinate.longitude)&elevation=30&school=5") else {
-            completion(nil, .notFound)
+            completion(nil, .urlFailure)
             return
         }
 
@@ -33,7 +34,7 @@ class DataProvider {
                 self?.lastUpdated = Date()
                 completion(result, nil)
             } catch {
-                completion(nil, .notFound)
+                completion(nil, .unableToDecode)
             }
         }
         .resume()
