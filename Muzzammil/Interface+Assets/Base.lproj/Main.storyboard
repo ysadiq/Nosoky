@@ -45,19 +45,19 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="nbv-nM-Z8n" userLabel="Other Prayers">
-                                <rect key="frame" x="50" y="451.5" width="314" height="43"/>
+                                <rect key="frame" x="50" y="451.5" width="314" height="0.0"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gVE-gm-x2W" userLabel="Other Prayer 1" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.5" width="41.5" height="42"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gVE-gm-x2W" userLabel="Other Prayer 1" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duhur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5n-5u-dSn">
-                                                <rect key="frame" x="0.0" y="0.0" width="41.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etJ-CE-45a">
-                                                <rect key="frame" x="3.5" y="25" width="34.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="25" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -68,17 +68,17 @@
                                             <outlet property="time" destination="etJ-CE-45a" id="n9C-8p-Vw9"/>
                                         </connections>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FLF-L7-axf" userLabel="Other Prayer 2" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
-                                        <rect key="frame" x="95.5" y="0.5" width="34.5" height="42"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FLF-L7-axf" userLabel="Other Prayer 2" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5we-m9-WNH">
-                                                <rect key="frame" x="6" y="0.0" width="23" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fsi-X2-XfS">
-                                                <rect key="frame" x="0.0" y="25" width="34.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="25" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -89,17 +89,17 @@
                                             <outlet property="time" destination="Fsi-X2-XfS" id="QUx-xN-MLq"/>
                                         </connections>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tak-yS-yMA" userLabel="Other Prayer 3" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
-                                        <rect key="frame" x="177" y="0.0" width="56" height="43"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tak-yS-yMA" userLabel="Other Prayer 3" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-0.5" width="0.0" height="43"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maghrib" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM3-B5-JLn">
-                                                <rect key="frame" x="0.0" y="0.0" width="56" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yh-2v-ZIU">
-                                                <rect key="frame" x="10.5" y="26" width="34.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="26" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -110,17 +110,17 @@
                                             <outlet property="time" destination="1yh-2v-ZIU" id="gEw-24-3KR"/>
                                         </connections>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="x6m-T1-lDO" userLabel="Other Prayer 4" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
-                                        <rect key="frame" x="279.5" y="0.0" width="34.5" height="43"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="x6m-T1-lDO" userLabel="Other Prayer 4" customClass="PrayerStackView" customModule="Muzzammil" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="-0.5" width="0.0" height="43"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Isha" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgo-ev-os9">
-                                                <rect key="frame" x="3.5" y="0.0" width="28" height="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlr-YW-dQS">
-                                                <rect key="frame" x="0.0" y="26" width="34.5" height="17"/>
+                                                <rect key="frame" x="0.0" y="26" width="0.0" height="17"/>
                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -146,7 +146,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="84J-Uy-hS1" userLabel="Third Night">
-                                <rect key="frame" x="149.5" y="535.5" width="115" height="44.5"/>
+                                <rect key="frame" x="149.5" y="492.5" width="115" height="44.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last night third" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2y5-f5-ft9">
                                         <rect key="frame" x="0.0" y="0.0" width="115" height="19.5"/>
@@ -181,14 +181,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="lastUpdated" destination="e6E-Kj-uY3" id="DYr-gg-w7R"/>
-                        <outlet property="lastUpdatedDate" destination="jm3-OP-bkm" id="vXt-fK-5RF"/>
-                        <outlet property="prayerName" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
-                        <outlet property="prayerTime" destination="VlA-Cu-2PY" id="r9w-BS-dC7"/>
-                        <outletCollection property="otherPrayers" destination="gVE-gm-x2W" collectionClass="NSMutableArray" id="sva-G3-1Uw"/>
-                        <outletCollection property="otherPrayers" destination="FLF-L7-axf" collectionClass="NSMutableArray" id="lJ0-yB-5t0"/>
-                        <outletCollection property="otherPrayers" destination="Tak-yS-yMA" collectionClass="NSMutableArray" id="Ynj-8m-FyL"/>
-                        <outletCollection property="otherPrayers" destination="x6m-T1-lDO" collectionClass="NSMutableArray" id="Zl9-2Z-eRY"/>
+                        <outlet property="lastUpdatedDateLabel" destination="jm3-OP-bkm" id="vXt-fK-5RF"/>
+                        <outlet property="lastUpdatedLabel" destination="e6E-Kj-uY3" id="DYr-gg-w7R"/>
+                        <outlet property="prayerNameLabel" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
+                        <outlet property="prayerTimeLabel" destination="VlA-Cu-2PY" id="r9w-BS-dC7"/>
+                        <outletCollection property="otherPrayersStackView" destination="gVE-gm-x2W" collectionClass="NSMutableArray" id="sva-G3-1Uw"/>
+                        <outletCollection property="otherPrayersStackView" destination="FLF-L7-axf" collectionClass="NSMutableArray" id="lJ0-yB-5t0"/>
+                        <outletCollection property="otherPrayersStackView" destination="Tak-yS-yMA" collectionClass="NSMutableArray" id="Ynj-8m-FyL"/>
+                        <outletCollection property="otherPrayersStackView" destination="x6m-T1-lDO" collectionClass="NSMutableArray" id="Zl9-2Z-eRY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

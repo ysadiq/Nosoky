@@ -8,11 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var prayerName: UILabel!
-    @IBOutlet weak var prayerTime: UILabel!
-    @IBOutlet weak var lastUpdated: UILabel!
-    @IBOutlet weak var lastUpdatedDate: UILabel!
-    @IBOutlet var otherPrayers: [PrayerStackView]!
+    @IBOutlet weak var prayerNameLabel: UILabel!
+    @IBOutlet weak var prayerTimeLabel: UILabel!
+    @IBOutlet weak var lastUpdatedLabel: UILabel!
+    @IBOutlet weak var lastUpdatedDateLabel: UILabel!
+    @IBOutlet var otherPrayersStackView: [PrayerStackView]!
 
     lazy var viewModel = {
         ViewModel()
@@ -45,21 +45,30 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        prayerName.text = viewModel.nextPrayer?.name
-        prayerTime.text = viewModel.nextPrayer?.time
+        guard let nextPrayer = viewModel.getNextPrayer() else {
+            return
+        }
+
+        prayerNameLabel.text = nextPrayer.name
+        prayerTimeLabel.text = nextPrayer.time
     }
 
     func updateOtherPrayers() {
+        guard !viewModel.otherPrayers.isEmpty else {
+            return
+        }
+
         for (index, prayer) in viewModel.otherPrayers.enumerated() {
-            otherPrayers[index].name.text = prayer.name
-            otherPrayers[index].time.text = prayer.time
+            otherPrayersStackView[index].name.text = prayer.name
+            otherPrayersStackView[index].time.text = prayer.time
+            otherPrayersStackView[index].isHidden = false
         }
     }
 
     func updateLastUpdated() {
-        self.lastUpdatedDate.text = self.viewModel.lastUpdated
-        self.lastUpdated.isHidden = false
-        self.lastUpdatedDate.isHidden = false
+        self.lastUpdatedDateLabel.text = self.viewModel.lastUpdated
+        self.lastUpdatedLabel.isHidden = false
+        self.lastUpdatedDateLabel.isHidden = false
     }
 }
 

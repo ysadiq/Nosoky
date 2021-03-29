@@ -38,61 +38,14 @@ class ViewModel {
         DateHelper.string(dateFormat: "HH:mm")
     }()
 
-    var nextPrayer: Prayer? {
-        guard let todaysPrayers = dateTimes.filter({ dateTime in
+    lazy var todaysPrayers: Times? = {
+        dateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
-        }).first?.times else {
-            return nil
-        }
+        }).first?.times
+    }()
 
-        if todaysPrayers.fajr > currentTime {
-            return ("Fajr", todaysPrayers.fajr, nil)
-        } else if todaysPrayers.sunrise > currentTime {
-            return ("Sunrise", todaysPrayers.sunrise, nil)
-        } else if todaysPrayers.dhuhr > currentTime {
-            return ("Dhuhr", todaysPrayers.dhuhr, nil)
-        } else if todaysPrayers.asr > currentTime {
-            return ("Asr", todaysPrayers.asr, nil)
-        } else if todaysPrayers.maghrib > currentTime {
-            return ("Maghrib", todaysPrayers.maghrib, nil)
-        } else if todaysPrayers.isha > currentTime {
-            return ("Isha", todaysPrayers.isha, nil)
-        }
-
-        return ("Imsak", todaysPrayers.imsak, nil)
-    }
-
-    var otherPrayers: [Prayer] {
-        guard let todaysPrayers = dateTimes.filter({ dateTime in
-            dateTime.date.gregorian == DateHelper.string()
-        }).first?.times else {
-            return []
-        }
-
-        var otherPrayers: [Prayer] = []
-
-        if todaysPrayers.fajr != nextPrayer?.time {
-            otherPrayers.append(("Fajr", todaysPrayers.fajr, nil))
-        }
-
-        if todaysPrayers.dhuhr != nextPrayer?.time {
-            otherPrayers.append(("Dhuhr", todaysPrayers.dhuhr, nil))
-        }
-
-        if todaysPrayers.asr != nextPrayer?.time {
-            otherPrayers.append(("Asr", todaysPrayers.asr, nil))
-        }
-
-        if todaysPrayers.maghrib != nextPrayer?.time {
-            otherPrayers.append(("Maghrib", todaysPrayers.maghrib, nil))
-        }
-
-        if todaysPrayers.isha != nextPrayer?.time {
-            otherPrayers.append(("Isha", todaysPrayers.isha, nil))
-        }
-
-        return otherPrayers
-    }
+    var nextPrayer: Prayer?
+    var otherPrayers: [Prayer] = []
 
     func fetchData() {
         contentState = .loading
@@ -106,5 +59,68 @@ class ViewModel {
             self.dateTimes = result.datetime
             self.contentState = .populated
         }
+    }
+
+    func getNextPrayer() -> Prayer? {
+        guard let todaysPrayers = todaysPrayers else {
+            return nil
+        }
+
+        guard nextPrayer == nil else {
+            return nextPrayer
+        }
+
+        var prayer: Prayer?
+
+        if todaysPrayers.fajr > currentTime {
+            prayer = ("Fajr", todaysPrayers.fajr, nil)
+        }
+
+        if todaysPrayers.sunrise > currentTime {
+            let sunrise: Prayer = ("Sunrise", todaysPrayers.sunrise, nil)
+            if prayer == nil {
+                prayer = sunrise
+            } else {
+                otherPrayers.append(sunrise)
+            }
+        }
+
+        if todaysPrayers.dhuhr > currentTime {
+            let dhuhr: Prayer = ("Dhuhr", todaysPrayers.dhuhr, nil)
+            if prayer == nil {
+                prayer = dhuhr
+            } else {
+                otherPrayers.append(dhuhr)
+            }
+        }
+
+        if todaysPrayers.asr > currentTime {
+            let asr: Prayer = ("Asr", todaysPrayers.asr, nil)
+            if prayer == nil {
+                prayer = asr
+            } else {
+                otherPrayers.append(asr)
+            }
+        }
+
+        if todaysPrayers.maghrib > currentTime {
+            let maghrib: Prayer = ("Maghrib", todaysPrayers.maghrib, nil)
+            if prayer == nil {
+                prayer = maghrib
+            } else {
+                otherPrayers.append(maghrib)
+            }
+        }
+
+        if todaysPrayers.isha > currentTime {
+            let isha: Prayer = ("Isha", todaysPrayers.isha, nil)
+            if prayer == nil {
+                prayer = isha
+            } else {
+                otherPrayers.append(isha)
+            }
+        }
+
+        return prayer
     }
 }
