@@ -8,8 +8,6 @@
 import Foundation
 import CoreLocation
 
-typealias Prayer = (name: String, time: String, timeLeft: String?)
-
 public enum ContentState {
     case loading
     case error

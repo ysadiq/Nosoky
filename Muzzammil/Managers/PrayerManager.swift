@@ -7,6 +7,9 @@
 
 import Foundation
 
+typealias Prayer = (name: String, time: String)
+typealias Time = (hour: Int, minute: Int)
+
 class PrayerManager {
     public static let shared = PrayerManager()
     private init() {}
@@ -23,6 +26,26 @@ class PrayerManager {
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times
     }()
+    var timeLeftToNextPrayer: Time {
+        let nextPrayer = (
+            hour: Int(getNextPrayer()?.time.split(separator: ":").first ?? "") ?? 0,
+            minute: Int(getNextPrayer()?.time.split(separator: ":").last ?? "") ?? 0
+        )
+        let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
+
+        var hoursDifference = differenceInHours(nextPrayer.hour,
+                                                currentTime.hour ?? 0)
+        let minutesDifference = differenceInMinutes(nextPrayer.minute,
+                                                    currentTime.minute ?? 0,
+                                                    &hoursDifference)
+
+        let timeLeft = (
+            hour: hoursDifference,
+            minute: minutesDifference
+        )
+
+        return timeLeft
+    }
 
     func getNextPrayer() -> Prayer? {
         guard let todaysPrayers = todaysPrayers else {
@@ -34,11 +57,11 @@ class PrayerManager {
         }
 
         if todaysPrayers.fajr > currentTime {
-            nextPrayer = ("Fajr", todaysPrayers.fajr, nil)
+            nextPrayer = ("Fajr", todaysPrayers.fajr)
         }
 
         if todaysPrayers.sunrise > currentTime {
-            let sunrise: Prayer = ("Sunrise", todaysPrayers.sunrise, nil)
+            let sunrise: Prayer = ("Sunrise", todaysPrayers.sunrise)
             if nextPrayer == nil {
                 nextPrayer = sunrise
             } else {
@@ -47,7 +70,7 @@ class PrayerManager {
         }
 
         if todaysPrayers.dhuhr > currentTime {
-            let dhuhr: Prayer = ("Dhuhr", todaysPrayers.dhuhr, nil)
+            let dhuhr: Prayer = ("Dhuhr", todaysPrayers.dhuhr)
             if nextPrayer == nil {
                 nextPrayer = dhuhr
             } else {
@@ -56,7 +79,7 @@ class PrayerManager {
         }
 
         if todaysPrayers.asr > currentTime {
-            let asr: Prayer = ("Asr", todaysPrayers.asr, nil)
+            let asr: Prayer = ("Asr", todaysPrayers.asr)
             if nextPrayer == nil {
                 nextPrayer = asr
             } else {
@@ -65,7 +88,7 @@ class PrayerManager {
         }
 
         if todaysPrayers.maghrib > currentTime {
-            let maghrib: Prayer = ("Maghrib", todaysPrayers.maghrib, nil)
+            let maghrib: Prayer = ("Maghrib", todaysPrayers.maghrib)
             if nextPrayer == nil {
                 nextPrayer = maghrib
             } else {
@@ -74,7 +97,7 @@ class PrayerManager {
         }
 
         if todaysPrayers.isha > currentTime {
-            let isha: Prayer = ("Isha", todaysPrayers.isha, nil)
+            let isha: Prayer = ("Isha", todaysPrayers.isha)
             if nextPrayer == nil {
                 nextPrayer = isha
             } else {
@@ -82,7 +105,7 @@ class PrayerManager {
             }
         }
 
-        lastNightThird = Prayer("", lastThirdTime, nil)
+        lastNightThird = Prayer("", lastThirdTime)
 
         return nextPrayer
     }
@@ -137,7 +160,7 @@ class PrayerManager {
     }
 
     func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {
-        var minutesDifference = max(minute, otherMinute) - min(minute, otherMinute)
+        var minutesDifference = minute - otherMinute
         if minutesDifference < 0 {
             minutesDifference += 60
             hoursDifference -= 1
@@ -147,7 +170,7 @@ class PrayerManager {
     }
 
     func differenceInHours(_ hour: Int, _ otherHour: Int) -> Int {
-        var hoursDifference = min(hour, otherHour) - max(hour, otherHour)
+        var hoursDifference = hour - otherHour
         if hoursDifference < 0 {
             hoursDifference += 24
             if hoursDifference == 24 {
