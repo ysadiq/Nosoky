@@ -23,7 +23,7 @@ class ViewModel {
             return nil
         }
 
-        return DateHelper.string(from: lastUpdated, dateFormat: "EEEE, MMM d, yyyy")
+        return DateHelper.string(from: lastUpdated, dateFormat: "MMM yyyy")
     }
 
     var contentState: ContentState = .empty {

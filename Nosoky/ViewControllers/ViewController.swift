@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     }
 
     func updateLastUpdated() {
-        lastUpdatedDateLabel.text = self.viewModel.lastUpdated
+        lastUpdatedDateLabel.text = viewModel.lastUpdated
         lastUpdatedLabel.isHidden = false
         lastUpdatedDateLabel.isHidden = false
 
