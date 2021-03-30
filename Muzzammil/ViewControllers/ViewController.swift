@@ -53,7 +53,7 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = PrayerManager.shared.getNextPrayer() else {
+        guard let nextPrayer = PrayerManager.shared.nextPrayer else {
             return
         }
 
@@ -75,7 +75,7 @@ class ViewController: UIViewController {
     }
 
     func updateLastNightThird() {
-        lastThirdNightTimeLabel.text = PrayerManager.shared.lastNightThird?.time
+        lastThirdNightTimeLabel.text = PrayerManager.shared.lastNightThird
     }
 
     func updateLastUpdated() {
