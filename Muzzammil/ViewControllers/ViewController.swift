@@ -69,9 +69,7 @@ class ViewController: UIViewController {
         }
 
         for (index, prayer) in otherPrayers.enumerated() {
-            otherPrayersStackView[index].name.text = prayer.name
-            otherPrayersStackView[index].time.text = prayer.time
-            otherPrayersStackView[index].isHidden = false
+            otherPrayersStackView[index].setup(prayer)
         }
     }
 

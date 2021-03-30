@@ -13,6 +13,7 @@ class PrayerStackView: UIStackView {
 
     func setup(_ prayer: Prayer) {
         name.text = prayer.name
-        time.text = prayer.time
+        time.text = "\(prayer.hour - 12):\(prayer.minute)"
+        isHidden = false
     }
 }
