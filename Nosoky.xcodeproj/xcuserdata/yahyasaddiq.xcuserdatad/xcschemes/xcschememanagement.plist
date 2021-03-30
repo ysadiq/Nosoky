@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Nosoky.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>Static WidgetExtension.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>76219F1526084E8700FE3B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76219F2B26084E8800FE3B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76219F3626084E8800FE3B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>76219F9226087D4B00FE3B83</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
