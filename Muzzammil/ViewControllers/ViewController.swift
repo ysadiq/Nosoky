@@ -63,11 +63,12 @@ class ViewController: UIViewController {
     }
 
     func updateOtherPrayers() {
-        guard !PrayerManager.shared.otherPrayers.isEmpty else {
+        guard let otherPrayers = PrayerManager.shared.otherPrayers,
+              !otherPrayers.isEmpty else {
             return
         }
 
-        for (index, prayer) in PrayerManager.shared.otherPrayers.enumerated() {
+        for (index, prayer) in otherPrayers.enumerated() {
             otherPrayersStackView[index].name.text = prayer.name
             otherPrayersStackView[index].time.text = prayer.time
             otherPrayersStackView[index].isHidden = false
