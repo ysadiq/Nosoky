@@ -12,8 +12,12 @@ class PrayerStackView: UIStackView {
     @IBOutlet weak var time: UILabel!
 
     func setup(_ prayer: Prayer) {
+        var hourToSubtract: Int {
+            prayer.time.hour > 12 ? 12 : 0
+        }
+
         name.text = prayer.name
-        time.text = "\(prayer.hour - 12):\(prayer.minute)"
+        time.text = "\(prayer.time.hour - hourToSubtract):\(prayer.time.minute)"
         isHidden = false
     }
 }

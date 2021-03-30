@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias Prayer = (name: String, hour: Int, minute: Int)
+typealias Prayer = (name: String, time: Time)
 typealias Time = (hour: Int, minute: Int)
 
 class PrayerManager {
@@ -17,7 +17,7 @@ class PrayerManager {
 
     // MARK: - Properties
     var prayerDateTimes: [Datetime] = []
-    var lastNightThird: String?
+    var lastNightThird: Time?
 
     var currentTime: Time {
         (
@@ -27,82 +27,90 @@ class PrayerManager {
     }
 
     var nextPrayer: Prayer? {
-        while let prayer = todaysPrayers?.first {
-            if prayer.hour > currentTime.hour ||
-               (prayer.hour == currentTime.hour && prayer.minute > currentTime.minute) {
+        while let prayer = todaysPrayers.first {
+            if prayer.time.hour > currentTime.hour ||
+                (prayer.time.hour == currentTime.hour && prayer.time.minute > currentTime.minute) {
                 return prayer
             } else {
-                todaysPrayers?.removeFirst()
+                todaysPrayers.removeFirst()
             }
         }
 
         return nil
     }
 
-    var otherPrayers: [Prayer]? {
-        todaysPrayers?.filter { $0.name != nextPrayer?.name }
+    var otherPrayers: [Prayer] {
+        if let nextPrayer = nextPrayer {
+            return todaysPrayers.filter { $0.name != nextPrayer.name }
+        } else {
+            return tomorrowsPrayers.filter { $0.name != "Isha" }
+        }
     }
 
-    private lazy var todaysPrayers: [Prayer]? = {
+    private lazy var todaysPrayers: [Prayer] = {
         guard let prayers = prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string()
         }).first?.times else {
-            return nil
+            return []
         }
 
         setLastThirdTime(maghribTime: prayers.maghrib, fajrTime: prayers.fajr)
+        return buildPrayersList(prayers)
+    }()
 
-        return [
+    private lazy var tomorrowsPrayers: [Prayer] = {
+        guard let prayers = prayerDateTimes.filter({ dateTime in
+            dateTime.date.gregorian == DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
+        }).first?.times else {
+            return []
+        }
+
+        return buildPrayersList(prayers)
+    }()
+
+    // MARK: - Methods
+
+    private func buildPrayersList(_ prayers: Times) -> [Prayer] {
+        [
             Prayer(
                 "Fajr",
-                Int(prayers.fajr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.fajr.split(separator: ":").last ?? "") ?? 0
+                (Int(prayers.fajr.split(separator: ":").first ?? "") ?? 0,
+                Int(prayers.fajr.split(separator: ":").last ?? "") ?? 0)
             ),
             Prayer(
                 "Dhuhur",
-                Int(prayers.dhuhr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.dhuhr.split(separator: ":").last ?? "") ?? 0
+                (Int(prayers.dhuhr.split(separator: ":").first ?? "") ?? 0,
+                Int(prayers.dhuhr.split(separator: ":").last ?? "") ?? 0)
             ),
             Prayer(
                 "Asr",
-                Int(prayers.asr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.asr.split(separator: ":").last ?? "") ?? 0
+                (Int(prayers.asr.split(separator: ":").first ?? "") ?? 0,
+                Int(prayers.asr.split(separator: ":").last ?? "") ?? 0)
             ),
             Prayer(
                 "Maghrib",
-                Int(prayers.maghrib.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.maghrib.split(separator: ":").last ?? "") ?? 0
+                (Int(prayers.maghrib.split(separator: ":").first ?? "") ?? 0,
+                Int(prayers.maghrib.split(separator: ":").last ?? "") ?? 0)
             ),
             Prayer(
                 "Isha",
-                Int(prayers.isha.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.isha.split(separator: ":").last ?? "") ?? 0
+                (Int(prayers.isha.split(separator: ":").first ?? "") ?? 0,
+                Int(prayers.isha.split(separator: ":").last ?? "") ?? 0)
             )
         ]
-    }()
-
-    var timeLeftToNextPrayer: Time? {
-        guard let nextPrayer = nextPrayer else {
-            return nil
-        }
-
-        let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
-
-        var hoursDifference = differenceInHours(nextPrayer.hour,
-                                                currentTime.hour ?? 0)
-        let minutesDifference = differenceInMinutes(nextPrayer.minute,
-                                                    currentTime.minute ?? 0,
-                                                    &hoursDifference)
-
-        let timeLeft = (
-            hour: hoursDifference,
-            minute: minutesDifference
-        )
-
-        return timeLeft
     }
 
-    // MARK: - Methods
+    func timeLeftTo(_ time: Time) -> Time {
+        let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
+
+        var hoursDifference = differenceInHours(time.hour,
+                                                currentTime.hour ?? 0)
+        let minutesDifference = differenceInMinutes(time.minute,
+                                                    currentTime.minute ?? 0,
+                                                    &hoursDifference)
+        return (hoursDifference, minutesDifference)
+    }
+
 
     /*
      calculate how long is the night
@@ -149,7 +157,7 @@ class PrayerManager {
         // calculate how long is the last third of the night
         let lastThirdNightLong = nightLong.hour / 3
 
-        lastNightThird = "\(fajrTime.hour - lastThirdNightLong):00"
+        lastNightThird = Time(fajrTime.hour - lastThirdNightLong, 0)
     }
 
     func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {

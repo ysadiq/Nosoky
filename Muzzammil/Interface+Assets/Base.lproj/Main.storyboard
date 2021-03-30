@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,16 +18,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="NBw-Hr-K9B" userLabel="Next Prayer">
-                                <rect key="frame" x="80" y="144" width="254.5" height="257.5"/>
+                                <rect key="frame" x="20" y="144" width="374" height="257.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Prayer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-SZ-Q4I">
-                                        <rect key="frame" x="0.0" y="0.0" width="254.5" height="66"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next Prayer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OHd-SZ-Q4I">
+                                        <rect key="frame" x="60" y="0.0" width="254.5" height="66"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="55"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="35" translatesAutoresizingMaskIntoConstraints="NO" id="ub1-JB-UEs">
-                                        <rect key="frame" x="62.5" y="86" width="129.5" height="171.5"/>
+                                        <rect key="frame" x="122.5" y="86" width="129.5" height="171.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fajr" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPU-gK-dwj">
                                                 <rect key="frame" x="20.5" y="0.0" width="88" height="58.5"/>
@@ -173,17 +174,21 @@
                             <constraint firstItem="84J-Uy-hS1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lm1-uq-yD6"/>
                             <constraint firstItem="nbv-nM-Z8n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="QwR-Ip-g10"/>
                             <constraint firstItem="nbv-nM-Z8n" firstAttribute="top" secondItem="NBw-Hr-K9B" secondAttribute="bottom" constant="50" id="Wp4-Me-wz6"/>
+                            <constraint firstItem="NBw-Hr-K9B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="ayD-np-Q0x"/>
                             <constraint firstItem="84J-Uy-hS1" firstAttribute="top" secondItem="nbv-nM-Z8n" secondAttribute="bottom" constant="41" id="fOn-EA-d9T"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jm3-OP-bkm" secondAttribute="bottom" constant="17" id="iji-Zh-xtM"/>
                             <constraint firstItem="jm3-OP-bkm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="itZ-9A-26c"/>
                             <constraint firstItem="NBw-Hr-K9B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="sW7-gB-FlL"/>
                             <constraint firstItem="e6E-Kj-uY3" firstAttribute="centerX" secondItem="jm3-OP-bkm" secondAttribute="centerX" id="sYN-cQ-mJn"/>
+                            <constraint firstAttribute="trailing" secondItem="NBw-Hr-K9B" secondAttribute="trailing" constant="20" id="te5-Cb-Jod"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lastThirdNightStackView" destination="84J-Uy-hS1" id="rj8-kt-ymQ"/>
                         <outlet property="lastThirdNightTimeLabel" destination="zmY-fg-mL7" id="TL2-mU-sds"/>
                         <outlet property="lastUpdatedDateLabel" destination="jm3-OP-bkm" id="vXt-fK-5RF"/>
                         <outlet property="lastUpdatedLabel" destination="e6E-Kj-uY3" id="DYr-gg-w7R"/>
+                        <outlet property="nextPrayerTitleLabel" destination="OHd-SZ-Q4I" id="k3F-SJ-pIF"/>
                         <outlet property="prayerNameLabel" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
                         <outlet property="prayerTimeLabel" destination="VlA-Cu-2PY" id="r9w-BS-dC7"/>
                         <outletCollection property="otherPrayersStackView" destination="gVE-gm-x2W" collectionClass="NSMutableArray" id="sva-G3-1Uw"/>
