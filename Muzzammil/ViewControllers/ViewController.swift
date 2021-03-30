@@ -53,11 +53,11 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = PrayerManager.shared.nextPrayer else {
+        guard let nextPrayer = PrayerManager.shared.nextPrayer,
+              let timeLeft = PrayerManager.shared.timeLeftToNextPrayer else {
             return
         }
 
-        let timeLeft = PrayerManager.shared.timeLeftToNextPrayer
         prayerNameLabel.text = nextPrayer.name
         prayerTimeLabel.text = "\(timeLeft.hour):\(timeLeft.minute)"
     }

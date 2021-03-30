@@ -15,7 +15,7 @@ struct WidgetData {
 
 extension WidgetData {
     static let previewData = WidgetData(
-        nextPrayerTime: PrayerManager.shared.nextPrayer?.time ?? "not found",
+        nextPrayerTime: "\(PrayerManager.shared.nextPrayer?.hour)" ,
         date: Date().advanced(by: (-60*29))
     )
 }
