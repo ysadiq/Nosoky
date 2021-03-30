@@ -73,8 +73,8 @@ class ViewController: UIViewController {
     }
 
     func updateLastNightThird() {
-        if let lastNightThird = PrayerManager.shared.lastNightThird {
-            lastThirdNightTimeLabel.text = "\(lastNightThird.hour):\(lastNightThird.minute)"
+        if let lastNightThirdTime = PrayerManager.shared.lastNightThirdTime {
+            lastThirdNightTimeLabel.text = "\(lastNightThirdTime.hour):\(lastNightThirdTime.minute)"
         }
     }
 
@@ -86,12 +86,12 @@ class ViewController: UIViewController {
     }
 
     func configureLastThirdNightView() {
-        guard let lastNightThird = PrayerManager.shared.lastNightThird else {
+        guard let lastNightThirdTime = PrayerManager.shared.lastNightThirdTime else {
             return
         }
 
         nextPrayerTitleLabel.text = "The last third of the night starts in"
-        setPrayerTimeLabel(lastNightThird)
+        setPrayerTimeLabel(lastNightThirdTime)
 
         prayerNameLabel.isHidden = true
         lastThirdNightStackView.isHidden = true

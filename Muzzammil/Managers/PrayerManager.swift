@@ -11,13 +11,14 @@ typealias Prayer = (name: String, time: Time)
 typealias Time = (hour: Int, minute: Int)
 
 class PrayerManager {
+
     // MARK: - Initializer
     public static let shared = PrayerManager()
     private init() {}
 
     // MARK: - Properties
     var prayerDateTimes: [Datetime] = []
-    var lastNightThird: Time?
+    var lastNightThirdTime: Time?
 
     var currentTime: Time {
         (
@@ -58,7 +59,7 @@ class PrayerManager {
             return []
         }
 
-        setLastThirdTime(maghribTime: prayers.maghrib, fajrTime: prayers.fajr)
+        calculateLastThirdNightTime(maghribTime: prayers.maghrib, fajrTime: prayers.fajr)
         return buildPrayersList(prayers)
     }()
 
@@ -73,12 +74,11 @@ class PrayerManager {
     }()
 
     // MARK: - Methods
-
     private func buildPrayersList(_ prayers: Times) -> [Prayer] {
         [
             Prayer(
                 "Night",
-                lastNightThird ?? Time(0, 0)
+                lastNightThirdTime ?? Time(0, 0)
             ),
             Prayer(
                 "Fajr",
@@ -142,7 +142,7 @@ class PrayerManager {
             1 - 1 = 0
         the last third of the night starts at 00:54
     */
-    func  setLastThirdTime(maghribTime: String, fajrTime: String) {
+    func  calculateLastThirdNightTime(maghribTime: String, fajrTime: String) {
         // calculate how long is the night
         let maghribTime = (
             hour: Int(maghribTime.split(separator: ":").first ?? "") ?? 0,
@@ -165,7 +165,7 @@ class PrayerManager {
         // calculate how long is the last third of the night
         let lastThirdNightLong = nightLong.hour / 3
 
-        lastNightThird = Time(fajrTime.hour - lastThirdNightLong, minutesDifference)
+        lastNightThirdTime = Time(fajrTime.hour - lastThirdNightLong, minutesDifference)
     }
 
     func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {
