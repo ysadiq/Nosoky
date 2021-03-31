@@ -100,7 +100,10 @@ class ViewController: UIViewController {
     func setPrayerTimeLabel(_ time: Time) {
         let timeLeft = PrayerManager.shared.timeLeftTo(time)
         prayerTimeLabel.text = timeLeft.time.hour != 0 ? "\(timeLeft.time.hour):\(timeLeft.time.minute)" : "\(timeLeft.time.minute)"
-        prayerTimeUnitLabel.text = timeLeft.timeUnit
+        if !timeLeft.timeUnit.isEmpty {
+            prayerTimeUnitLabel.text = timeLeft.timeUnit
+            prayerTimeUnitLabel.isHidden = false
+        }
     }
 
     func startShimmering() {
