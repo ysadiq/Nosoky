@@ -22,6 +22,7 @@
 		76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6A260852C800FE3B83 /* ViewModel.swift */; };
 		76219F84260872F200FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 		767EA24026119F7400CAC126 /* PrayerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EA23F26119F7400CAC126 /* PrayerStackView.swift */; };
+		763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -195,6 +196,7 @@
 			children = (
 				76219F1D26084E8700FE3B83 /* ViewController.swift */,
 				767EA23F26119F7400CAC126 /* PrayerStackView.swift */,
+				763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -380,6 +382,7 @@
 				76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */,
 				76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */,
 				767EA24026119F7400CAC126 /* PrayerStackView.swift in Sources */,
+				763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */,
 				76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

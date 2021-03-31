@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var lastUpdatedDateLabel: UILabel!
     @IBOutlet var otherPrayersStackView: [PrayerStackView]!
+    @IBOutlet var otherPrayersCollectionView: UICollectionView!
     @IBOutlet var lastThirdNightStackView: UIStackView!
     @IBOutlet var lastThirdNightTimeLabel: UILabel!
 
@@ -28,7 +29,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        startShimmering()
+        otherPrayersCollectionView.delegate = self
         configureLocation()
     }
 
@@ -45,7 +46,7 @@ class ViewController: UIViewController {
                     self.updateOtherPrayers()
                     self.updateLastUpdated()
                     self.updateLastNightThird()
-                    self.stopShimmering()
+                    self.otherPrayersCollectionView.reloadData()
                 }
             default:
                 break
@@ -106,14 +107,6 @@ class ViewController: UIViewController {
         }
     }
 
-    func startShimmering() {
-
-    }
-
-    func stopShimmering() {
-
-    }
-
     func configureLocation() {
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
@@ -136,3 +129,20 @@ extension ViewController: CLLocationManagerDelegate {
     }
 }
 
+extension ViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        PrayerManager.shared.otherPrayers.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "prayerCell",
+            for: indexPath) as? PrayerCollectionViewCell else {
+            return UICollectionViewCell()
+        }
+
+        cell.setup(PrayerManager.shared.otherPrayers[indexPath.row])
+        return cell
+    }
+
+}
