@@ -124,7 +124,7 @@ class PrayerManager {
         let minutesDifference = differenceInMinutes(time.minute,
                                                     currentTime.minute ?? 0,
                                                     &hoursDifference)
-        return ((hoursDifference, minutesDifference), hoursDifference > 0 ? "hr" : "min")
+        return ((hoursDifference, minutesDifference), hoursDifference > 0 ? "" : "min")
     }
 
 
