@@ -141,7 +141,7 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let CellWidth = 65
+        let CellWidth = 60
         let CellCount = PrayerManager.shared.otherPrayers.count
         let CellSpacing = 20
 
