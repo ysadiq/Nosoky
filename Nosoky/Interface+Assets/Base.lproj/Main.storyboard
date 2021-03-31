@@ -56,95 +56,6 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="nbv-nM-Z8n" userLabel="Other Prayers">
-                                <rect key="frame" x="50" y="451.5" width="314" height="0.0"/>
-                                <subviews>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gVE-gm-x2W" userLabel="Other Prayer 1" customClass="PrayerStackView" customModule="Nosoky" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="42"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duhur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5n-5u-dSn">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etJ-CE-45a">
-                                                <rect key="frame" x="0.0" y="25" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="name" destination="Y5n-5u-dSn" id="gyv-TJ-Ziu"/>
-                                            <outlet property="time" destination="etJ-CE-45a" id="n9C-8p-Vw9"/>
-                                        </connections>
-                                    </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="FLF-L7-axf" userLabel="Other Prayer 2" customClass="PrayerStackView" customModule="Nosoky" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="42"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5we-m9-WNH">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fsi-X2-XfS">
-                                                <rect key="frame" x="0.0" y="25" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="name" destination="5we-m9-WNH" id="efK-u0-8pF"/>
-                                            <outlet property="time" destination="Fsi-X2-XfS" id="QUx-xN-MLq"/>
-                                        </connections>
-                                    </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tak-yS-yMA" userLabel="Other Prayer 3" customClass="PrayerStackView" customModule="Nosoky" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-0.5" width="0.0" height="43"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maghrib" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DM3-B5-JLn">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1yh-2v-ZIU">
-                                                <rect key="frame" x="0.0" y="26" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="name" destination="DM3-B5-JLn" id="cJy-IR-KWo"/>
-                                            <outlet property="time" destination="1yh-2v-ZIU" id="gEw-24-3KR"/>
-                                        </connections>
-                                    </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="x6m-T1-lDO" userLabel="Other Prayer 4" customClass="PrayerStackView" customModule="Nosoky" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-0.5" width="0.0" height="43"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Isha" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xgo-ev-os9">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mlr-YW-dQS">
-                                                <rect key="frame" x="0.0" y="26" width="0.0" height="17"/>
-                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <connections>
-                                            <outlet property="name" destination="Xgo-ev-os9" id="goB-Jr-rjs"/>
-                                            <outlet property="time" destination="mlr-YW-dQS" id="X0x-m2-NY0"/>
-                                        </connections>
-                                    </stackView>
-                                </subviews>
-                            </stackView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6E-Kj-uY3">
                                 <rect key="frame" x="165.5" y="802.5" width="83" height="17"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
@@ -313,15 +224,11 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="NBw-Hr-K9B" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5a3-mm-oqq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nbv-nM-Z8n" secondAttribute="trailing" constant="50" id="6Tt-KO-BYZ"/>
                             <constraint firstItem="t4u-CN-nS9" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ety-sj-Pid"/>
                             <constraint firstItem="84J-Uy-hS1" firstAttribute="top" secondItem="t4u-CN-nS9" secondAttribute="bottom" constant="41" id="Gb5-YM-oQi"/>
-                            <constraint firstItem="nbv-nM-Z8n" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="HFj-Wt-xhp"/>
                             <constraint firstItem="jm3-OP-bkm" firstAttribute="top" secondItem="e6E-Kj-uY3" secondAttribute="bottom" constant="8.5" id="KrG-nP-FGV"/>
                             <constraint firstItem="84J-Uy-hS1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lm1-uq-yD6"/>
-                            <constraint firstItem="nbv-nM-Z8n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="QwR-Ip-g10"/>
                             <constraint firstItem="t4u-CN-nS9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="UdR-qc-ph2"/>
-                            <constraint firstItem="nbv-nM-Z8n" firstAttribute="top" secondItem="NBw-Hr-K9B" secondAttribute="bottom" constant="50" id="Wp4-Me-wz6"/>
                             <constraint firstItem="NBw-Hr-K9B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="ayD-np-Q0x"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="t4u-CN-nS9" secondAttribute="trailing" constant="25" id="gts-mD-H7t"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="jm3-OP-bkm" secondAttribute="bottom" constant="17" id="iji-Zh-xtM"/>
@@ -331,11 +238,6 @@
                             <constraint firstAttribute="trailing" secondItem="NBw-Hr-K9B" secondAttribute="trailing" constant="20" id="te5-Cb-Jod"/>
                             <constraint firstItem="t4u-CN-nS9" firstAttribute="top" secondItem="VlA-Cu-2PY" secondAttribute="bottom" constant="50" id="yrQ-UM-Pc5"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="nbv-nM-Z8n"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="lastThirdNightStackView" destination="84J-Uy-hS1" id="rj8-kt-ymQ"/>
@@ -347,10 +249,6 @@
                         <outlet property="prayerNameLabel" destination="aPU-gK-dwj" id="G0Q-kH-HSL"/>
                         <outlet property="prayerTimeLabel" destination="VlA-Cu-2PY" id="r9w-BS-dC7"/>
                         <outlet property="prayerTimeUnitLabel" destination="ANB-cC-wR6" id="LWt-vq-owV"/>
-                        <outletCollection property="otherPrayersStackView" destination="gVE-gm-x2W" collectionClass="NSMutableArray" id="sva-G3-1Uw"/>
-                        <outletCollection property="otherPrayersStackView" destination="FLF-L7-axf" collectionClass="NSMutableArray" id="lJ0-yB-5t0"/>
-                        <outletCollection property="otherPrayersStackView" destination="Tak-yS-yMA" collectionClass="NSMutableArray" id="Ynj-8m-FyL"/>
-                        <outletCollection property="otherPrayersStackView" destination="x6m-T1-lDO" collectionClass="NSMutableArray" id="Zl9-2Z-eRY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

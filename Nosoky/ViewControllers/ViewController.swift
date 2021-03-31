@@ -15,7 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var prayerTimeUnitLabel: UILabel!
     @IBOutlet weak var lastUpdatedLabel: UILabel!
     @IBOutlet weak var lastUpdatedDateLabel: UILabel!
-    @IBOutlet var otherPrayersStackView: [PrayerStackView]!
     @IBOutlet var otherPrayersCollectionView: UICollectionView!
     @IBOutlet var lastThirdNightStackView: UIStackView!
     @IBOutlet var lastThirdNightTimeLabel: UILabel!
@@ -43,7 +42,6 @@ class ViewController: UIViewController {
             case .populated:
                 DispatchQueue.main.async {
                     self.updateNextPrayer()
-                    self.updateOtherPrayers()
                     self.updateLastUpdated()
                     self.updateLastNightThird()
                     self.otherPrayersCollectionView.reloadData()
@@ -65,12 +63,6 @@ class ViewController: UIViewController {
 
         prayerNameLabel.text = nextPrayer.name
         setPrayerTimeLabel(nextPrayer.time)
-    }
-
-    func updateOtherPrayers() {
-        for (index, prayer) in PrayerManager.shared.otherPrayers.enumerated() {
-            otherPrayersStackView[index].setup(prayer)
-        }
     }
 
     func updateLastNightThird() {
