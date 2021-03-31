@@ -18,25 +18,62 @@ class DataProvider {
         case urlFailure = "Failed to build url"
     }
     var lastUpdated: Date?
+    var completion: ((_ data: Results?, _ error: APIError?) -> Void)?
 
-    func fetchPrayerTimes(with locationCoordinate: CLLocationCoordinate2D, completion: @escaping (_ data: Results?, _ error: APIError?) -> Void) {
-        guard let url = URL(string: "https://api.pray.zone/v2/times/this_month.json?latitude=\(locationCoordinate.latitude)&longitude=\(locationCoordinate.longitude)&elevation=30&school=5") else {
-            completion(nil, .urlFailure)
+    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D,
+                     completion: @escaping (_ data: Results?, _ error: APIError?
+                     ) -> Void) {
+        self.completion = completion
+
+        if let data = fetchPrayerTimesFromStorage() {
+            parse(data)
             return
         }
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-            guard let data = data else { return }
-            do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                let result = try decoder.decode(Model.self, from: data).results
-                self?.lastUpdated = Date()
-                completion(result, nil)
-            } catch {
-                completion(nil, .unableToDecode)
+        fetchPrayerTimesFromAPI(with: locationCoordinate) { [weak self] (data, error) in
+            guard let data = data else {
+                return
             }
+
+            NSStorageManager.shared.save(data)
+            self?.parse(data)
         }
-        .resume()
+    }
+
+    private func fetchPrayerTimesFromAPI(
+        with locationCoordinate: CLLocationCoordinate2D,
+        completion: @escaping (_ data: Data?, _ error: Error?
+        ) -> Void) {
+        guard let url = URL(string: "https://api.pray.zone/v2/times/this_month.json?latitude=\(locationCoordinate.latitude)&longitude=\(locationCoordinate.longitude)&elevation=30&school=5") else {
+            completion(nil, nil)
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, urlResponse, error in
+            guard let data = data else {
+                completion(nil, nil)
+                return
+            }
+
+            completion(data, nil)
+        }.resume()
+    }
+
+    private func fetchPrayerTimesFromStorage() -> Data? {
+        NSStorageManager.shared.load()
+    }
+
+    private func parse(_ data: Data) {
+        do {
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let result = try decoder.decode(Model.self, from: data).results
+
+            lastUpdated = Date()
+
+            completion?(result, nil)
+        } catch {
+            completion?(nil, .unableToDecode)
+        }
     }
 }

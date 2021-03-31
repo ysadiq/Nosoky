@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		760D3F492613E6A7004F5BB0 /* NSStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */; };
 		76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1926084E8700FE3B83 /* AppDelegate.swift */; };
 		76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1D26084E8700FE3B83 /* ViewController.swift */; };
 		76219F2126084E8700FE3B83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76219F1F26084E8700FE3B83 /* Main.storyboard */; };
@@ -21,7 +22,6 @@
 		76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6A260852C800FE3B83 /* ViewModel.swift */; };
 		76219F84260872F200FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 		767EA24026119F7400CAC126 /* PrayerStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 767EA23F26119F7400CAC126 /* PrayerStackView.swift */; };
-		767EA27426137CF700CAC126 /* this_month.json in Resources */ = {isa = PBXBuildFile; fileRef = 767EA27326137CF700CAC126 /* this_month.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStorageManager.swift; sourceTree = "<group>"; };
 		76219F1626084E8700FE3B83 /* Nosoky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nosoky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F1926084E8700FE3B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76219F1D26084E8700FE3B83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		76219F9526087D4B00FE3B83 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		76219F9726087D4B00FE3B83 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		767EA23F26119F7400CAC126 /* PrayerStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerStackView.swift; sourceTree = "<group>"; };
-		767EA27326137CF700CAC126 /* this_month.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = this_month.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +105,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		760D3F502613EB1F004F5BB0 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		76219F0D26084E8700FE3B83 = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				76219F1926084E8700FE3B83 /* AppDelegate.swift */,
+				760D3F502613EB1F004F5BB0 /* Storage */,
 				76219F782608614E00FE3B83 /* DataProvider */,
 				76219F742608614800FE3B83 /* Model */,
 				76219F7C2608615500FE3B83 /* ViewModel */,
@@ -202,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				76219F6026084FD000FE3B83 /* DataProvider.swift */,
-				767EA27326137CF700CAC126 /* this_month.json */,
 			);
 			path = DataProvider;
 			sourceTree = "<group>";
@@ -336,7 +344,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				767EA27426137CF700CAC126 /* this_month.json in Resources */,
 				76219F2626084E8800FE3B83 /* LaunchScreen.storyboard in Resources */,
 				76219F2326084E8800FE3B83 /* Assets.xcassets in Resources */,
 				76219F2126084E8700FE3B83 /* Main.storyboard in Resources */,
@@ -364,6 +371,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				760D3F492613E6A7004F5BB0 /* NSStorageManager.swift in Sources */,
 				76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */,
 				76219F84260872F200FE3B83 /* DateHelper.swift in Sources */,
 				76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */,

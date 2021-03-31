@@ -35,7 +35,7 @@ class ViewModel {
     func fetchData(with locationCoordinate: CLLocationCoordinate2D) {
         contentState = .loading
 
-        dataProvider.fetchPrayerTimes(with: locationCoordinate) { [weak self] result, error in
+        dataProvider.prayerTimes(for: locationCoordinate) { [weak self] result, error in
             guard let self = self,
                   let result = result else {
                 return
