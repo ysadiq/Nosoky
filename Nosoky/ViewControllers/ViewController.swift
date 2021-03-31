@@ -138,3 +138,19 @@ extension ViewController: UICollectionViewDataSource {
     }
 
 }
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let CellWidth = 65
+        let CellCount = PrayerManager.shared.otherPrayers.count
+        let CellSpacing = 20
+
+        let totalCellWidth = CellWidth * CellCount
+        let totalSpacingWidth = CellSpacing * (CellCount - 1)
+
+        let leftInset = (otherPrayersCollectionView.frame.width - CGFloat(totalCellWidth + totalSpacingWidth)) / 2
+        let rightInset = leftInset
+
+        return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
+    }
+}
