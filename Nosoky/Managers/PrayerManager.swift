@@ -67,6 +67,14 @@ class PrayerManager {
         guard let prayers = prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
         }).first?.times else {
+            // if tomorrow is a new month, get today's prayer too :)
+            // I think there's not much difference
+            if let prayers = prayerDateTimes.filter({ dateTime in
+                dateTime.date.gregorian == DateHelper.string()
+            }).first?.times {
+                return buildPrayersList(prayers)
+            }
+
             return []
         }
 
