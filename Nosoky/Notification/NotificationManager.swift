@@ -159,4 +159,3 @@ class NotificationManager {
         case fajr = "Adhan-fajr.m4a"
     }
 }
-}
