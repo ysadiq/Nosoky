@@ -32,6 +32,8 @@ class DataProvider {
             }
 
             completion(prayerTimes, nil)
+            NotificationManager.shared.addNotificationsIfNeeded(for: prayerTimes.datetime)
+            printPendingNotifications()
             return
         }
 
@@ -48,8 +50,9 @@ class DataProvider {
                 return
             }
 
-            NotificationManager.shared.setMonthlyNotification(for: prayerTimes.datetime)
             completion(prayerTimes, nil)
+            NotificationManager.shared.addNotificationsIfNeeded(for: prayerTimes.datetime)
+            printPendingNotifications()
         }
     }
 

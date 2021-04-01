@@ -9,25 +9,65 @@ import Foundation
 import NotificationCenter
 
 class NotificationManager {
+    // MARK: - Private properties
+    private var numberOfAddedNotification = 0
+
     // MARK: - Initializer
     public static let shared = NotificationManager()
     private init() {}
 
+    // MARK: - Private Methods
+    private func shouldAddNotifications(_ completion: @escaping (Bool) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
+            guard authorizationStatus else {
+                completion(false)
+                return
+            }
+
+            UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
+                let maximumNumberOfNotification = 60
+                completion(notifications.count < maximumNumberOfNotification)
+            }
+        }
+    }
+
     // MARK: - Methods
-    func setMonthlyNotification(for prayers: [Datetime]) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { [weak self] status, _ in
+    func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
+        let maximumNumberOfNotification = 64
+        var numberOfPendingNotifications = 0
+
+        shouldAddNotifications { status in
             guard status else {
                 return
             }
 
-            prayers.forEach { datetime in
-                let date = Calendar.current.dateComponents(
+            let monthPrayers = monthPrayers.filter { dayPrayersAndDate in
+                guard let prayersDay = Calendar.current.dateComponents(
                     [.year, .month, .day],
-                    from: DateHelper.date(from: datetime.date.gregorian)
+                    from: DateHelper.date(from: dayPrayersAndDate.date.gregorian)
+                ).day else { return false }
+
+                guard let today = Calendar.current.dateComponents(
+                    [.year, .month, .day],
+                    from: Date()
+                ).day else { return false }
+
+                return prayersDay >= today
+            }
+
+            for dayPrayers in monthPrayers {
+                let prayerDate = Calendar.current.dateComponents(
+                    [.year, .month, .day],
+                    from: DateHelper.date(from: dayPrayers.date.gregorian)
                 )
 
-                PrayerManager.shared.prayersList(of: datetime.times).forEach { prayer in
-                    self?.addNotification(for: prayer, at: date)
+                let dayPrayers = PrayerManager.shared.prayersList(of: dayPrayers.times)
+                for prayer in dayPrayers {
+                    guard numberOfPendingNotifications < maximumNumberOfNotification else {
+                        break
+                    }
+                    self.addNotification(for: prayer, at: prayerDate)
+                    numberOfPendingNotifications += 1
                 }
             }
         }
