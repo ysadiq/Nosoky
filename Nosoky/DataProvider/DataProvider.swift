@@ -18,10 +18,10 @@ class DataProvider {
         case urlFailure = "Failed to build url"
     }
     var lastUpdated: Date?
-    var completion: ((_ data: Results?, _ error: APIError?) -> Void)?
+    var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
 
     func prayerTimes(for locationCoordinate: CLLocationCoordinate2D,
-                     completion: @escaping (_ data: Results?, _ error: APIError?
+                     completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void) {
         self.completion = completion
 
@@ -35,7 +35,7 @@ class DataProvider {
                 return
             }
 
-            NSStorageManager.shared.save(data)
+            StorageManager.shared.save(data)
             self?.parse(data)
         }
     }
@@ -60,17 +60,16 @@ class DataProvider {
     }
 
     private func fetchPrayerTimesFromStorage() -> Data? {
-        NSStorageManager.shared.load()
+        StorageManager.shared.load()
     }
 
     private func parse(_ data: Data) {
         do {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let result = try decoder.decode(Model.self, from: data).results
+            let result = try decoder.decode(PrayerTimesModel.self, from: data).results
 
             lastUpdated = Date()
-
             completion?(result, nil)
         } catch {
             completion?(nil, .unableToDecode)

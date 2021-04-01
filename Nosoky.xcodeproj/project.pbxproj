@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		760D3F492613E6A7004F5BB0 /* NSStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */; };
+		7601ABDC2614EBBF0049590A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7601ABDB2614EBBF0049590A /* NotificationManager.swift */; };
+		760D3F492613E6A7004F5BB0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D3F482613E6A7004F5BB0 /* StorageManager.swift */; };
 		76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1926084E8700FE3B83 /* AppDelegate.swift */; };
 		76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1D26084E8700FE3B83 /* ViewController.swift */; };
 		76219F2126084E8700FE3B83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76219F1F26084E8700FE3B83 /* Main.storyboard */; };
@@ -18,7 +19,7 @@
 		76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F4C26084EDC00FE3B83 /* PrayerManager.swift */; };
 		76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F5126084EEA00FE3B83 /* FastingManager.swift */; };
 		76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6026084FD000FE3B83 /* DataProvider.swift */; };
-		76219F662608501200FE3B83 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F652608501200FE3B83 /* Model.swift */; };
+		76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F652608501200FE3B83 /* PrayerTimesModel.swift */; };
 		76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6A260852C800FE3B83 /* ViewModel.swift */; };
 		76219F84260872F200FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 		763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */; };
@@ -55,7 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSStorageManager.swift; sourceTree = "<group>"; };
+		7601ABDB2614EBBF0049590A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		760D3F482613E6A7004F5BB0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		76219F1626084E8700FE3B83 /* Nosoky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nosoky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F1926084E8700FE3B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76219F1D26084E8700FE3B83 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,7 +74,7 @@
 		76219F4C26084EDC00FE3B83 /* PrayerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManager.swift; sourceTree = "<group>"; };
 		76219F5126084EEA00FE3B83 /* FastingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingManager.swift; sourceTree = "<group>"; };
 		76219F6026084FD000FE3B83 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
-		76219F652608501200FE3B83 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		76219F652608501200FE3B83 /* PrayerTimesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesModel.swift; sourceTree = "<group>"; };
 		76219F6A260852C800FE3B83 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		76219F83260872F200FE3B83 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		76219F9526087D4B00FE3B83 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -105,10 +107,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7601ABE02614EBD80049590A /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				7601ABDB2614EBBF0049590A /* NotificationManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		760D3F502613EB1F004F5BB0 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				760D3F482613E6A7004F5BB0 /* NSStorageManager.swift */,
+				760D3F482613E6A7004F5BB0 /* StorageManager.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -140,6 +150,7 @@
 				76219F1926084E8700FE3B83 /* AppDelegate.swift */,
 				760D3F502613EB1F004F5BB0 /* Storage */,
 				76219F782608614E00FE3B83 /* DataProvider */,
+				7601ABE02614EBD80049590A /* Notification */,
 				76219F742608614800FE3B83 /* Model */,
 				76219F7C2608615500FE3B83 /* ViewModel */,
 				76219F5B26084F3500FE3B83 /* ViewControllers */,
@@ -202,7 +213,7 @@
 		76219F742608614800FE3B83 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				76219F652608501200FE3B83 /* Model.swift */,
+				76219F652608501200FE3B83 /* PrayerTimesModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,12 +382,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				760D3F492613E6A7004F5BB0 /* NSStorageManager.swift in Sources */,
+				7601ABDC2614EBBF0049590A /* NotificationManager.swift in Sources */,
+				760D3F492613E6A7004F5BB0 /* StorageManager.swift in Sources */,
 				76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */,
 				76219F84260872F200FE3B83 /* DateHelper.swift in Sources */,
 				76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */,
 				76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */,
-				76219F662608501200FE3B83 /* Model.swift in Sources */,
+				76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */,
 				76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */,
 				76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */,
 				763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */,

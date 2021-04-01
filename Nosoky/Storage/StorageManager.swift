@@ -1,5 +1,5 @@
 //
-//  NSStorageManager.swift
+//  StorageManager.swift
 //  Nosoky
 //
 //  Created by Yahya Saddiq on 3/31/21.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class NSStorageManager {
+class StorageManager {
     // MARK: - Initializer
-    public static let shared = NSStorageManager()
+    public static let shared = StorageManager()
     private init() {}
 
     // MARK: - Public methods

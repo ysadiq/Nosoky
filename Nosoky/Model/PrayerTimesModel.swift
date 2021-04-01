@@ -5,18 +5,19 @@
 //  Created by Yahya Saddiq on 3/22/21.
 //
 
-struct Model: Codable {
+struct PrayerTimesModel: Codable {
     let code: Int
     let status: String
     let results: Results
+
+    // MARK: - Results
+    struct Results: Codable {
+        let datetime: [Datetime]
+        let location: Location
+        let settings: Settings
+    }
 }
 
-// MARK: - Results
-struct Results: Codable {
-    let datetime: [Datetime]
-    let location: Location
-    let settings: Settings
-}
 
 // MARK: - Datetime
 struct Datetime: Codable {

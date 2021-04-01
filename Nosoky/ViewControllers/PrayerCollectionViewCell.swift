@@ -12,12 +12,16 @@ class PrayerCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var time: UILabel!
 
     func setup(_ prayer: Prayer) {
+        guard let prayerTimeHour = prayer.time.hour, let prayerTimeMinute = prayer.time.minute else {
+            return
+        }
+
         var hourToSubtract: Int {
-            prayer.time.hour > 12 ? 12 : 0
+            prayerTimeHour > 12 ? 12 : 0
         }
 
         name.text = prayer.name
-        time.text = "\(prayer.time.hour - hourToSubtract):\(prayer.time.minute)"
+        time.text = "\(prayerTimeHour - hourToSubtract):\(prayerTimeMinute)"
         isHidden = false
     }
 }

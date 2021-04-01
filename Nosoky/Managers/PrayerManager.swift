@@ -8,7 +8,7 @@
 import Foundation
 
 typealias Prayer = (name: String, time: Time)
-typealias Time = (hour: Int, minute: Int)
+typealias Time = (hour: Int?, minute: Int?)
 
 class PrayerManager {
 
@@ -36,8 +36,13 @@ class PrayerManager {
     }
     var nextPrayer: Prayer? {
         while let prayer = todaysPrayers.first {
-            if prayer.time.hour > currentTime.hour ||
-                (prayer.time.hour == currentTime.hour && prayer.time.minute > currentTime.minute) {
+            guard let prayerTimeHour = prayer.time.hour, let prayerTimeMinute = prayer.time.minute,
+                  let currentTimeHour = currentTime.hour, let currentTimeMinute = currentTime.minute else {
+                continue
+            }
+
+            if prayerTimeHour > currentTimeHour ||
+                (prayerTimeHour == currentTimeHour && prayerTimeMinute > currentTimeMinute) {
                 return prayer
             } else {
                 todaysPrayers.removeFirst()
@@ -194,14 +199,25 @@ class PrayerManager {
     }
 
     // MARK: - Public methods
-    func timeLeftTo(_ time: Time) -> (time: Time, timeUnit: String) {
+    func timeLeftTo(_ time: Time) -> (time: Time, timeUnit: String)? {
+        guard let hour = time.hour, let minute = time.minute else {
+            return nil
+        }
+
         let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
 
-        var hoursDifference = differenceInHours(time.hour,
+        var hoursDifference = differenceInHours(hour,
                                                 currentTime.hour ?? 0)
-        let minutesDifference = differenceInMinutes(time.minute,
+        let minutesDifference = differenceInMinutes(minute,
                                                     currentTime.minute ?? 0,
                                                     &hoursDifference)
         return ((hoursDifference, minutesDifference), hoursDifference > 0 ? "" : "min")
     }
+}
+
+func prayer(_ name: String, time: String) -> Prayer {
+    let timeComponents = time.split(separator: ":")
+
+    return Prayer(name,
+                  (Int(timeComponents[0]), Int(timeComponents[1])))
 }
