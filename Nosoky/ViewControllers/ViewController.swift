@@ -107,10 +107,8 @@ class ViewController: UIViewController {
 
         prayerTimeLabel.text = timeRemainingHour == 0 ? "\(timeRemainingMinute)" : "\(timeRemainingHour):\(timeRemainingMinute)"
 
-        if !timeRemaining.timeUnit.isEmpty {
-            prayerTimeUnitLabel.text = timeRemaining.timeUnit
-            prayerTimeUnitLabel.isHidden = false
-        }
+        prayerTimeUnitLabel.text = timeRemaining.timeUnit
+        prayerTimeUnitLabel.isHidden = timeRemaining.timeUnit.isEmpty
     }
 
     func configureLocation() {
