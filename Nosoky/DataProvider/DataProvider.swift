@@ -5,7 +5,7 @@
 //  Created by Yahya Saddiq on 3/22/21.
 //
 
-import Foundation
+import UIKit
 import CoreLocation
 
 // API Doc: https://prayertimes.date/api/docs/this_month
@@ -26,17 +26,30 @@ class DataProvider {
         self.completion = completion
 
         if let data = fetchPrayerTimesFromStorage() {
-            parse(data)
+            guard let prayerTimes = self.parse(data) else {
+                completion(nil, .unableToDecode)
+                return
+            }
+
+            completion(prayerTimes, nil)
             return
         }
 
         fetchPrayerTimesFromAPI(with: locationCoordinate) { [weak self] (data, error) in
             guard let data = data else {
+                completion(nil, .noNetwork)
                 return
             }
 
             StorageManager.shared.save(data)
-            self?.parse(data)
+
+            guard let prayerTimes = self?.parse(data) else {
+                completion(nil, .unableToDecode)
+                return
+            }
+
+            NotificationManager.shared.setMonthlyNotification(for: prayerTimes.datetime)
+            completion(prayerTimes, nil)
         }
     }
 
@@ -63,16 +76,16 @@ class DataProvider {
         StorageManager.shared.load()
     }
 
-    private func parse(_ data: Data) {
+    private func parse(_ data: Data) -> PrayerTimesModel.Results? {
         do {
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
             let result = try decoder.decode(PrayerTimesModel.self, from: data).results
 
             lastUpdated = Date()
-            completion?(result, nil)
+            return result
         } catch {
-            completion?(nil, .unableToDecode)
+            return nil
         }
     }
 }

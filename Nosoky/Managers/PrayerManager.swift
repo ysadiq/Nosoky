@@ -94,7 +94,7 @@ class PrayerManager {
         tomorrowsPrayers = prayersList(of: prayers)
     }
 
-    private func prayersList(of prayers: Times) -> [Prayer] {
+    func prayersList(of prayers: Times) -> [Prayer] {
         var prayersList: [Prayer] = []
 
         if let lastNightThirdTime = lastNightThirdTime {
