@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7601ABDC2614EBBF0049590A /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7601ABDB2614EBBF0049590A /* NotificationManager.swift */; };
+		7601AC062615B6D60049590A /* Adhan-makkah.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7601AC052615B6D60049590A /* Adhan-makkah.m4a */; };
+		7601AC212615C93F0049590A /* Adhan-fajr.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 7601AC202615C93F0049590A /* Adhan-fajr.m4a */; };
 		760D3F492613E6A7004F5BB0 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760D3F482613E6A7004F5BB0 /* StorageManager.swift */; };
 		76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1926084E8700FE3B83 /* AppDelegate.swift */; };
 		76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F1D26084E8700FE3B83 /* ViewController.swift */; };
@@ -57,6 +59,8 @@
 
 /* Begin PBXFileReference section */
 		7601ABDB2614EBBF0049590A /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		7601AC052615B6D60049590A /* Adhan-makkah.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Adhan-makkah.m4a"; sourceTree = "<group>"; };
+		7601AC202615C93F0049590A /* Adhan-fajr.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Adhan-fajr.m4a"; sourceTree = "<group>"; };
 		760D3F482613E6A7004F5BB0 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		76219F1626084E8700FE3B83 /* Nosoky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nosoky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76219F1926084E8700FE3B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 			children = (
 				76219F1F26084E8700FE3B83 /* Main.storyboard */,
 				76219F2226084E8800FE3B83 /* Assets.xcassets */,
+				7601AC202615C93F0049590A /* Adhan-fajr.m4a */,
+				7601AC052615B6D60049590A /* Adhan-makkah.m4a */,
 				76219F2426084E8800FE3B83 /* LaunchScreen.storyboard */,
 			);
 			path = "Interface+Assets";
@@ -355,8 +361,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7601AC062615B6D60049590A /* Adhan-makkah.m4a in Resources */,
 				76219F2626084E8800FE3B83 /* LaunchScreen.storyboard in Resources */,
 				76219F2326084E8800FE3B83 /* Assets.xcassets in Resources */,
+				7601AC212615C93F0049590A /* Adhan-fajr.m4a in Resources */,
 				76219F2126084E8700FE3B83 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

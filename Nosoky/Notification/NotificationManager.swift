@@ -74,19 +74,26 @@ class NotificationManager {
     }
 
     private func addNotification(for prayer: Prayer, at date: DateComponents) {
-        var dateComponents = DateComponents()
+        guard let notificationDetails = notificationContent(for: prayer) else {
+            return
+        }
 
+        var dateComponents = DateComponents()
         dateComponents.hour = prayer.time.hour
         dateComponents.minute = prayer.time.minute
-
         dateComponents.day = date.day
         dateComponents.month = date.month
         dateComponents.year = date.year
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 
         let content = UNMutableNotificationContent()
-        content.title = "\(prayer.name) prayer"
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "miniAdhan.mp3"))
+        content.title = notificationDetails.title
+        if let adhan = notificationDetails.adhan?.rawValue {
+            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: adhan))
+        }
+        if let subtitle = notificationDetails.subtitle {
+            content.subtitle = subtitle
+        }
 
         let randomIdentifier = UUID().uuidString
         let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
@@ -100,4 +107,59 @@ class NotificationManager {
             }
         }
     }
+
+    private func notificationContent(for prayer: Prayer) -> (title: String, subtitle: String?, adhan: AdhanFileName?)? {
+        switch prayer.name {
+        case "Fajr":
+            return (
+                title: "الفجر",
+                subtitle: "الصلاة خير من النوم",
+                adhan: .fajr
+            )
+        case "Dhuhur":
+            return (
+                title: "الظهر",
+                subtitle: nil,
+                adhan: .mini
+            )
+        case "Asr":
+            return (
+                title: "العصر",
+                subtitle: nil,
+                adhan: .mini
+            )
+        case "Maghrib":
+            return (
+                title: "المغرب",
+                subtitle: nil,
+                adhan: .mini
+            )
+        case "Isha":
+            return (
+                title: "العشاء",
+                subtitle: nil,
+                adhan: .mini
+            )
+        case "Night":
+            return (
+                title: "الثلث الأخير من اليل",
+                subtitle: "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا",
+                adhan: .mini
+            )
+        case "Sunrise":
+            return (
+                title: "الضحى",
+                subtitle: nil,
+                adhan: .mini
+            )
+        default:
+            return nil
+        }
+    }
+
+    enum AdhanFileName: String {
+        case mini = "Adhan-makkah.m4a"
+        case fajr = "Adhan-fajr.m4a"
+    }
+}
 }
