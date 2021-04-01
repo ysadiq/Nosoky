@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet var lastThirdNightStackView: UIStackView!
     @IBOutlet var lastThirdNightTimeLabel: UILabel!
 
-    let locationManager = CLLocationManager()
+    var locationManager: CLLocationManager? = CLLocationManager()
     var currentCoordination: CLLocationCoordinate2D?
 
     lazy var viewModel = {
@@ -107,6 +107,10 @@ class ViewController: UIViewController {
     }
 
     func configureLocation() {
+        guard let locationManager = locationManager else {
+            return
+        }
+
         locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
 
@@ -120,6 +124,8 @@ class ViewController: UIViewController {
 
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager = nil
+
         guard let currentLocation = locations.first else {
             return
         }
