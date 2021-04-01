@@ -10,31 +10,31 @@ import NotificationCenter
 
 class NotificationManager {
     // MARK: - Private properties
-    private var numberOfAddedNotification = 0
+    let maximumNumberOfNotification = 60
 
     // MARK: - Initializer
     public static let shared = NotificationManager()
     private init() {}
 
     // MARK: - Private Methods
-    private func shouldAddNotifications(_ completion: @escaping (Bool) -> Void) {
+    private func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
             guard authorizationStatus else {
-                completion(false)
+                completion(false, nil)
                 return
             }
 
-            UNUserNotificationCenter.current().getPendingNotificationRequests { notifications in
-                let maximumNumberOfNotification = 60
-                completion(notifications.count < maximumNumberOfNotification)
+            UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotifications in
+                completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications.count)
             }
         }
     }
 
     // MARK: - Methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
-        shouldAddNotifications { status in
-            guard status else {
+        shouldAddNotifications { status, numberOfPendingNotifications in
+            guard status,
+                  var numberOfPendingNotifications = numberOfPendingNotifications else {
                 return
             }
 
@@ -60,7 +60,11 @@ class NotificationManager {
 
                 let dayPrayers = PrayerManager.shared.prayersList(of: dayPrayers.times)
                 for prayer in dayPrayers {
+                    guard numberOfPendingNotifications < self.maximumNumberOfNotification else {
+                        break
+                    }
                     self.addNotification(for: prayer, at: prayerDate)
+                    numberOfPendingNotifications += 1
                 }
             }
         }
