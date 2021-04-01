@@ -66,8 +66,9 @@ class ViewController: UIViewController {
     }
 
     func updateLastNightThird() {
-        if let lastNightThirdTime = PrayerManager.shared.lastNightThirdTime {
-            lastThirdNightTimeLabel.text = "\(lastNightThirdTime.hour):\(lastNightThirdTime.minute)"
+        if let lastNightThirdTimeHour = PrayerManager.shared.lastNightThirdTime?.hour,
+           let lastNightThirdTimeMinute = PrayerManager.shared.lastNightThirdTime?.minute {
+            lastThirdNightTimeLabel.text = "\(lastNightThirdTimeHour):\(lastNightThirdTimeMinute)"
         }
     }
 

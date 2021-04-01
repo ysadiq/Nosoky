@@ -72,12 +72,12 @@ class PrayerManager {
         }
 
         calculateLastThirdNightTime(maghribTime: prayers.maghrib, fajrTime: prayers.fajr)
-        todaysPrayers = buildPrayersList(prayers)
+        todaysPrayers = prayersList(of: prayers)
     }
 
     private func setTomorrowsPrayers() {
         // set tomorrow's prayer
-        guard let prayers2 = prayerDateTimes.filter({ dateTime in
+        guard let prayers = prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
         }).first?.times else {
             // if tomorrow is a new month, get today's prayer too :)
@@ -85,47 +85,31 @@ class PrayerManager {
             if let prayers = prayerDateTimes.filter({ dateTime in
                 dateTime.date.gregorian == DateHelper.string()
             }).first?.times {
-                tomorrowsPrayers = buildPrayersList(prayers)
+                tomorrowsPrayers = prayersList(of: prayers)
             }
 
             return
         }
 
-        tomorrowsPrayers = buildPrayersList(prayers2)
+        tomorrowsPrayers = prayersList(of: prayers)
     }
 
-    private func buildPrayersList(_ prayers: Times) -> [Prayer] {
-        [
-            Prayer(
-                "Night",
-                lastNightThirdTime ?? Time(0, 0)
-            ),
-            Prayer(
-                "Fajr",
-                (Int(prayers.fajr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.fajr.split(separator: ":").last ?? "") ?? 0)
-            ),
-            Prayer(
-                "Dhuhur",
-                (Int(prayers.dhuhr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.dhuhr.split(separator: ":").last ?? "") ?? 0)
-            ),
-            Prayer(
-                "Asr",
-                (Int(prayers.asr.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.asr.split(separator: ":").last ?? "") ?? 0)
-            ),
-            Prayer(
-                "Maghrib",
-                (Int(prayers.maghrib.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.maghrib.split(separator: ":").last ?? "") ?? 0)
-            ),
-            Prayer(
-                "Isha",
-                (Int(prayers.isha.split(separator: ":").first ?? "") ?? 0,
-                Int(prayers.isha.split(separator: ":").last ?? "") ?? 0)
-            )
+    private func prayersList(of prayers: Times) -> [Prayer] {
+        var prayersList: [Prayer] = []
+
+        if let lastNightThirdTime = lastNightThirdTime {
+            prayersList.append(("Night", lastNightThirdTime))
+        }
+
+        prayersList += [
+            prayer("Fajr", time: prayers.fajr),
+            prayer("Dhuhur", time: prayers.dhuhr),
+            prayer("Asr", time: prayers.asr),
+            prayer("Maghrib", time: prayers.maghrib),
+            prayer("Isha", time: prayers.isha)
         ]
+
+        return prayersList
     }
 
     /*
