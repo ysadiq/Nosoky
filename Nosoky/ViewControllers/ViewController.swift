@@ -30,20 +30,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         otherPrayersCollectionView.delegate = self
         configureLocation()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
 
         PrayerManager.shared.onMinuteUpdate = { [weak self] in
             self?.updateNextPrayer()
         }
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-        PrayerManager.shared.onMinuteUpdate = nil
     }
 
     func initViewModel(with locationCoordinate: CLLocationCoordinate2D) {
