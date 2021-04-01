@@ -10,8 +10,14 @@ import Foundation
 typealias Prayer = (name: String, time: Time)
 typealias Time = (hour: Int?, minute: Int?)
 
-class PrayerManager {
+func prayer(_ name: String, time: String) -> Prayer {
+    let timeComponents = time.split(separator: ":")
 
+    return Prayer(name,
+                  (Int(timeComponents[0]), Int(timeComponents[1])))
+}
+
+class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
     private init() {}
@@ -19,9 +25,19 @@ class PrayerManager {
     // MARK: - Private properties
     private var todaysPrayers: [Prayer] = []
     private var tomorrowsPrayers: [Prayer] = []
+    private var timer: Timer?
 
     // MARK: - Public properties
     var lastNightThirdTime: Time?
+    var onMinuteUpdate: (() -> Void)? {
+        willSet {
+            if newValue == nil {
+                stopCountdownTimer()
+            } else {
+                startCountdownTimer()
+            }
+        }
+    }
     var prayerDateTimes: [Datetime] = [] {
         didSet {
             setTodaysPrayers()
@@ -183,7 +199,7 @@ class PrayerManager {
     }
 
     // MARK: - Public methods
-    func timeLeftTo(_ time: Time) -> (time: Time, timeUnit: String)? {
+    func timeRemainingTo(_ time: Time) -> (time: Time, timeUnit: String)? {
         guard let hour = time.hour, let minute = time.minute else {
             return nil
         }
@@ -199,9 +215,28 @@ class PrayerManager {
     }
 }
 
-func prayer(_ name: String, time: String) -> Prayer {
-    let timeComponents = time.split(separator: ":")
+// MARK: - Countdown Timer
+extension PrayerManager {
+    func startCountdownTimer() {
+        guard timer == nil,
+              onMinuteUpdate == nil else {
+            return
+        }
 
-    return Prayer(name,
-                  (Int(timeComponents[0]), Int(timeComponents[1])))
+        timer = Timer.scheduledTimer(
+            timeInterval: 60,
+            target: self,
+            selector: #selector(executeOnMinuteUpdate),
+            userInfo: nil,
+            repeats: true)
+    }
+
+    func stopCountdownTimer() {
+        timer?.invalidate()
+        timer = nil
+    }
+
+    @objc private func executeOnMinuteUpdate() {
+        onMinuteUpdate?()
+    }
 }

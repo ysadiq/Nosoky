@@ -32,6 +32,20 @@ class ViewController: UIViewController {
         configureLocation()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        PrayerManager.shared.onMinuteUpdate = { [weak self] in
+            self?.updateNextPrayer()
+        }
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        PrayerManager.shared.onMinuteUpdate = nil
+    }
+
     func initViewModel(with locationCoordinate: CLLocationCoordinate2D) {
         viewModel.updateLoadingStatus = { [weak self] in
             guard let self = self else {
@@ -61,7 +75,10 @@ class ViewController: UIViewController {
             return
         }
 
-        prayerNameLabel.text = nextPrayer.name
+        if nextPrayer.name != prayerNameLabel.text {
+            prayerNameLabel.text = nextPrayer.name
+            otherPrayersCollectionView.reloadData()
+        }
         setPrayerTimeLabel(nextPrayer.time)
     }
 
@@ -92,16 +109,16 @@ class ViewController: UIViewController {
     }
 
     func setPrayerTimeLabel(_ time: Time) {
-        guard let timeLeft = PrayerManager.shared.timeLeftTo(time),
-              let timeLeftHour = timeLeft.time.hour,
-              let timeLeftMinute = timeLeft.time.minute else {
+        guard let timeRemaining = PrayerManager.shared.timeRemainingTo(time),
+              let timeRemainingHour = timeRemaining.time.hour,
+              let timeRemainingMinute = timeRemaining.time.minute else {
             return
         }
-        
-        prayerTimeLabel.text = timeLeftHour != 0 ? "\(timeLeftHour):\(timeLeftMinute)" : "\(timeLeftMinute)"
 
-        if !timeLeft.timeUnit.isEmpty {
-            prayerTimeUnitLabel.text = timeLeft.timeUnit
+        prayerTimeLabel.text = timeRemainingHour == 0 ? "\(timeRemainingMinute)" : "\(timeRemainingHour):\(timeRemainingMinute)"
+
+        if !timeRemaining.timeUnit.isEmpty {
+            prayerTimeUnitLabel.text = timeRemaining.timeUnit
             prayerTimeUnitLabel.isHidden = false
         }
     }
