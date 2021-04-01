@@ -33,9 +33,6 @@ class NotificationManager {
 
     // MARK: - Methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
-        let maximumNumberOfNotification = 64
-        var numberOfPendingNotifications = 0
-
         shouldAddNotifications { status in
             guard status else {
                 return
@@ -63,11 +60,7 @@ class NotificationManager {
 
                 let dayPrayers = PrayerManager.shared.prayersList(of: dayPrayers.times)
                 for prayer in dayPrayers {
-                    guard numberOfPendingNotifications < maximumNumberOfNotification else {
-                        break
-                    }
                     self.addNotification(for: prayer, at: prayerDate)
-                    numberOfPendingNotifications += 1
                 }
             }
         }
