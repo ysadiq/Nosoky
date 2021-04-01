@@ -14,23 +14,22 @@ class NSStorageManager {
 
     // MARK: - Public methods
     func save(_ data: Data) {
+        let fileName = DateHelper.string(dateFormat: "MMMM_yyyy")
         let path = FileManager.default.urls(for: .documentDirectory,
-                                            in: .userDomainMask)[0].appendingPathComponent("this_month.json")
+                                            in: .userDomainMask)[0].appendingPathComponent("\(fileName).json")
 
         try? data.write(to: path)
     }
 
     func load() -> Data? {
-
-        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("this_month.json") else {
+        let fileName = DateHelper.string(dateFormat: "MMMM_yyyy")
+        guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("\(fileName).json") else {
             return nil
         }
 
         do {
             return try Data(contentsOf: url, options: .mappedIfSafe)
-        }
-
-        catch {
+        } catch {
             return nil
         }
     }
