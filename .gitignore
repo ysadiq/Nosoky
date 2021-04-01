@@ -23,7 +23,6 @@ xcuserdata
 *.moved-aside
 *.xcuserstate
 *.xcscmblueprint
-Nosoky/Helpers/Debugger.swift
 
 ## Obj-C/Swift specific
 *.hmap
