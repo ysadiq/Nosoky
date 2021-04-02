@@ -27,8 +27,8 @@
 		763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */; };
 		7680DC5B2616383C008DE89D /* DataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DC5A2616383C008DE89D /* DataProviderMock.swift */; };
 		7680DC602616392C008DE89D /* april.json in Resources */ = {isa = PBXBuildFile; fileRef = 7680DC5F2616392C008DE89D /* april.json */; };
-		7680DCA6261754F9008DE89D /* PrayerManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */; };
 		7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */; };
+		7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -436,7 +436,6 @@
 				76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */,
 				76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */,
 				7680DC5B2616383C008DE89D /* DataProviderMock.swift in Sources */,
-				7680DCA6261754F9008DE89D /* PrayerManagerMock.swift in Sources */,
 				76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */,
 				763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */,
 				76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */,
@@ -448,6 +447,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76219F3126084E8800FE3B83 /* ViewControllerTests.swift in Sources */,
+				7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */,
 				7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
