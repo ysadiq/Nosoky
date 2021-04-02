@@ -13,7 +13,9 @@ typealias Time = (hour: Int?, minute: Int?)
 class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
-    init() {}
+    init(minuteUpdateInterval: Double = 60) {
+        self.minuteUpdateInterval = minuteUpdateInterval
+    }
 
     // MARK: - Private properties
     private var todaysPrayers: [Prayer] = []
@@ -22,6 +24,7 @@ class PrayerManager {
 
     // MARK: - Public properties
     var lastNightThirdTime: Time?
+    let minuteUpdateInterval: Double
     var onMinuteUpdate: (() -> Void)? {
         willSet {
             if newValue == nil {
@@ -226,7 +229,7 @@ extension PrayerManager {
         }
 
         timer = Timer.scheduledTimer(
-            timeInterval: 60,
+            timeInterval: minuteUpdateInterval,
             target: self,
             selector: #selector(executeOnMinuteUpdate),
             userInfo: nil,
