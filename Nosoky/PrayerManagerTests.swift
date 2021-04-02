@@ -85,6 +85,30 @@ class PrayerManagerTests: XCTestCase {
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Isha")
         XCTAssertTrue(prayerManager.otherPrayers.isEmpty)
     }
+
+    func testPrayerDateTimes() {
+        prayerManager.currentTimeMock = (2, 0)
+        prayerManager.prayerDateTimes = [
+            Datetime(
+                times: Times(
+                    imsak: "",
+                    sunrise: "",
+                    fajr: "5:00",
+                    dhuhr: "",
+                    asr: "",
+                    sunset: "",
+                    maghrib: "",
+                    isha: "",
+                    midnight: ""),
+                date: DateClass(
+                    timestamp: 1,
+                    gregorian: DateHelper.string(from: Date()),
+                    hijri: "")
+            )]
+
+        XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
+        XCTAssertEqual(prayerManager.otherPrayers.count, 4)
+    }
 }
 
 // MARK: - Helper methods
