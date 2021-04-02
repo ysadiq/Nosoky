@@ -76,8 +76,11 @@ class PrayerManager {
     class func prayer(_ name: String, time: String) -> Prayer {
         let timeComponents = time.split(separator: ":")
 
-        return Prayer(name,
-                      (Int(timeComponents[0]), Int(timeComponents[1])))
+        guard let hour = timeComponents.first, let minute = timeComponents.last else {
+            return Prayer(name, (0,0))
+        }
+
+        return Prayer(name, (Int(hour), Int(minute)))
     }
 
     // MARK: - Private methods
