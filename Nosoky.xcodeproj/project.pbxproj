@@ -30,6 +30,7 @@
 		7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */; };
 		7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */; };
 		7680DCCE261770E1008DE89D /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCC626176F78008DE89D /* ViewModelTests.swift */; };
+		7680DCD626177D60008DE89D /* PrayerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCD526177D60008DE89D /* PrayerManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManagerMock.swift; sourceTree = "<group>"; };
 		7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboard.swift"; sourceTree = "<group>"; };
 		7680DCC626176F78008DE89D /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		7680DCD526177D60008DE89D /* PrayerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 		76219F2F26084E8800FE3B83 /* NosokyTests */ = {
 			isa = PBXGroup;
 			children = (
+				7680DCD526177D60008DE89D /* PrayerManagerTests.swift */,
 				76219F3026084E8800FE3B83 /* ViewControllerTests.swift */,
 				7680DCC626176F78008DE89D /* ViewModelTests.swift */,
 				7680DCB626175544008DE89D /* Mocks */,
@@ -449,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7680DCD626177D60008DE89D /* PrayerManagerTests.swift in Sources */,
 				76219F3126084E8800FE3B83 /* ViewControllerTests.swift in Sources */,
 				7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */,
 				7680DCCE261770E1008DE89D /* ViewModelTests.swift in Sources */,
