@@ -31,7 +31,7 @@ class PrayerManager {
             }
         }
     }
-    
+
     var prayerDateTimes: [Datetime] = [] {
         didSet {
             setTodaysPrayers()
@@ -66,11 +66,7 @@ class PrayerManager {
 
     var otherPrayers: [Prayer] {
         if let nextPrayer = nextPrayer {
-            var prayers = todaysPrayers.filter { $0.name != nextPrayer.name }
-            if prayers.count > 4 {
-                _ = prayers.popLast()
-            }
-            return prayers
+            return todaysPrayers.filter { $0.name != nextPrayer.name }
         } else {
             return tomorrowsPrayers.filter { $0.name != "Isha" && $0.name != "Night" }
         }
