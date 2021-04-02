@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     }
 
     func initViewModel(with locationCoordinate: CLLocationCoordinate2D) {
-        viewModel.updateLoadingStatus = { [weak self] in
+        let updateLoadingStatus = { [weak self] in
             guard let self = self else {
                 return
             }
@@ -55,7 +55,8 @@ class ViewController: UIViewController {
                 break
             }
         }
-
+        
+        viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewModel.fetchData(with: locationCoordinate)
     }
 

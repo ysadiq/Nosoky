@@ -16,9 +16,9 @@ public enum ContentState {
 }
 
 class ViewModel {
-    var updateLoadingStatus: (() -> Void)?
     private let dataProvider: DataProviderProtocol
     private let prayerManager: PrayerManager
+    var updateLoadingStatus: [(() -> Void)?] = [] 
     var lastUpdated: String? {
         guard let lastUpdated = dataProvider.lastUpdated else {
             return nil
@@ -29,7 +29,9 @@ class ViewModel {
 
     var contentState: ContentState = .empty {
         didSet {
-            self.updateLoadingStatus?()
+            updateLoadingStatus.forEach {
+                $0?()
+            }
         }
     }
 
