@@ -31,7 +31,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        otherPrayersCollectionView.delegate = self
         configureLocation()
 
         prayerManager.onMinuteUpdate = { [weak self] in
