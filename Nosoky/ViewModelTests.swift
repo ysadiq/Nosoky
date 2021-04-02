@@ -40,7 +40,7 @@ class ViewModelTests: XCTestCase {
         viewModel.updateLoadingStatus = [listenerOne, listenerTwo]
         viewModel.contentState = .populated
 
-        wait(for: [promise], timeout: 1)
+        wait(for: [promise], timeout: 0.1)
     }
 
     func testMultipleListenersInOrder() {
@@ -58,6 +58,6 @@ class ViewModelTests: XCTestCase {
         viewModel.updateLoadingStatus = [listenerOne, listenerTwo]
         viewModel.contentState = .populated
 
-        wait(for: [promiseOne, promiseTwo], timeout: 1, enforceOrder: true)
+        wait(for: [promiseOne, promiseTwo], timeout: 0.1, enforceOrder: true)
     }
 }

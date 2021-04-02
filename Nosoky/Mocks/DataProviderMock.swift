@@ -18,16 +18,18 @@ class DataProviderMock: DataProviderProtocol {
             return
         }
 
-        do {
-            let data = try Data(contentsOf: url, options: .mappedIfSafe)
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let result = try decoder.decode(PrayerTimesModel.self, from: data).results
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            do {
+                let data = try Data(contentsOf: url, options: .mappedIfSafe)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let result = try decoder.decode(PrayerTimesModel.self, from: data).results
 
-            lastUpdated = Date()
-            completion(result, nil)
-        } catch {
-            completion(nil, APIError.unableToDecode)
+                self.lastUpdated = Date()
+                completion(result, nil)
+            } catch {
+                completion(nil, APIError.unableToDecode)
+            }
         }
     }
 }

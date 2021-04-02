@@ -92,7 +92,7 @@ class ViewControllerTests: XCTestCase {
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewController.initViewModel(with: coordinate)
 
-        wait(for: [promise], timeout: 0.1)
+        wait(for: [promise], timeout: 0.2)
         XCTAssertFalse(viewController.prayerTimeUnitLabel.isHidden)
         XCTAssertEqual(viewController.prayerTimeLabel.text, "22")
     }
