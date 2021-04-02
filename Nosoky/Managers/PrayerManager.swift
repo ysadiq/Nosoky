@@ -204,8 +204,6 @@ class PrayerManager {
             return nil
         }
 
-        let currentTime = Calendar.current.dateComponents([.hour, .minute], from: Date())
-
         var hoursDifference = differenceInHours(hour,
                                                 currentTime.hour ?? 0)
         let minutesDifference = differenceInMinutes(minute,
