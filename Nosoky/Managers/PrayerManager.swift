@@ -20,7 +20,7 @@ func prayer(_ name: String, time: String) -> Prayer {
 class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
-    private init() {}
+    init() {}
 
     // MARK: - Private properties
     private var todaysPrayers: [Prayer] = []
