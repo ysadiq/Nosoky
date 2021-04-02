@@ -10,13 +10,6 @@ import Foundation
 typealias Prayer = (name: String, time: Time)
 typealias Time = (hour: Int?, minute: Int?)
 
-func prayer(_ name: String, time: String) -> Prayer {
-    let timeComponents = time.split(separator: ":")
-
-    return Prayer(name,
-                  (Int(timeComponents[0]), Int(timeComponents[1])))
-}
-
 class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
@@ -38,18 +31,21 @@ class PrayerManager {
             }
         }
     }
+    
     var prayerDateTimes: [Datetime] = [] {
         didSet {
             setTodaysPrayers()
             setTomorrowsPrayers()
         }
     }
+
     var currentTime: Time {
         (
             Calendar.current.dateComponents([.hour], from: Date()).hour ?? 0,
             Calendar.current.dateComponents([.minute], from: Date()).minute ?? 0
         )
     }
+
     var nextPrayer: Prayer? {
         while let prayer = todaysPrayers.first {
             guard let prayerTimeHour = prayer.time.hour, let prayerTimeMinute = prayer.time.minute,
@@ -77,6 +73,14 @@ class PrayerManager {
         } else {
             return tomorrowsPrayers.filter { $0.name != "Isha" && $0.name != "Night" }
         }
+    }
+
+    // MARK: - Class methods
+    class func prayer(_ name: String, time: String) -> Prayer {
+        let timeComponents = time.split(separator: ":")
+
+        return Prayer(name,
+                      (Int(timeComponents[0]), Int(timeComponents[1])))
     }
 
     // MARK: - Private methods
@@ -118,11 +122,11 @@ class PrayerManager {
         }
 
         prayersList += [
-            prayer("Fajr", time: prayers.fajr),
-            prayer("Dhuhur", time: prayers.dhuhr),
-            prayer("Asr", time: prayers.asr),
-            prayer("Maghrib", time: prayers.maghrib),
-            prayer("Isha", time: prayers.isha)
+            PrayerManager.prayer("Fajr", time: prayers.fajr),
+            PrayerManager.prayer("Dhuhur", time: prayers.dhuhr),
+            PrayerManager.prayer("Asr", time: prayers.asr),
+            PrayerManager.prayer("Maghrib", time: prayers.maghrib),
+            PrayerManager.prayer("Isha", time: prayers.isha)
         ]
 
         return prayersList
@@ -199,7 +203,7 @@ class PrayerManager {
     }
 
     // MARK: - Public methods
-    func timeRemainingTo(_ time: Time) -> (time: Time, timeUnit: String)? {
+    public func timeRemainingTo(_ time: Time) -> (time: Time, timeUnit: String)? {
         guard let hour = time.hour, let minute = time.minute else {
             return nil
         }
