@@ -23,7 +23,10 @@ class ViewController: UIViewController {
     var currentCoordination: CLLocationCoordinate2D?
 
     lazy var viewModel = {
-        ViewModel()
+        ViewModel(prayerManager: prayerManager)
+    }()
+    lazy var prayerManager = {
+        PrayerManager.shared
     }()
 
     override func viewDidLoad() {
@@ -31,7 +34,7 @@ class ViewController: UIViewController {
         otherPrayersCollectionView.delegate = self
         configureLocation()
 
-        PrayerManager.shared.onMinuteUpdate = { [weak self] in
+        prayerManager.onMinuteUpdate = { [weak self] in
             self?.updateNextPrayer()
         }
     }
@@ -57,8 +60,8 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = PrayerManager.shared.nextPrayer,
-              PrayerManager.shared.nextPrayer?.name != "Night" else {
+        guard let nextPrayer = prayerManager.nextPrayer,
+              prayerManager.nextPrayer?.name != "Night" else {
             configureLastThirdNightView()
             otherPrayersCollectionView.reloadData()
             return
@@ -72,8 +75,8 @@ class ViewController: UIViewController {
     }
 
     func updateLastNightThird() {
-        if let lastNightThirdTimeHour = PrayerManager.shared.lastNightThirdTime?.hour,
-           let lastNightThirdTimeMinute = PrayerManager.shared.lastNightThirdTime?.minute {
+        if let lastNightThirdTimeHour = prayerManager.lastNightThirdTime?.hour,
+           let lastNightThirdTimeMinute = prayerManager.lastNightThirdTime?.minute {
             lastThirdNightTimeLabel.text = "\(lastNightThirdTimeHour):\(lastNightThirdTimeMinute)"
         }
     }
@@ -86,7 +89,7 @@ class ViewController: UIViewController {
     }
 
     func configureLastThirdNightView() {
-        guard let lastNightThirdTime = PrayerManager.shared.lastNightThirdTime else {
+        guard let lastNightThirdTime = prayerManager.lastNightThirdTime else {
             return
         }
 
@@ -98,7 +101,7 @@ class ViewController: UIViewController {
     }
 
     func setPrayerTimeLabel(_ time: Time) {
-        guard let timeRemaining = PrayerManager.shared.timeRemainingTo(time),
+        guard let timeRemaining = prayerManager.timeRemainingTo(time),
               let timeRemainingHour = timeRemaining.time.hour,
               let timeRemainingMinute = timeRemaining.time.minute else {
             return
@@ -140,7 +143,7 @@ extension ViewController: CLLocationManagerDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        PrayerManager.shared.otherPrayers.count
+        prayerManager.otherPrayers.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -150,7 +153,7 @@ extension ViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
 
-        cell.setup(PrayerManager.shared.otherPrayers[indexPath.row])
+        cell.setup(prayerManager.otherPrayers[indexPath.row])
         return cell
     }
 
@@ -159,7 +162,7 @@ extension ViewController: UICollectionViewDataSource {
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let CellWidth = 60
-        let CellCount = PrayerManager.shared.otherPrayers.count
+        let CellCount = prayerManager.otherPrayers.count
         let CellSpacing = 20
 
         let totalCellWidth = CellWidth * CellCount

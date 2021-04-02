@@ -16,8 +16,9 @@ public enum ContentState {
 }
 
 class ViewModel {
-    private let dataProvider = DataProvider()
     var updateLoadingStatus: (() -> Void)?
+    private let dataProvider: DataProviderProtocol
+    private let prayerManager: PrayerManager
     var lastUpdated: String? {
         guard let lastUpdated = dataProvider.lastUpdated else {
             return nil
@@ -32,6 +33,11 @@ class ViewModel {
         }
     }
 
+    init(dataProvider: DataProviderProtocol = DataProvider(), prayerManager: PrayerManager = PrayerManager.shared) {
+        self.dataProvider = dataProvider
+        self.prayerManager = prayerManager
+    }
+
     func fetchData(with locationCoordinate: CLLocationCoordinate2D) {
         contentState = .loading
 
@@ -41,7 +47,7 @@ class ViewModel {
                 return
             }
 
-            PrayerManager.shared.prayerDateTimes = result.datetime
+            self.prayerManager.prayerDateTimes = result.datetime
             self.contentState = .populated
         }
     }
