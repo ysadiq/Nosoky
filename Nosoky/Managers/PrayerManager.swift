@@ -157,17 +157,24 @@ class PrayerManager {
             1 - 1 = 0
         the last third of the night starts at 00:54
     */
-    private func  calculateLastThirdNightTime(maghribTime: String, fajrTime: String) {
+    private func calculateLastThirdNightTime(maghribTime: String, fajrTime: String) {
         // calculate how long is the night
-        let maghribTime = (
-            hour: Int(maghribTime.split(separator: ":").first ?? "") ?? 0,
-            minute: Int(maghribTime.split(separator: ":").last ?? "") ?? 0
-        )
+        let maghribTimeComponents = maghribTime.split(separator: ":")
+        let fajrTimeComponents = fajrTime.split(separator: ":")
 
-        let fajrTime = (
-            hour: Int(fajrTime.split(separator: ":").first ?? "") ?? 0,
-            minute: Int(fajrTime.split(separator: ":").last ?? "") ?? 0
-        )
+        guard let maghribHourString = maghribTimeComponents.first,
+              let maghribHour = Int(maghribHourString),
+              let maghribMinuteString = maghribTimeComponents.last,
+              let maghribMinute = Int(maghribMinuteString),
+              let fajrHourString = fajrTimeComponents.first,
+              let fajrHour = Int(fajrHourString),
+              let fajrMinuteString = fajrTimeComponents.last,
+              let fajrMinute = Int(fajrMinuteString) else {
+            return
+        }
+
+        let maghribTime = (hour: maghribHour, minute: maghribMinute)
+        let fajrTime = (hour: fajrHour, minute: fajrMinute)
 
         var hoursDifference = differenceInHours(fajrTime.hour, maghribTime.hour)
         let minutesDifference = differenceInMinutes(fajrTime.minute, maghribTime.minute, &hoursDifference)
@@ -179,7 +186,6 @@ class PrayerManager {
 
         // calculate how long is the last third of the night
         let lastThirdNightLong = nightLong.hour / 3
-
         lastNightThirdTime = Time(fajrTime.hour - lastThirdNightLong, minutesDifference)
     }
 
