@@ -18,6 +18,8 @@ class ViewControllerTests: XCTestCase {
         super.setUp()
 
         prayerManagerMock = PrayerManagerMock()
+        prayerManagerMock.todayAsString = "2021-04-02"
+        
         let viewController = ViewController.instance(
             from: "Main",
             with: "ViewController",
@@ -29,7 +31,7 @@ class ViewControllerTests: XCTestCase {
 
         self.viewController = mainViewController
         self.viewController.locationManager = nil
-        self.viewController.prayerManager = PrayerManagerMock()
+        self.viewController.prayerManager = prayerManagerMock
         self.viewController.viewModel = ViewModel(
             dataProvider: DataProviderMock(),
             prayerManager: self.viewController.prayerManager
@@ -59,7 +61,7 @@ class ViewControllerTests: XCTestCase {
         promise.expectedFulfillmentCount = 2
         prayerManagerMock.currentTimeMock = (2,0)
 
-        let updateLoadingStatus = { [weak self] in
+        let updateLoadingStatus = {
             promise.fulfill()
         }
 
@@ -85,7 +87,7 @@ class ViewControllerTests: XCTestCase {
 
         prayerManagerMock.currentTimeMock = (4,0)
 
-        let updateLoadingStatus = { [weak self] in
+        let updateLoadingStatus = {
             promise.fulfill()
         }
 
@@ -103,7 +105,7 @@ class ViewControllerTests: XCTestCase {
 
         prayerManagerMock.currentTimeMock = (23,0)
 
-        let updateLoadingStatus = { [weak self] in
+        let updateLoadingStatus = {
             promise.fulfill()
         }
 
