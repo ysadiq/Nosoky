@@ -14,7 +14,7 @@ class PrayerManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        prayerManager = PrayerManagerMock()
+        prayerManager = PrayerManagerMock(minuteUpdateInterval: 1)
     }
 
     override func tearDown() {
@@ -108,6 +108,45 @@ class PrayerManagerTests: XCTestCase {
 
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
+    }
+
+    func testOnMinuteUpdate() {
+        let expectation = XCTestExpectation(description: #function)
+        prayerManager.onMinuteUpdate = {
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testCancelOnMinuteUpdate() {
+        let expectation = XCTestExpectation(description: #function)
+        expectation.isInverted = true
+        prayerManager.onMinuteUpdate = nil
+        wait(for: [expectation], timeout: 1)
+    }
+
+    func testLastNightThirdTime() {
+        prayerManager.currentTimeMock = (2, 0)
+        prayerManager.prayerDateTimes = [
+            Datetime(
+                times: Times(
+                    imsak: "",
+                    sunrise: "",
+                    fajr: "4:00",
+                    dhuhr: "",
+                    asr: "",
+                    sunset: "",
+                    maghrib: "18:00",
+                    isha: "",
+                    midnight: ""),
+                date: DateClass(
+                    timestamp: 1,
+                    gregorian: DateHelper.string(from: Date()),
+                    hijri: "")
+            )]
+
+        XCTAssertEqual(prayerManager.lastNightThirdTime?.hour, 1)
+        XCTAssertEqual(prayerManager.lastNightThirdTime?.minute, 7)
     }
 }
 
