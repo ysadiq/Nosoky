@@ -11,7 +11,7 @@ import CoreLocation
 
 class ViewControllerTests: XCTestCase {
     static var currentTime = (3,0)
-    
+
     var viewController: ViewController!
     let coordinate = CLLocationCoordinate2D(latitude: 30.086594, longitude: 31.344536)
 
@@ -66,7 +66,7 @@ class ViewControllerTests: XCTestCase {
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewController.initViewModel(with: coordinate)
 
-        wait(for: [promise], timeout: 0.5)
+        wait(for: [promise], timeout: 0.1)
 
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "Next Prayer")
         XCTAssertEqual(viewController.prayerNameLabel.text!, "Fajr")
@@ -92,8 +92,28 @@ class ViewControllerTests: XCTestCase {
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewController.initViewModel(with: coordinate)
 
-        wait(for: [promise], timeout: 0.5)
+        wait(for: [promise], timeout: 0.1)
         XCTAssertFalse(viewController.prayerTimeUnitLabel.isHidden)
         XCTAssertEqual(viewController.prayerTimeLabel.text, "22")
+    }
+
+    func testLastThirdNightView() {
+        let promise = XCTestExpectation(description: #function)
+        promise.expectedFulfillmentCount = 2
+
+        ViewControllerTests.currentTime = (23,0)
+
+        let updateLoadingStatus = { [weak self] in
+            promise.fulfill()
+        }
+
+        viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
+        viewController.initViewModel(with: coordinate)
+
+        wait(for: [promise], timeout: 0.1)
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")
+        XCTAssertEqual(viewController.prayerTimeLabel.text!, "2:7")
+        XCTAssertTrue(viewController.prayerNameLabel.isHidden)
+        XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
     }
 }
