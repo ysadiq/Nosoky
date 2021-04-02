@@ -70,7 +70,7 @@ class ViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.contentState, .empty)
 
-
+        viewModel.fetchData()
 
         XCTAssertEqual(viewModel.contentState, .loading)
 
@@ -88,7 +88,7 @@ class ViewModelTests: XCTestCase {
 
         viewModel.fetchData()
         wait(for: [promise], timeout: 0.2)
-        
+
         XCTAssertEqual(viewModel.lastUpdated, "March 2021")
     }
 }
