@@ -8,8 +8,8 @@
 import Foundation
 
 class PrayerManagerMock: PrayerManager {
-    override var nextPrayer: Prayer? {
-        ("Asr", (3,0))
+    override var currentTime: Time {
+        (3,0)
     }
 
     override var lastNightThirdTime: Time? {

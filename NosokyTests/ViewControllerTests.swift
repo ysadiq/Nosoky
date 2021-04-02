@@ -40,13 +40,20 @@ class ViewControllerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testInitViewModel() {
+    func testLoadingUIStatus() {
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "Next Prayer")
+        XCTAssertEqual(viewController.prayerNameLabel.text!, "--")
+        XCTAssertEqual(viewController.prayerTimeLabel.text!, "--:--")
+        XCTAssertTrue(viewController.prayerTimeUnitLabel.isHidden)
+        XCTAssertEqual(viewController.otherPrayersCollectionView.numberOfItems(inSection: 0), 0)
+        XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "--:--")
+        XCTAssertEqual(viewController.lastUpdatedLabel.text!, "Last updated")
+        XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, "-- ----")
+    }
+
+    func testPopulatedUIStatus() {
         let promise = XCTestExpectation(description: #file)
         promise.expectedFulfillmentCount = 2
-
-        XCTAssertEqual(viewController.prayerNameLabel.text!, "--")
-        XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, "-- ----")
-        XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "--:--")
 
         let updateLoadingStatus = { [weak self] in
             promise.fulfill()
@@ -58,14 +65,18 @@ class ViewControllerTests: XCTestCase {
         wait(for: [promise], timeout: 0.5)
 
         let nextPrayer = viewController.prayerManager.nextPrayer
-        XCTAssertEqual(viewController.prayerNameLabel.text!, nextPrayer!.name)
-
         let timeRemaining =  viewController.prayerManager.timeRemainingTo(nextPrayer!.time)!.time
         let expectedPrayerTimeText = timeRemaining.hour == 0 ? "\((timeRemaining.minute)!)" : "\((timeRemaining.hour)!):\((timeRemaining.minute)!)"
 
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "Next Prayer")
+        XCTAssertEqual(viewController.prayerNameLabel.text!, "Fajr")
+        XCTAssertEqual(viewController.prayerNameLabel.text!, nextPrayer!.name)
         XCTAssertEqual(viewController.prayerTimeLabel.text!, expectedPrayerTimeText)
-        XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, DateHelper.string(dateFormat: "MMMM yyyy"))
-        XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "1:7")
+        XCTAssertTrue(viewController.prayerTimeUnitLabel.isHidden)
         XCTAssertEqual(viewController.otherPrayersCollectionView.numberOfItems(inSection: 0), 4)
+        XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "1:7")
+        XCTAssertEqual(viewController.lastUpdatedLabel.text!, "Last updated")
+        XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, DateHelper.string(dateFormat: "MMMM yyyy"))
+//        XCTAssertEqual((viewController.otherPrayersCollectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! PrayerCollectionViewCell).name.text, "Dhuhur")
     }
 }
