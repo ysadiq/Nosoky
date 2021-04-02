@@ -8,15 +8,24 @@
 import UIKit
 import CoreLocation
 
+enum APIError: String, Error {
+    case noNetwork = "No Network"
+    case serverOverload = "Server is overloaded"
+    case unableToDecode = "Failed to decode"
+    case urlFailure = "Failed to build url"
+}
+
+protocol DataProviderProtocol {
+    var lastUpdated: Date? { get }
+    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D,
+                     completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
+                     ) -> Void)
+
+}
+
 // API Doc: https://prayertimes.date/api/docs/this_month
 
-class DataProvider {
-    enum APIError: String, Error {
-        case noNetwork = "No Network"
-        case serverOverload = "Server is overloaded"
-        case unableToDecode = "Failed to decode"
-        case urlFailure = "Failed to build url"
-    }
+class DataProvider: DataProviderProtocol {
     var lastUpdated: Date?
     var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
 
