@@ -42,6 +42,8 @@ class PrayerManager {
         }
     }
 
+    var tomorrowAsString = DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
+    var todayAsString = DateHelper.string()
     var currentTime: Time {
         (
             Calendar.current.dateComponents([.hour], from: Date()).hour ?? 0,
@@ -89,7 +91,7 @@ class PrayerManager {
     // MARK: - Private methods
     private func setTodaysPrayers() {
         guard let prayers = prayerDateTimes.filter({ dateTime in
-            dateTime.date.gregorian == DateHelper.string()
+            dateTime.date.gregorian == todayAsString
         }).first?.times else {
             return
         }
@@ -101,12 +103,12 @@ class PrayerManager {
     private func setTomorrowsPrayers() {
         // set tomorrow's prayer
         guard let prayers = prayerDateTimes.filter({ dateTime in
-            dateTime.date.gregorian == DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
+            dateTime.date.gregorian == tomorrowAsString
         }).first?.times else {
             // if tomorrow is a new month, get today's prayer too :)
             // I think there's not much difference
             if let prayers = prayerDateTimes.filter({ dateTime in
-                dateTime.date.gregorian == DateHelper.string()
+                dateTime.date.gregorian == todayAsString
             }).first?.times {
                 tomorrowsPrayers = prayersList(of: prayers)
             }
