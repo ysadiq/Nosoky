@@ -78,7 +78,9 @@ class DataProvider: DataProviderProtocol {
                 return
             }
 
-            completion(data, nil)
+            DispatchQueue.main.async {
+                completion(data, nil)
+            }
         }.resume()
     }
 

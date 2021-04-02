@@ -44,12 +44,10 @@ class ViewController: UIViewController {
 
             switch self.viewModel.contentState {
             case .populated:
-                DispatchQueue.main.async {
-                    self.updateNextPrayer()
-                    self.updateLastUpdated()
-                    self.updateLastNightThird()
-                    self.otherPrayersCollectionView.reloadData()
-                }
+                self.updateNextPrayer()
+                self.updateLastUpdated()
+                self.updateLastNightThird()
+                self.otherPrayersCollectionView.reloadData()
             default:
                 break
             }
