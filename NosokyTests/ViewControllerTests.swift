@@ -10,14 +10,14 @@ import CoreLocation
 @testable import Nosoky
 
 class ViewControllerTests: XCTestCase {
-    static var currentTime = (3,0)
-
     var viewController: ViewController!
+    var prayerManagerMock: PrayerManagerMock!
     let coordinate = CLLocationCoordinate2D(latitude: 30.086594, longitude: 31.344536)
 
     override func setUp() {
         super.setUp()
 
+        prayerManagerMock = PrayerManagerMock()
         let viewController = ViewController.instance(
             from: "Main",
             with: "ViewController",
@@ -57,7 +57,7 @@ class ViewControllerTests: XCTestCase {
     func testPopulatedUIStatus() {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
-        ViewControllerTests.currentTime = (2,0)
+        prayerManagerMock.currentTimeMock = (2,0)
 
         let updateLoadingStatus = { [weak self] in
             promise.fulfill()
@@ -83,7 +83,7 @@ class ViewControllerTests: XCTestCase {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
 
-        ViewControllerTests.currentTime = (4,0)
+        prayerManagerMock.currentTimeMock = (4,0)
 
         let updateLoadingStatus = { [weak self] in
             promise.fulfill()
@@ -101,7 +101,7 @@ class ViewControllerTests: XCTestCase {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
 
-        ViewControllerTests.currentTime = (23,0)
+        prayerManagerMock.currentTimeMock = (23,0)
 
         let updateLoadingStatus = { [weak self] in
             promise.fulfill()

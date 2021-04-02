@@ -9,8 +9,9 @@ import Foundation
 @testable import Nosoky
 
 class PrayerManagerMock: PrayerManager {
+    var currentTimeMock = (3,0)
     override var currentTime: Time {
-        ViewControllerTests.currentTime
+        currentTimeMock
     }
 
     override var lastNightThirdTime: Time? {
