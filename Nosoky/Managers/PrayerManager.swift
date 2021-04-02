@@ -63,6 +63,7 @@ class PrayerManager {
 
         return nil
     }
+
     var otherPrayers: [Prayer] {
         if let nextPrayer = nextPrayer {
             var prayers = todaysPrayers.filter { $0.name != nextPrayer.name }
