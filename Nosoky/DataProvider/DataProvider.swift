@@ -17,7 +17,7 @@ enum APIError: String, Error {
 
 protocol DataProviderProtocol {
     var lastUpdated: Date? { get }
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D,
+    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D?,
                      completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void)
 
@@ -29,7 +29,7 @@ class DataProvider: DataProviderProtocol {
     var lastUpdated: Date?
     var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
 
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D,
+    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D? = nil,
                      completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void) {
         self.completion = completion
@@ -42,6 +42,10 @@ class DataProvider: DataProviderProtocol {
 
             completion(prayerTimes, nil)
             NotificationManager.shared.addNotificationsIfNeeded(for: prayerTimes.datetime)
+            return
+        }
+
+        guard let locationCoordinate = locationCoordinate else {
             return
         }
 

@@ -40,7 +40,7 @@ class ViewModel {
         self.prayerManager = prayerManager
     }
 
-    func fetchData(with locationCoordinate: CLLocationCoordinate2D) {
+    func fetchData(with locationCoordinate: CLLocationCoordinate2D? = nil) {
         contentState = .loading
 
         dataProvider.prayerTimes(for: locationCoordinate) { [weak self] result, error in

@@ -11,7 +11,7 @@ import CoreLocation
 class DataProviderMock: DataProviderProtocol {
     var lastUpdated: Date?
 
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D, completion: @escaping (PrayerTimesModel.Results?, APIError?) -> Void) {
+    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D?, completion: @escaping (PrayerTimesModel.Results?, APIError?) -> Void) {
         let fileName = DateHelper.string(dateFormat: "MMMM_yyyy")
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("\(fileName).json") else {
             completion(nil, APIError.noNetwork)
