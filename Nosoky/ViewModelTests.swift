@@ -70,12 +70,25 @@ class ViewModelTests: XCTestCase {
 
         XCTAssertEqual(viewModel.contentState, .empty)
 
-        viewModel.fetchData()
+
 
         XCTAssertEqual(viewModel.contentState, .loading)
 
         wait(for: [promise], timeout: 0.2)
 
         XCTAssertEqual(viewModel.contentState, .populated)
+    }
+
+    func testLastUpdated() {
+        let promise = XCTestExpectation(description: #function)
+        promise.expectedFulfillmentCount = 2
+        viewModel.updateLoadingStatus = [{
+            promise.fulfill()
+        }]
+
+        viewModel.fetchData()
+        wait(for: [promise], timeout: 0.2)
+        
+        XCTAssertEqual(viewModel.lastUpdated, "March 2021")
     }
 }

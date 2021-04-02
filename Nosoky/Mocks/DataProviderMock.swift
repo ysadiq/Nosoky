@@ -25,7 +25,7 @@ class DataProviderMock: DataProviderProtocol {
                 decoder.dateDecodingStrategy = .iso8601
                 let result = try decoder.decode(PrayerTimesModel.self, from: data).results
 
-                self.lastUpdated = Date()
+                self.lastUpdated = DateHelper.date(from: "2021-03-01")
                 completion(result, nil)
             } catch {
                 completion(nil, APIError.unableToDecode)
