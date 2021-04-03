@@ -67,13 +67,14 @@ class NotificationManager {
 
     // MARK: - Internal Methods
     func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
-        userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
-            guard authorizationStatus else {
+        userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { [weak self] authorizationStatus, _ in
+            guard let self = self,
+                  authorizationStatus else {
                 completion(false, nil)
                 return
             }
 
-            UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotifications in
+            self.userNotificationCenter.getPendingNotificationRequests { pendingNotifications in
                 completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications.count)
             }
         }
@@ -104,7 +105,7 @@ class NotificationManager {
         let randomIdentifier = UUID().uuidString
         let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
 
-        UNUserNotificationCenter.current().add(request) { error in
+        userNotificationCenter.add(request) { error in
             if error == nil {
                 print("\(prayer) at date \(date) notification did add")
 
