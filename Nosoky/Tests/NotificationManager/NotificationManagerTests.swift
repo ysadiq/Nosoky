@@ -32,7 +32,6 @@ class NotificationManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "fetch prayer times")
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
 
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         notificationCenter.grantAuthorization = true
 
         DataProviderMock().prayerTimes(for: nil) { result, _ in
