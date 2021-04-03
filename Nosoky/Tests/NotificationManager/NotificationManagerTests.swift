@@ -134,10 +134,6 @@ class NotificationManagerTests: XCTestCase {
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 1
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
 
-        // 64 notifications is equal 64 prayers
-        // 10 days prayers + 4 prayers from day 11th
-        // [10(days) * 6(prayers) = 60]
-        // Asr prayer of 11th/04/2021 is the expected last added notification
         XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.name, "Night")
         XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.time.hour, 1)
         XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.time.minute, 5)
@@ -146,6 +142,7 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(notificationManager.firstAddedNotificationDate?.year, 2021)
 
         XCTAssertEqual(notificationCenter.requests.first?.content.title, "الثلث الأخير من اليل")
+        XCTAssertEqual(notificationCenter.requests.first?.content.subtitle, "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا")
         let notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
         XCTAssertEqual(notificationDate?.hour, 1)
         XCTAssertEqual(notificationDate?.minute, 5)
