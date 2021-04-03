@@ -81,7 +81,7 @@ class NotificationManager {
     }
 
     private func addNotification(for prayer: Prayer, at date: DateComponents) {
-        guard let notificationDetails = notificationContent(for: prayer) else {
+        guard let notificationContent = notificationContent(for: prayer) else {
             return
         }
 
@@ -94,11 +94,11 @@ class NotificationManager {
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
 
         let content = UNMutableNotificationContent()
-        content.title = notificationDetails.title
-        if let adhan = notificationDetails.adhan?.rawValue {
+        content.title = notificationContent.title
+        if let adhan = notificationContent.adhan?.rawValue {
             content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: adhan))
         }
-        if let subtitle = notificationDetails.subtitle {
+        if let subtitle = notificationContent.subtitle {
             content.subtitle = subtitle
         }
 
