@@ -125,6 +125,12 @@ class NotificationManager {
                 subtitle: "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا",
                 adhan: .mini
             )
+        case "Fajr":
+            return (
+                title: "الفجر",
+                subtitle: "الصلاة خير من النوم",
+                adhan: .fajr
+            )
         default:
             return nil
         }
