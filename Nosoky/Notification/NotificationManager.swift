@@ -19,6 +19,7 @@ class NotificationManager {
     // MARK: - Private properties
     let maximumNumberOfNotification = 60
     let userNotificationCenter: UserNotificationCenter
+    var addNotificationFromDate = Date()
 
     // MARK: - Initializer
     init(userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current()) {
@@ -41,7 +42,7 @@ class NotificationManager {
 
                 guard let today = Calendar.current.dateComponents(
                     [.year, .month, .day],
-                    from: Date()
+                    from: self.addNotificationFromDate
                 ).day else { return false }
 
                 return prayersDay >= today
