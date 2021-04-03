@@ -67,6 +67,21 @@ class NotificationManagerTests: XCTestCase {
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
     }
 
+    func testAddNotificationsIfNeededForLastFiveDaysOfTheMonth() {
+        var datetimes: [Datetime] = []
+        let expectation = XCTestExpectation(description: "fetch prayer times")
+        DataProviderMock().prayerTimes(for: nil) { result, _ in
+            datetimes = Array(result!.datetime.dropFirst(25))
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.2)
+
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 5
+        notificationCenter.grantAuthorization = true
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 30)
+    }
         notificationCenter.grantAuthorization = true
 
         DataProviderMock().prayerTimes(for: nil) { result, _ in
