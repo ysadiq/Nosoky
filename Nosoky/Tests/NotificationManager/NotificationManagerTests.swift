@@ -84,7 +84,7 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(notificationManager.numberOfAddedNotifications, 30)
     }
 
-    func testNotificationContent() {
+    func testLastAddedNotificationContent() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
         DataProviderMock().prayerTimes(for: nil) { result, _ in
@@ -99,7 +99,9 @@ class NotificationManagerTests: XCTestCase {
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 1
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
 
-        // 64 notifications is equal to 10 days prayers [6(prayers) * 10(days) = 60] + 4 prayers
+        // 64 notifications is equal 64 prayers
+        // 10 days prayers + 4 prayers from day 11th
+        // [10(days) * 6(prayers) = 60]
         // Asr prayer of 11th/04/2021 is the expected last added notification
         XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.name, "Asr")
         XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.time.hour, 15)
@@ -107,11 +109,19 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.day, 11)
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.month, 4)
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.year, 2021)
+
+        XCTAssertEqual(notificationCenter.requests.last?.content.title, "العصر")
+        let notificationDate = (notificationCenter.requests.last?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
+        XCTAssertEqual(notificationDate?.hour, 15)
+        XCTAssertEqual(notificationDate?.minute, 30)
+        XCTAssertEqual(notificationDate?.day, 11)
+        XCTAssertEqual(notificationDate?.month, 4)
+        XCTAssertEqual(notificationDate?.year, 2021)
     }
 }
 
 class NotificationManagerMock: NotificationManager {
-    var addNotificationExpectation = XCTestExpectation(description: "addNotification(for prayer:, at date:)")
+    var addNotificationExpectation = XCTestExpectation(description: #function)
     var lastAddedNotificationDate: DateComponents?
     var lastAddedNotificationPrayer: Prayer?
     var numberOfAddedNotifications: Int = 0
