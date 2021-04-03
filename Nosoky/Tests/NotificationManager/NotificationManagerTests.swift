@@ -40,18 +40,22 @@ class NotificationManagerTests: XCTestCase {
 
         wait(for: [expectation], timeout: 0.2)
 
-        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 58
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
 
         notificationManager.addNotificationsIfNeeded(for: datetimes)
         wait(for: [notificationManager.addNotificationExpectation], timeout: 5)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
     }
 }
 
 class NotificationManagerMock: NotificationManager {
     var addNotificationExpectation = XCTestExpectation(description: "addNotification(for prayer:, at date:)")
+    var numberOfAddedNotifications: Int = 0
 
     override func addNotification(for prayer: Prayer, at date: DateComponents) {
         super.addNotification(for: prayer, at: date)
+
+        numberOfAddedNotifications += 1
 
         addNotificationExpectation.fulfill()
     }
