@@ -23,14 +23,14 @@ class NotificationManagerTests: XCTestCase {
 
     override func tearDown() {
         notificationManager = nil
+        notificationCenter = nil
 
         super.tearDown()
     }
 
-    func testAddNotificationsIfNeeded() {
+    func testAddNotificationsIfNeededWhenAuthorizationIsDisabled() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        notificationCenter.grantAuthorization = true
         DataProviderMock().prayerTimes(for: nil) { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
@@ -38,6 +38,24 @@ class NotificationManagerTests: XCTestCase {
         wait(for: [expectation], timeout: 0.2)
 
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+        notificationCenter.grantAuthorization = false
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        notificationManager.addNotificationExpectation.isInverted = true
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 0)
+    }
+
+    func testAddNotificationsIfNeeded() {
+        var datetimes: [Datetime] = []
+        let expectation = XCTestExpectation(description: "fetch prayer times")
+        DataProviderMock().prayerTimes(for: nil) { result, _ in
+            datetimes = result!.datetime
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.2)
+
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+        notificationCenter.grantAuthorization = true
         notificationManager.addNotificationsIfNeeded(for: datetimes)
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
         XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
