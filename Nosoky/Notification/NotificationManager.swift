@@ -17,7 +17,7 @@ enum AdhanFileName: String {
 
 class NotificationManager {
     // MARK: - Private properties
-    let maximumNumberOfNotification = 60
+    let maximumNumberOfNotification = 64
     let userNotificationCenter: UserNotificationCenter
     var addNotificationFromDate = Date()
 
