@@ -25,7 +25,7 @@ class NotificationManager {
         self.userNotificationCenter = userNotificationCenter
     }
 
-    // MARK: - Methods
+    // MARK: - Public methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
         shouldAddNotifications { status, numberOfPendingNotifications in
             guard status,
@@ -65,9 +65,8 @@ class NotificationManager {
         }
     }
 
-    // MARK: - Private Methods
-    private func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
+    // MARK: - Internal Methods
+    func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
         userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
             guard authorizationStatus else {
                 completion(false, nil)
@@ -80,7 +79,7 @@ class NotificationManager {
         }
     }
 
-    private func addNotification(for prayer: Prayer, at date: DateComponents) {
+    func addNotification(for prayer: Prayer, at date: DateComponents) {
         guard let notificationContent = notificationContent(for: prayer) else {
             return
         }
@@ -115,7 +114,7 @@ class NotificationManager {
         }
     }
 
-    private func notificationContent(for prayer: Prayer) -> NotificationContent? {
+    func notificationContent(for prayer: Prayer) -> NotificationContent? {
         switch prayer.name {
         case "Dhuhur": return (title: "الظهر", subtitle: nil, adhan: .mini)
         case "Asr": return (title: "العصر", subtitle: nil, adhan: .mini)
