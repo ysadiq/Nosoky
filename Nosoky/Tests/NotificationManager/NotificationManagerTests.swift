@@ -30,7 +30,24 @@ class NotificationManagerTests: XCTestCase {
     func testAddNotificationsIfNeeded() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
+        notificationCenter.grantAuthorization = true
+        DataProviderMock().prayerTimes(for: nil) { result, _ in
+            datetimes = result!.datetime
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.2)
+
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
+
+        // Test that no notification is added when maximum is reached
+        notificationManager.addNotificationExpectation = XCTestExpectation(description: "Maximum number of notifications")
+        notificationManager.addNotificationExpectation.isInverted = true
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+    }
 
         notificationCenter.grantAuthorization = true
 
