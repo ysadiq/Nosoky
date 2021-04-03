@@ -68,6 +68,62 @@ class NotificationManagerTests: XCTestCase {
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
     }
 
+    func testNextNotificationsAfterDeliveringNotifications() {
+        // Fetch prayers
+        var datetimes: [Datetime] = []
+        let expectation = XCTestExpectation(description: "fetch prayer times")
+        DataProviderMock().prayerTimes(for: nil) { result, _ in
+            datetimes = result!.datetime
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.2)
+
+        // Add notifications
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+        notificationCenter.grantAuthorization = true
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
+
+        // Test first notification
+        XCTAssertEqual(notificationCenter.requests.first?.content.title, "الثلث الأخير من اليل")
+        var notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
+        XCTAssertEqual(notificationDate?.hour, 1)
+        XCTAssertEqual(notificationDate?.minute, 5)
+        XCTAssertEqual(notificationDate?.day, 1)
+        XCTAssertEqual(notificationDate?.month, 4)
+        XCTAssertEqual(notificationDate?.year, 2021)
+
+        // Deliver first notification
+        notificationCenter.requests.removeFirst()
+        XCTAssertEqual(notificationCenter.requests.count, 63)
+
+        // Add new notification if there's available spot for notifications
+        notificationManager.addNotificationExpectation = XCTestExpectation(description: #function)
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+
+        // Test second notification
+        XCTAssertEqual(notificationCenter.requests.count, 64)
+        XCTAssertEqual(notificationCenter.requests.first?.content.title, "الفجر")
+        notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
+        XCTAssertEqual(notificationDate?.hour, 4)
+        XCTAssertEqual(notificationDate?.minute, 23)
+        XCTAssertEqual(notificationDate?.day, 1)
+        XCTAssertEqual(notificationDate?.month, 4)
+        XCTAssertEqual(notificationDate?.year, 2021)
+
+        // Add new notification if there's available spot for notifications
+        XCTAssertEqual(notificationCenter.requests.count, 64)
+        notificationManager.addNotificationExpectation = XCTestExpectation(description: #function)
+        notificationManager.addNotificationExpectation.isInverted = true
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+
+        // No available spot to add more notification
+        XCTAssertEqual(notificationCenter.requests.count, 64)
+    }
+
     func testAddNotificationsIfNeededForLastFiveDaysOfTheMonth() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
