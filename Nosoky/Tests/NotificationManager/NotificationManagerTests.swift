@@ -28,10 +28,12 @@ class NotificationManagerTests: XCTestCase {
     }
 
     func testAddNotificationsIfNeeded() {
+        var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         notificationCenter.grantAuthorization = true
-        var datetimes: [Datetime] = []
 
         DataProviderMock().prayerTimes(for: nil) { result, _ in
             datetimes = result!.datetime
@@ -40,10 +42,8 @@ class NotificationManagerTests: XCTestCase {
 
         wait(for: [expectation], timeout: 0.2)
 
-        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
-
         notificationManager.addNotificationsIfNeeded(for: datetimes)
-        wait(for: [notificationManager.addNotificationExpectation], timeout: 5)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
         XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
     }
 }
