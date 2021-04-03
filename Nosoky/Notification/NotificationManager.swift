@@ -8,6 +8,13 @@
 import Foundation
 import NotificationCenter
 
+typealias NotificationContent = (title: String, subtitle: String?, adhan: AdhanFileName?)
+
+enum AdhanFileName: String {
+    case mini = "Adhan-makkah.m4a"
+    case fajr = "Adhan-fajr.m4a"
+}
+
 class NotificationManager {
     // MARK: - Private properties
     let maximumNumberOfNotification = 60
@@ -15,20 +22,6 @@ class NotificationManager {
     // MARK: - Initializer
     public static let shared = NotificationManager()
     private init() {}
-
-    // MARK: - Private Methods
-    private func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
-            guard authorizationStatus else {
-                completion(false, nil)
-                return
-            }
-
-            UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotifications in
-                completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications.count)
-            }
-        }
-    }
 
     // MARK: - Methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
@@ -70,6 +63,20 @@ class NotificationManager {
         }
     }
 
+    // MARK: - Private Methods
+    private func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
+            guard authorizationStatus else {
+                completion(false, nil)
+                return
+            }
+
+            UNUserNotificationCenter.current().getPendingNotificationRequests { pendingNotifications in
+                completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications.count)
+            }
+        }
+    }
+
     private func addNotification(for prayer: Prayer, at date: DateComponents) {
         guard let notificationDetails = notificationContent(for: prayer) else {
             return
@@ -105,57 +112,21 @@ class NotificationManager {
         }
     }
 
-    private func notificationContent(for prayer: Prayer) -> (title: String, subtitle: String?, adhan: AdhanFileName?)? {
+    private func notificationContent(for prayer: Prayer) -> NotificationContent? {
         switch prayer.name {
-        case "Fajr":
-            return (
-                title: "الفجر",
-                subtitle: "الصلاة خير من النوم",
-                adhan: .fajr
-            )
-        case "Dhuhur":
-            return (
-                title: "الظهر",
-                subtitle: nil,
-                adhan: .mini
-            )
-        case "Asr":
-            return (
-                title: "العصر",
-                subtitle: nil,
-                adhan: .mini
-            )
-        case "Maghrib":
-            return (
-                title: "المغرب",
-                subtitle: nil,
-                adhan: .mini
-            )
-        case "Isha":
-            return (
-                title: "العشاء",
-                subtitle: nil,
-                adhan: .mini
-            )
+        case "Dhuhur": return (title: "الظهر", subtitle: nil, adhan: .mini)
+        case "Asr": return (title: "العصر", subtitle: nil, adhan: .mini)
+        case "Maghrib": return (title: "المغرب", subtitle: nil, adhan: .mini)
+        case "Isha": return (title: "العشاء", subtitle: nil, adhan: .mini)
+        case "Sunrise":return (title: "الضحى", subtitle: nil, adhan: .mini)
         case "Night":
             return (
                 title: "الثلث الأخير من اليل",
                 subtitle: "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا",
                 adhan: .mini
             )
-        case "Sunrise":
-            return (
-                title: "الضحى",
-                subtitle: nil,
-                adhan: .mini
-            )
         default:
             return nil
         }
-    }
-
-    enum AdhanFileName: String {
-        case mini = "Adhan-makkah.m4a"
-        case fajr = "Adhan-fajr.m4a"
     }
 }
