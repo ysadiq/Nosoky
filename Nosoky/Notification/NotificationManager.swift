@@ -18,10 +18,12 @@ enum AdhanFileName: String {
 class NotificationManager {
     // MARK: - Private properties
     let maximumNumberOfNotification = 60
+    let userNotificationCenter: UserNotificationCenter
 
     // MARK: - Initializer
-    public static let shared = NotificationManager()
-    private init() {}
+    init(userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current()) {
+        self.userNotificationCenter = userNotificationCenter
+    }
 
     // MARK: - Methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
@@ -66,6 +68,7 @@ class NotificationManager {
     // MARK: - Private Methods
     private func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
+        userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { authorizationStatus, _ in
             guard authorizationStatus else {
                 completion(false, nil)
                 return

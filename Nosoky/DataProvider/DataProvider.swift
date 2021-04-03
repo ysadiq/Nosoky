@@ -28,6 +28,11 @@ protocol DataProviderProtocol {
 class DataProvider: DataProviderProtocol {
     var lastUpdated: Date?
     var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
+    private let notificationManager: NotificationManager
+
+    init(notificationManager: NotificationManager = NotificationManager()) {
+        self.notificationManager = notificationManager
+    }
 
     func prayerTimes(for locationCoordinate: CLLocationCoordinate2D? = nil,
                      completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
@@ -41,7 +46,7 @@ class DataProvider: DataProviderProtocol {
             }
 
             completion(prayerTimes, nil)
-            NotificationManager.shared.addNotificationsIfNeeded(for: prayerTimes.datetime)
+            notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
             return
         }
 
@@ -63,7 +68,7 @@ class DataProvider: DataProviderProtocol {
             }
 
             completion(prayerTimes, nil)
-            NotificationManager.shared.addNotificationsIfNeeded(for: prayerTimes.datetime)
+            self?.notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
         }
     }
 
