@@ -39,16 +39,6 @@
                ReferencedContainer = "container:Nosoky.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76219F3626084E8800FE3B83"
-               BuildableName = "NosokyUITests.xctest"
-               BlueprintName = "NosokyUITests"
-               ReferencedContainer = "container:Nosoky.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
