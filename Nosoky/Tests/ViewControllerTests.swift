@@ -118,4 +118,24 @@ class ViewControllerTests: XCTestCase {
         XCTAssertTrue(viewController.prayerNameLabel.isHidden)
         XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
     }
+
+    func testLastThirdNightViewPreMinutes() {
+        let promise = XCTestExpectation(description: #function)
+        promise.expectedFulfillmentCount = 2
+
+        prayerManagerMock.currentTimeMock = Time(hour: 1, minute: 0)
+
+        let updateLoadingStatus = {
+            promise.fulfill()
+        }
+
+        viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
+        viewController.initViewModel(with: coordinate)
+
+        wait(for: [promise], timeout: 0.1)
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")
+        XCTAssertEqual(viewController.prayerTimeLabel.text!, "7")
+        XCTAssertTrue(viewController.prayerNameLabel.isHidden)
+        XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
+    }
 }
