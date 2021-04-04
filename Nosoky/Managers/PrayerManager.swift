@@ -74,17 +74,6 @@ class PrayerManager {
         }
     }
 
-    // MARK: - Class methods
-//    class func prayer(_ id: String, _ name: String, time: Time) -> Prayer {
-//        let timeComponents = time.split(separator: ":")
-//
-//        guard let hour = timeComponents.first, let minute = timeComponents.last else {
-//            return Prayer(id: id, name: name, time: Time(hour: 0, minute: 0))
-//        }
-//
-//        return Prayer(id: id, name: name, time: Time(hour: Int(hour), minute: Int(minute)))
-//    }
-
     // MARK: - Private methods
     private func setTodaysPrayers() {
         guard let prayers = prayerDateTimes.filter({ dateTime in
