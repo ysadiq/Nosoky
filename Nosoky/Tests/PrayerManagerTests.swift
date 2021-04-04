@@ -15,6 +15,7 @@ class PrayerManagerTests: XCTestCase {
         super.setUp()
 
         prayerManager = PrayerManagerMock(minuteUpdateInterval: 1)
+        prayerManager.todayAsString = "2021-04-01"
     }
 
     override func tearDown() {
@@ -88,14 +89,8 @@ class PrayerManagerTests: XCTestCase {
 
     func testPrayerDateTimes() {
         prayerManager.currentTimeMock = Time(hour: 2, minute:0)
-        prayerManager.prayerDateTimes = [
-            Datetime(
-                times: Times(JSONString: "{\"times\":{\"Imsak\":\"\",\"Sunrise\":\"\",\"Fajr\":\"05:00\",\"Dhuhr\":\"\",\"Asr\":\"\",\"Sunset\":\"\",\"Maghrib\":\"\",\"Isha\":\"\",\"Midnight\":\"\"}}")!,
-                date: DateClass(
-                    timestamp: 1,
-                    gregorian: DateHelper.string(from: Date()),
-                    hijri: "")
-            )]
+        prayerManager.prayerDateTimes =
+            PrayerTimesModel(JSONString: "{\"code\":200,\"status\":\"OK\",\"results\":{\"datetime\":[{\"times\":{\"Imsak\":\"04:13\",\"Sunrise\":\"05:43\",\"Fajr\":\"05:00\",\"Dhuhr\":\"11:58\",\"Asr\":\"15:30\",\"Sunset\":\"18:14\",\"Maghrib\":\"18:14\",\"Isha\":\"19:34\",\"Midnight\":\"23:59\"},\"date\":{\"timestamp\":1617235200,\"gregorian\":\"2021-04-01\",\"hijri\":\"1442-08-19\"}}],\"location\":{\"latitude\":30.086594,\"longitude\":31.3445356,\"elevation\":30,\"country\":\"\",\"country_code\":\"EG\",\"timezone\":\"Africa/Cairo\",\"local_offset\":2},\"settings\":{\"timeformat\":\"HH:mm\",\"school\":\"Egyptian General Authority of Survey\",\"juristic\":\"Shafii\",\"highlat\":\"None\",\"fajr_angle\":18,\"isha_angle\":18}}}")!.results.datetime
 
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
