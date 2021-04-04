@@ -67,7 +67,7 @@ class ViewControllerTests: XCTestCase {
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewController.initViewModel()
 
-        wait(for: [promise], timeout: 0.1)
+        wait(for: [promise], timeout: 1)
 
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "Next Prayer")
         XCTAssertEqual(viewController.prayerNameLabel.text!, "Fajr")
