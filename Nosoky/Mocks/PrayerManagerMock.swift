@@ -9,14 +9,14 @@ import Foundation
 @testable import Nosoky
 
 class PrayerManagerMock: PrayerManager {
-    var currentTimeMock = (3,0)
+    var currentTimeMock = Time(hour: 3, minute: 0)
     override var currentTime: Time {
         currentTimeMock
     }
 
     override var lastNightThirdTime: Time? {
         get {
-            (1,7)
+            Time(hour: 1, minute: 7)
         } set {
             _ = newValue
         }

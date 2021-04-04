@@ -59,7 +59,7 @@ class ViewControllerTests: XCTestCase {
     func testPopulatedUIStatus() {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
-        prayerManagerMock.currentTimeMock = (2,0)
+        prayerManagerMock.currentTimeMock = Time(hour: 2, minute: 0)
 
         let updateLoadingStatus = {
             promise.fulfill()
@@ -78,14 +78,14 @@ class ViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "1:7")
         XCTAssertEqual(viewController.lastUpdatedLabel.text!, "Last updated")
         XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, "March 2021")
-        XCTAssertEqual((viewController.collectionView(viewController.otherPrayersCollectionView, cellForItemAt: IndexPath(item: 0, section: 0)) as! PrayerCollectionViewCell).name.text, "Dhuhur")
+        XCTAssertEqual((viewController.collectionView(viewController.otherPrayersCollectionView, cellForItemAt: IndexPath(item: 0, section: 0)) as! PrayerCollectionViewCell).name.text, "Dhuhr")
     }
 
     func testPopulatedUIStatusWithMinutesTimeRemaining() {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
 
-        prayerManagerMock.currentTimeMock = (4,0)
+        prayerManagerMock.currentTimeMock = Time(hour: 4, minute: 0)
 
         let updateLoadingStatus = {
             promise.fulfill()
@@ -103,7 +103,7 @@ class ViewControllerTests: XCTestCase {
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
 
-        prayerManagerMock.currentTimeMock = (23,0)
+        prayerManagerMock.currentTimeMock = Time(hour: 23, minute: 0)
 
         let updateLoadingStatus = {
             promise.fulfill()

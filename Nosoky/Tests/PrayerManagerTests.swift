@@ -24,7 +24,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testPrayer() {
-        let prayer = PrayerManager.prayer("Asr", time: "3:52")
+        let prayer = Prayer(id: "", name: "Asr", time: Time(hour: 3, minute: 52))
 
         XCTAssertEqual(prayer.name, "Asr")
         XCTAssertEqual(prayer.time.hour, 3)
@@ -32,30 +32,30 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testNightPrayer() {
-        fetch(at: (20,0))
+        fetch(at: Time(hour: 20, minute: 0))
         XCTAssertNil(prayerManager.nextPrayer)
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Fajr")
-        XCTAssertEqual(prayerManager.otherPrayers[1].name, "Dhuhur")
+        XCTAssertEqual(prayerManager.otherPrayers[1].name, "Dhuhr")
         XCTAssertEqual(prayerManager.otherPrayers[2].name, "Asr")
         XCTAssertEqual(prayerManager.otherPrayers[3].name, "Maghrib")
     }
 
     func testFajrPrayer() {
-        fetch(at: (3,0))
+        fetch(at: Time(hour: 3, minute: 0))
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
-        XCTAssertEqual(prayerManager.otherPrayers[0].name, "Dhuhur")
+        XCTAssertEqual(prayerManager.otherPrayers[0].name, "Dhuhr")
         XCTAssertEqual(prayerManager.otherPrayers[1].name, "Asr")
         XCTAssertEqual(prayerManager.otherPrayers[2].name, "Maghrib")
         XCTAssertEqual(prayerManager.otherPrayers[3].name, "Isha")
     }
 
     func testDhuhurPrayer() {
-        fetch(at: (11,0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Dhuhur")
+        fetch(at: Time(hour: 11, minute: 0))
+        XCTAssertEqual(prayerManager.nextPrayer?.name, "Dhuhr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 3)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Asr")
@@ -64,7 +64,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testAsrPrayer() {
-        fetch(at: (14,0))
+        fetch(at: Time(hour: 14, minute: 0))
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Asr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 2)
@@ -73,7 +73,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testMaghribPrayer() {
-        fetch(at: (16,0))
+        fetch(at: Time(hour: 16, minute: 0))
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Maghrib")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 1)
@@ -81,25 +81,16 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testIshaPrayer() {
-        fetch(at: (19,0))
+        fetch(at: Time(hour: 19, minute: 0))
         XCTAssertEqual(prayerManager.nextPrayer?.name, "Isha")
         XCTAssertTrue(prayerManager.otherPrayers.isEmpty)
     }
 
     func testPrayerDateTimes() {
-        prayerManager.currentTimeMock = (2, 0)
+        prayerManager.currentTimeMock = Time(hour: 2, minute:0)
         prayerManager.prayerDateTimes = [
             Datetime(
-                times: Times(
-                    imsak: "",
-                    sunrise: "",
-                    fajr: "5:00",
-                    dhuhr: "",
-                    asr: "",
-                    sunset: "",
-                    maghrib: "",
-                    isha: "",
-                    midnight: ""),
+                times: Times(JSONString: "{\"times\":{\"Imsak\":\"\",\"Sunrise\":\"\",\"Fajr\":\"05:00\",\"Dhuhr\":\"\",\"Asr\":\"\",\"Sunset\":\"\",\"Maghrib\":\"\",\"Isha\":\"\",\"Midnight\":\"\"}}")!,
                 date: DateClass(
                     timestamp: 1,
                     gregorian: DateHelper.string(from: Date()),
@@ -126,19 +117,10 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testLastNightThirdTime() {
-        prayerManager.currentTimeMock = (2, 0)
+        prayerManager.currentTimeMock = Time(hour: 2, minute:0)
         prayerManager.prayerDateTimes = [
             Datetime(
-                times: Times(
-                    imsak: "",
-                    sunrise: "",
-                    fajr: "4:00",
-                    dhuhr: "",
-                    asr: "",
-                    sunset: "",
-                    maghrib: "18:00",
-                    isha: "",
-                    midnight: ""),
+                times: Times(JSONString: "{\"times\":{\"Imsak\":\"\",\"Sunrise\":\"\",\"Fajr\":\"04:00\",\"Dhuhr\":\"\",\"Asr\":\"\",\"Sunset\":\"\",\"Maghrib\":\"18:00\",\"Isha\":\"\",\"Midnight\":\"\"}}")!,
                 date: DateClass(
                     timestamp: 1,
                     gregorian: DateHelper.string(from: Date()),
@@ -153,7 +135,7 @@ class PrayerManagerTests: XCTestCase {
 // MARK: - Helper methods
 extension PrayerManagerTests {
     func fetch(at time: Time) {
-        prayerManager.currentTimeMock = (time.hour!, time.minute!)
+        prayerManager.currentTimeMock = Time(hour: time.hour!, minute: time.minute!)
         let promise = XCTestExpectation(description: #function)
         DataProviderMock().prayerTimes(for: nil) { result, error in
             self.prayerManager.prayerDateTimes = result!.datetime
