@@ -60,7 +60,8 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = prayerManager.nextPrayer else {
+        guard let nextPrayer = prayerManager.nextPrayer,
+              nextPrayer.name != "Night" else {
             configureLastThirdNightView()
             otherPrayersCollectionView.reloadData()
             return

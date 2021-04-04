@@ -23,6 +23,7 @@ struct PrayerTimesModel: Codable {
 struct Prayer: Codable {
     let id, name: String
     let time: Time
+    let isMandatory: Bool
 }
 
 struct Time: Codable {
@@ -68,7 +69,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.imsak.rawValue,
             time: Time(hour: Int(imsakTime?.first ?? "0"),
-                       minute: Int(imsakTime?.last ?? "0"))
+                       minute: Int(imsakTime?.last ?? "0")),
+            isMandatory: false
         )
 
         let fajrTime = try? container.decode(String.self, forKey: .fajr).split(separator: ":")
@@ -76,7 +78,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.fajr.rawValue,
             time: Time(hour: Int(fajrTime?.first ?? "0"),
-                       minute: Int(fajrTime?.last ?? "0"))
+                       minute: Int(fajrTime?.last ?? "0")),
+            isMandatory: true
         )
 
         let sunriseTime = try? container.decode(String.self, forKey: .sunrise).split(separator: ":")
@@ -84,7 +87,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.sunrise.rawValue,
             time: Time(hour: Int(sunriseTime?.first ?? "0"),
-                       minute: Int(sunriseTime?.last ?? "0"))
+                       minute: Int(sunriseTime?.last ?? "0")),
+            isMandatory: false
         )
 
         let dhuhrTime = try? container.decode(String.self, forKey: .dhuhr).split(separator: ":")
@@ -92,7 +96,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.dhuhr.rawValue,
             time: Time(hour: Int(dhuhrTime?.first ?? "0"),
-                       minute: Int(dhuhrTime?.last ?? "0"))
+                       minute: Int(dhuhrTime?.last ?? "0")),
+            isMandatory: true
         )
 
         let asrTime = try? container.decode(String.self, forKey: .asr).split(separator: ":")
@@ -100,7 +105,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.asr.rawValue,
             time: Time(hour: Int(asrTime?.first ?? "0"),
-                       minute: Int(asrTime?.last ?? "0"))
+                       minute: Int(asrTime?.last ?? "0")),
+            isMandatory: true
         )
 
         let maghribTime = try? container.decode(String.self, forKey: .maghrib).split(separator: ":")
@@ -108,7 +114,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.maghrib.rawValue,
             time: Time(hour: Int(maghribTime?.first ?? "0"),
-                       minute: Int(maghribTime?.last ?? "0"))
+                       minute: Int(maghribTime?.last ?? "0")),
+            isMandatory: true
         )
 
         let ishaTime = try? container.decode(String.self, forKey: .isha).split(separator: ":")
@@ -116,7 +123,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.isha.rawValue,
             time: Time(hour: Int(ishaTime?.first ?? "0"),
-                       minute: Int(ishaTime?.last ?? "0"))
+                       minute: Int(ishaTime?.last ?? "0")),
+            isMandatory: true
         )
 
         let sunsetTime = try? container.decode(String.self, forKey: .sunset).split(separator: ":")
@@ -124,7 +132,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.sunset.rawValue,
             time: Time(hour: Int(sunsetTime?.first ?? "0"),
-                       minute: Int(sunsetTime?.last ?? "0"))
+                       minute: Int(sunsetTime?.last ?? "0")),
+            isMandatory: false
         )
 
         let midnightTime = try? container.decode(String.self, forKey: .midnight).split(separator: ":")
@@ -132,7 +141,8 @@ struct Times: Codable {
             id: UUID().uuidString,
             name: CodingKeys.midnight.rawValue,
             time: Time(hour: Int(midnightTime?.first ?? "0"),
-                       minute: Int(midnightTime?.last ?? "0"))
+                       minute: Int(midnightTime?.last ?? "0")),
+            isMandatory: false
         )
     }
 }

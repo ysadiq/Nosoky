@@ -68,9 +68,9 @@ class PrayerManager {
 
     var otherPrayers: [Prayer] {
         if let nextPrayer = nextPrayer {
-            return todaysPrayers.filter { $0.name != nextPrayer.name }
+            return todaysPrayers.filter { $0.name != nextPrayer.name && $0.isMandatory }
         } else {
-            return tomorrowsPrayers.filter { $0.name != "Isha" && $0.name != "Night" }
+            return tomorrowsPrayers.filter { $0.isMandatory }
         }
     }
 
@@ -79,12 +79,13 @@ class PrayerManager {
         guard let prayers = prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == todayAsString
         }).first?.times,
+
         let maghrib = prayers.maghrib,
         let fajr = prayers.fajr else {
             return
         }
-
         calculateLastThirdNightTime(maghribTime: maghrib.time, fajrTime: fajr.time)
+        
         todaysPrayers = prayersList(of: prayers)
     }
 
@@ -111,7 +112,7 @@ class PrayerManager {
         var prayersList: [Prayer] = []
 
         if let lastNightThirdTime = lastNightThirdTime {
-            prayersList.append(Prayer(id: UUID().uuidString, name: "Night", time: lastNightThirdTime))
+            prayersList.append(Prayer(id: UUID().uuidString, name: "Night", time: lastNightThirdTime, isMandatory: false))
         }
 
         if let fajr = prayers.fajr {
