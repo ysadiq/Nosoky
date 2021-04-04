@@ -132,7 +132,7 @@ extension PrayerManagerTests {
     func fetch(at time: Time) {
         prayerManager.currentTimeMock = Time(hour: time.hour!, minute: time.minute!)
         let promise = XCTestExpectation(description: #function)
-        DataProviderMock().prayerTimes(for: nil) { result, error in
+        DataProviderMock().prayerTimes { result, error in
             self.prayerManager.prayerDateTimes = result!.datetime
             promise.fulfill()
         }

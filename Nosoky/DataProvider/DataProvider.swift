@@ -17,15 +17,16 @@ enum APIError: String, Error {
 
 protocol DataProviderProtocol {
     var lastUpdated: Date? { get }
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D?,
-                     completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
+    func prayerTimes(completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void)
 
 }
 
 // API Doc: https://prayertimes.date/api/docs/this_month
 
-class DataProvider: DataProviderProtocol {
+class DataProvider: NSObject, DataProviderProtocol {
+    var locationManager: CLLocationManager? = CLLocationManager()
+
     var lastUpdated: Date?
     var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
     private let notificationManager: NotificationManager
@@ -34,8 +35,7 @@ class DataProvider: DataProviderProtocol {
         self.notificationManager = notificationManager
     }
 
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D? = nil,
-                     completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
+    func prayerTimes(completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void) {
         self.completion = completion
 
@@ -50,26 +50,7 @@ class DataProvider: DataProviderProtocol {
             return
         }
 
-        guard let locationCoordinate = locationCoordinate else {
-            return
-        }
-
-        fetchPrayerTimesFromAPI(with: locationCoordinate) { [weak self] (data, error) in
-            guard let data = data else {
-                completion(nil, .noNetwork)
-                return
-            }
-
-            StorageManager.shared.save(data)
-
-            guard let prayerTimes = self?.parse(data) else {
-                completion(nil, .unableToDecode)
-                return
-            }
-
-            completion(prayerTimes, nil)
-            self?.notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
-        }
+        configureLocation()
     }
 
     private func fetchPrayerTimesFromAPI(
@@ -107,6 +88,48 @@ class DataProvider: DataProviderProtocol {
             return result
         } catch {
             return nil
+        }
+    }
+
+    func configureLocation() {
+        guard let locationManager = locationManager else {
+            return
+        }
+
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+    }
+}
+
+extension DataProvider: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locationManager = nil
+
+        guard let currentLocation = locations.first else {
+            return
+        }
+
+        fetchPrayerTimesFromAPI(with: currentLocation.coordinate) { [weak self] (data, error) in
+            guard let data = data else {
+                self?.completion?(nil, .noNetwork)
+                return
+            }
+
+            StorageManager.shared.save(data)
+
+            guard let prayerTimes = self?.parse(data) else {
+                self?.completion?(nil, .unableToDecode)
+                return
+            }
+
+            self?.completion?(prayerTimes, nil)
+            self?.notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
         }
     }
 }

@@ -33,7 +33,7 @@ class NotificationManagerTests: XCTestCase {
     func testAddNotificationsIfNeededWhenAuthorizationIsDisabled() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
         }
@@ -50,7 +50,7 @@ class NotificationManagerTests: XCTestCase {
     func testAddNotificationsIfNeeded() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
         }
@@ -73,7 +73,7 @@ class NotificationManagerTests: XCTestCase {
         // Fetch prayers
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
         }
@@ -147,7 +147,7 @@ class NotificationManagerTests: XCTestCase {
     func testAddNotificationsIfNeededForLastFiveDaysOfTheMonth() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = Array(result!.datetime.dropFirst(25))
             expectation.fulfill()
         }
@@ -163,7 +163,7 @@ class NotificationManagerTests: XCTestCase {
     func testLastAddedNotificationContent() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
         }
@@ -198,7 +198,7 @@ class NotificationManagerTests: XCTestCase {
     func testFirstAddedNotificationContent() {
         var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        DataProviderMock().prayerTimes(for: nil) { result, _ in
+        DataProviderMock().prayerTimes { result, _ in
             datetimes = result!.datetime
             expectation.fulfill()
         }

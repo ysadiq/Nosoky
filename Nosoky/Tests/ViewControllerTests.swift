@@ -30,7 +30,6 @@ class ViewControllerTests: XCTestCase {
         }
 
         self.viewController = mainViewController
-        self.viewController.locationManager = nil
         self.viewController.prayerManager = prayerManagerMock
         self.viewController.viewModel = ViewModel(
             dataProvider: DataProviderMock(),
@@ -66,7 +65,7 @@ class ViewControllerTests: XCTestCase {
         }
 
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
-        viewController.initViewModel(with: coordinate)
+        viewController.initViewModel()
 
         wait(for: [promise], timeout: 0.1)
 
@@ -92,7 +91,7 @@ class ViewControllerTests: XCTestCase {
         }
 
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
-        viewController.initViewModel(with: coordinate)
+        viewController.initViewModel()
 
         wait(for: [promise], timeout: 0.2)
         XCTAssertFalse(viewController.prayerTimeUnitLabel.isHidden)
@@ -110,7 +109,7 @@ class ViewControllerTests: XCTestCase {
         }
 
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
-        viewController.initViewModel(with: coordinate)
+        viewController.initViewModel()
 
         wait(for: [promise], timeout: 0.1)
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")
@@ -130,7 +129,7 @@ class ViewControllerTests: XCTestCase {
         }
 
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
-        viewController.initViewModel(with: coordinate)
+        viewController.initViewModel()
 
         wait(for: [promise], timeout: 0.1)
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 public enum ContentState {
     case loading
@@ -40,10 +39,10 @@ class ViewModel {
         self.prayerManager = prayerManager
     }
 
-    func fetchData(with locationCoordinate: CLLocationCoordinate2D? = nil) {
+    func fetchData() {
         contentState = .loading
 
-        dataProvider.prayerTimes(for: locationCoordinate) { [weak self] result, error in
+        dataProvider.prayerTimes() { [weak self] result, error in
             guard let self = self,
                   let result = result else {
                 return
