@@ -5,6 +5,8 @@
 //  Created by Yahya Saddiq on 3/22/21.
 //
 
+import Foundation
+
 struct PrayerTimesModel: Codable {
     let code: Int
     let status: String
@@ -16,6 +18,15 @@ struct PrayerTimesModel: Codable {
         let location: Location
         let settings: Settings
     }
+}
+
+struct Prayer: Codable {
+    let id, name: String
+    let time: Time
+}
+
+struct Time: Codable {
+    let hour, minute: Int?
 }
 
 
@@ -33,9 +44,9 @@ struct DateClass: Codable {
 
 // MARK: - Times
 struct Times: Codable {
-    let imsak, sunrise, fajr, dhuhr: String
-    let asr, sunset, maghrib, isha: String
-    let midnight: String
+    let imsak, sunrise, fajr, dhuhr: Prayer?
+    let asr, sunset, maghrib, isha: Prayer?
+    let midnight: Prayer?
 
     enum CodingKeys: String, CodingKey {
         case imsak = "Imsak"
@@ -47,6 +58,82 @@ struct Times: Codable {
         case maghrib = "Maghrib"
         case isha = "Isha"
         case midnight = "Midnight"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        let imsakTime = try? container.decode(String.self, forKey: .imsak).split(separator: ":")
+        self.imsak = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.imsak.rawValue,
+            time: Time(hour: Int(imsakTime?.first ?? "0"),
+                       minute: Int(imsakTime?.last ?? "0"))
+        )
+
+        let fajrTime = try? container.decode(String.self, forKey: .fajr).split(separator: ":")
+        self.fajr = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.fajr.rawValue,
+            time: Time(hour: Int(fajrTime?.first ?? "0"),
+                       minute: Int(fajrTime?.last ?? "0"))
+        )
+
+        let sunriseTime = try? container.decode(String.self, forKey: .sunrise).split(separator: ":")
+        self.sunrise = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.sunrise.rawValue,
+            time: Time(hour: Int(sunriseTime?.first ?? "0"),
+                       minute: Int(sunriseTime?.last ?? "0"))
+        )
+
+        let dhuhrTime = try? container.decode(String.self, forKey: .dhuhr).split(separator: ":")
+        self.dhuhr = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.dhuhr.rawValue,
+            time: Time(hour: Int(dhuhrTime?.first ?? "0"),
+                       minute: Int(dhuhrTime?.last ?? "0"))
+        )
+
+        let asrTime = try? container.decode(String.self, forKey: .asr).split(separator: ":")
+        self.asr = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.asr.rawValue,
+            time: Time(hour: Int(asrTime?.first ?? "0"),
+                       minute: Int(asrTime?.last ?? "0"))
+        )
+
+        let maghribTime = try? container.decode(String.self, forKey: .maghrib).split(separator: ":")
+        self.maghrib = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.maghrib.rawValue,
+            time: Time(hour: Int(maghribTime?.first ?? "0"),
+                       minute: Int(maghribTime?.last ?? "0"))
+        )
+
+        let ishaTime = try? container.decode(String.self, forKey: .isha).split(separator: ":")
+        self.isha = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.isha.rawValue,
+            time: Time(hour: Int(ishaTime?.first ?? "0"),
+                       minute: Int(ishaTime?.last ?? "0"))
+        )
+
+        let sunsetTime = try? container.decode(String.self, forKey: .sunset).split(separator: ":")
+        self.sunset = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.sunset.rawValue,
+            time: Time(hour: Int(sunsetTime?.first ?? "0"),
+                       minute: Int(sunsetTime?.last ?? "0"))
+        )
+
+        let midnightTime = try? container.decode(String.self, forKey: .midnight).split(separator: ":")
+        self.midnight = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.midnight.rawValue,
+            time: Time(hour: Int(midnightTime?.first ?? "0"),
+                       minute: Int(midnightTime?.last ?? "0"))
+        )
     }
 }
 

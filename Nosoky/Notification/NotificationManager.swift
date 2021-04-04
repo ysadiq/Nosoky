@@ -34,16 +34,18 @@ class NotificationManager {
                 return
             }
 
+            let currentDate = Calendar.current.dateComponents(
+                [.year, .month, .day, .hour, .minute],
+                from: self.addNotificationFromDate
+            )
+
             let monthPrayers = monthPrayers.filter { dayPrayersAndDate in
                 guard let prayersDay = Calendar.current.dateComponents(
                     [.year, .month, .day],
                     from: DateHelper.date(from: dayPrayersAndDate.date.gregorian)
                 ).day else { return false }
 
-                guard let today = Calendar.current.dateComponents(
-                    [.year, .month, .day],
-                    from: self.addNotificationFromDate
-                ).day else { return false }
+                guard let today = currentDate.day else { return false }
 
                 return prayersDay >= today
             }
@@ -59,6 +61,11 @@ class NotificationManager {
                     guard numberOfPendingNotifications < self.maximumNumberOfNotification else {
                         break
                     }
+
+                    if prayerDate.day == currentDate.day && (currentDate.hour! > prayer.time.hour! || (currentDate.hour! == prayer.time.hour! && currentDate.minute! > prayer.time.minute!)) {
+                        continue
+                    }
+
                     self.addNotification(for: prayer, at: prayerDate)
                     numberOfPendingNotifications += 1
                 }
@@ -103,12 +110,12 @@ class NotificationManager {
             content.subtitle = subtitle
         }
 
-        let randomIdentifier = UUID().uuidString
+        let randomIdentifier = prayer.id
         let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
 
         userNotificationCenter.add(request) { error in
             if error == nil {
-                print("\(prayer) at date \(date) notification did add")
+                print("\(prayer) at date \(date) notification did add for \(randomIdentifier)")
 
             } else {
                 print("\(prayer) at date \(date) notification did fail with error \(error!)")
@@ -118,7 +125,7 @@ class NotificationManager {
 
     func notificationContent(for prayer: Prayer) -> NotificationContent? {
         switch prayer.name {
-        case "Dhuhur": return (title: "الظهر", subtitle: nil, adhan: .mini)
+        case "Dhuhr": return (title: "الظهر", subtitle: nil, adhan: .mini)
         case "Asr": return (title: "العصر", subtitle: nil, adhan: .mini)
         case "Maghrib": return (title: "المغرب", subtitle: nil, adhan: .mini)
         case "Isha": return (title: "العشاء", subtitle: nil, adhan: .mini)

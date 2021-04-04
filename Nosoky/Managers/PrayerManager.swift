@@ -7,9 +7,6 @@
 
 import Foundation
 
-typealias Prayer = (name: String, time: Time)
-typealias Time = (hour: Int?, minute: Int?)
-
 class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
@@ -45,9 +42,9 @@ class PrayerManager {
     var tomorrowAsString = DateHelper.string(from: Date().addingTimeInterval(TimeInterval(60*60*24)))
     var todayAsString = DateHelper.string()
     var currentTime: Time {
-        (
-            Calendar.current.dateComponents([.hour], from: Date()).hour ?? 0,
-            Calendar.current.dateComponents([.minute], from: Date()).minute ?? 0
+        Time(
+            hour: Calendar.current.dateComponents([.hour], from: Date()).hour,
+            minute: Calendar.current.dateComponents([.minute], from: Date()).minute
         )
     }
 
@@ -78,25 +75,27 @@ class PrayerManager {
     }
 
     // MARK: - Class methods
-    class func prayer(_ name: String, time: String) -> Prayer {
-        let timeComponents = time.split(separator: ":")
-
-        guard let hour = timeComponents.first, let minute = timeComponents.last else {
-            return Prayer(name, (0,0))
-        }
-
-        return Prayer(name, (Int(hour), Int(minute)))
-    }
+//    class func prayer(_ id: String, _ name: String, time: Time) -> Prayer {
+//        let timeComponents = time.split(separator: ":")
+//
+//        guard let hour = timeComponents.first, let minute = timeComponents.last else {
+//            return Prayer(id: id, name: name, time: Time(hour: 0, minute: 0))
+//        }
+//
+//        return Prayer(id: id, name: name, time: Time(hour: Int(hour), minute: Int(minute)))
+//    }
 
     // MARK: - Private methods
     private func setTodaysPrayers() {
         guard let prayers = prayerDateTimes.filter({ dateTime in
             dateTime.date.gregorian == todayAsString
-        }).first?.times else {
+        }).first?.times,
+        let maghrib = prayers.maghrib,
+        let fajr = prayers.fajr else {
             return
         }
 
-        calculateLastThirdNightTime(maghribTime: prayers.maghrib, fajrTime: prayers.fajr)
+        calculateLastThirdNightTime(maghribTime: maghrib.time, fajrTime: fajr.time)
         todaysPrayers = prayersList(of: prayers)
     }
 
@@ -123,16 +122,28 @@ class PrayerManager {
         var prayersList: [Prayer] = []
 
         if let lastNightThirdTime = lastNightThirdTime {
-            prayersList.append(("Night", lastNightThirdTime))
+            prayersList.append(Prayer(id: UUID().uuidString, name: "Night", time: lastNightThirdTime))
         }
 
-        prayersList += [
-            PrayerManager.prayer("Fajr", time: prayers.fajr),
-            PrayerManager.prayer("Dhuhur", time: prayers.dhuhr),
-            PrayerManager.prayer("Asr", time: prayers.asr),
-            PrayerManager.prayer("Maghrib", time: prayers.maghrib),
-            PrayerManager.prayer("Isha", time: prayers.isha)
-        ]
+        if let fajr = prayers.fajr {
+            prayersList.append(fajr)
+        }
+
+        if let dhuhr = prayers.dhuhr {
+            prayersList.append(dhuhr)
+        }
+
+        if let asr = prayers.asr {
+            prayersList.append(asr)
+        }
+
+        if let maghrib = prayers.maghrib {
+            prayersList.append(maghrib)
+        }
+
+        if let isha = prayers.isha {
+            prayersList.append(isha)
+        }
 
         return prayersList
     }
@@ -159,19 +170,12 @@ class PrayerManager {
             1 - 1 = 0
         the last third of the night starts at 00:54
     */
-    private func calculateLastThirdNightTime(maghribTime: String, fajrTime: String) {
+    private func calculateLastThirdNightTime(maghribTime: Time, fajrTime: Time) {
         // calculate how long is the night
-        let maghribTimeComponents = maghribTime.split(separator: ":")
-        let fajrTimeComponents = fajrTime.split(separator: ":")
-
-        guard let maghribHourString = maghribTimeComponents.first,
-              let maghribHour = Int(maghribHourString),
-              let maghribMinuteString = maghribTimeComponents.last,
-              let maghribMinute = Int(maghribMinuteString),
-              let fajrHourString = fajrTimeComponents.first,
-              let fajrHour = Int(fajrHourString),
-              let fajrMinuteString = fajrTimeComponents.last,
-              let fajrMinute = Int(fajrMinuteString) else {
+        guard let maghribHour = maghribTime.hour,
+              let maghribMinute = maghribTime.minute,
+              let fajrHour = fajrTime.hour,
+              let fajrMinute = fajrTime.minute else {
             return
         }
 
@@ -188,7 +192,7 @@ class PrayerManager {
 
         // calculate how long is the last third of the night
         let lastThirdNightLong = nightLong.hour / 3
-        lastNightThirdTime = Time(fajrTime.hour - lastThirdNightLong, minutesDifference)
+        lastNightThirdTime = Time(hour: fajrTime.hour - lastThirdNightLong, minute: minutesDifference)
     }
 
     private func differenceInMinutes(_ minute: Int, _ otherMinute: Int, _ hoursDifference: inout Int) -> Int {
@@ -224,7 +228,7 @@ class PrayerManager {
         let minutesDifference = differenceInMinutes(minute,
                                                     currentTime.minute ?? 0,
                                                     &hoursDifference)
-        return ((hoursDifference, minutesDifference), hoursDifference > 0 ? "" : "min")
+        return (Time(hour: hoursDifference, minute: minutesDifference), hoursDifference > 0 ? "" : "min")
     }
 }
 
