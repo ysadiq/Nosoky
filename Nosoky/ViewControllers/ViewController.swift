@@ -142,7 +142,7 @@ extension ViewController: CLLocationManagerDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        prayerManager.otherPrayers.count
+        min(prayerManager.otherPrayers.count, 4)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -161,7 +161,7 @@ extension ViewController: UICollectionViewDataSource {
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let CellWidth = 60
-        let CellCount = prayerManager.otherPrayers.count
+        let CellCount = otherPrayersCollectionView.numberOfItems(inSection: 0)
         let CellSpacing = 20
 
         let totalCellWidth = CellWidth * CellCount
