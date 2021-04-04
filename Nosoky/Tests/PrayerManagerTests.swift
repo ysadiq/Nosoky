@@ -25,7 +25,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testPrayer() {
-        let prayer = Prayer(id: "", name: "Asr", time: Time(hour: 3, minute: 52))
+        let prayer = Prayer(id: "", name: "Asr", time: Time(hour: 3, minute: 52), isMandatory: true)
 
         XCTAssertEqual(prayer.name, "Asr")
         XCTAssertEqual(prayer.time.hour, 3)
@@ -36,7 +36,7 @@ class PrayerManagerTests: XCTestCase {
         fetch(at: Time(hour: 20, minute: 0))
         XCTAssertNil(prayerManager.nextPrayer)
 
-        XCTAssertEqual(prayerManager.otherPrayers.count, 4)
+        XCTAssertEqual(prayerManager.otherPrayers.count, 5)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Fajr")
         XCTAssertEqual(prayerManager.otherPrayers[1].name, "Dhuhr")
         XCTAssertEqual(prayerManager.otherPrayers[2].name, "Asr")
