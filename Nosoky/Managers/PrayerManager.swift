@@ -118,6 +118,10 @@ class PrayerManager {
             prayersList.append(fajr)
         }
 
+        if let sunrise = prayers.sunrise {
+            prayersList.append(sunrise)
+        }
+
         if let dhuhr = prayers.dhuhr {
             prayersList.append(dhuhr)
         }
