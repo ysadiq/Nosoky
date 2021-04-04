@@ -21,7 +21,8 @@ struct PrayerTimesModel: Codable {
 }
 
 struct Prayer: Codable {
-    let id, name: String
+    let id: String
+    var name: String
     let time: Time
     let isMandatory: Bool
 }

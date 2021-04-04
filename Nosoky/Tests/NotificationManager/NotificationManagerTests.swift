@@ -69,6 +69,33 @@ class NotificationManagerTests: XCTestCase {
         wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
     }
 
+    func testFridayNotification() {
+        PrayerManager.shared.todayAsString = "2021-04-09"
+        var datetimes: [Datetime] = []
+        let expectation = XCTestExpectation(description: "fetch prayer times")
+        DataProviderMock().prayerTimes { result, _ in
+            datetimes = result!.datetime
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 0.2)
+
+        notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
+        notificationCenter.grantAuthorization = true
+        notificationManager.addNotificationsIfNeeded(for: datetimes)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
+
+        XCTAssertEqual(notificationCenter.requests.count, 64)
+        XCTAssertEqual(notificationCenter.requests[3].content.title, "الجُمْعَة")
+        XCTAssertEqual(notificationCenter.requests[3].content.subtitle, "یَـٰۤأَیُّهَا ٱلَّذِینَ ءَامَنُوۤا۟ إِذَا نُودِیَ لِلصَّلَوٰةِ مِن یَوۡمِ ٱلۡجُمُعَةِ فَٱسۡعَوۡا۟ إِلَىٰ ذِكۡرِ ٱللَّهِ")
+        let notificationDate = (notificationCenter.requests[3].trigger as? UNCalendarNotificationTrigger)?.dateComponents
+        XCTAssertEqual(notificationDate?.hour, 11)
+        XCTAssertEqual(notificationDate?.minute, 58)
+        XCTAssertEqual(notificationDate?.day, 1)
+        XCTAssertEqual(notificationDate?.month, 4)
+        XCTAssertEqual(notificationDate?.year, 2021)
+    }
+
     func testNextNotificationsAfterDeliveringNotifications() {
         // Fetch prayers
         var datetimes: [Datetime] = []
@@ -126,7 +153,7 @@ class NotificationManagerTests: XCTestCase {
 
         // Test second notification
         XCTAssertEqual(notificationCenter.requests.count, 64)
-        XCTAssertEqual(notificationCenter.requests.first?.content.title, "الضحى")
+        XCTAssertEqual(notificationCenter.requests.first?.content.title, "الضُحَىٰ")
         notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
         XCTAssertEqual(notificationDate?.hour, 5)
         XCTAssertEqual(notificationDate?.minute, 43)

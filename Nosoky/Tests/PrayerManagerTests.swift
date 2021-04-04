@@ -87,6 +87,13 @@ class PrayerManagerTests: XCTestCase {
         XCTAssertTrue(prayerManager.otherPrayers.isEmpty)
     }
 
+    func testFridayPrayer() {
+        prayerManager.todayAsString = "2021-04-09"
+        fetch(at: Time(hour: 8, minute: 0))
+        XCTAssertEqual(prayerManager.nextPrayer?.name, "Jumuah")
+        XCTAssertEqual(prayerManager.otherPrayers[0].name, "Asr")
+    }
+
     func testPrayerDateTimes() {
         prayerManager.currentTimeMock = Time(hour: 2, minute:0)
         prayerManager.prayerDateTimes =

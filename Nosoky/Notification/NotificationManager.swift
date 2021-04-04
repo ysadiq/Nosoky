@@ -125,11 +125,11 @@ class NotificationManager {
 
     func notificationContent(for prayer: Prayer) -> NotificationContent? {
         switch prayer.name {
-        case "Dhuhr": return (title: "الظهر", subtitle: nil, adhan: .mini)
-        case "Asr": return (title: "العصر", subtitle: nil, adhan: .mini)
-        case "Maghrib": return (title: "المغرب", subtitle: nil, adhan: .mini)
-        case "Isha": return (title: "العشاء", subtitle: nil, adhan: .mini)
-        case "Sunrise":return (title: "الضحى", subtitle: nil, adhan: .mini)
+        case "Dhuhr": return (title: "الظُهْر", subtitle: nil, adhan: .mini)
+        case "Asr": return (title: "العَصْر", subtitle: nil, adhan: .mini)
+        case "Maghrib": return (title: "المَغْرِبْ", subtitle: nil, adhan: .mini)
+        case "Isha": return (title: "العِشَاء", subtitle: nil, adhan: .mini)
+        case "Sunrise":return (title: "الضُحَىٰ", subtitle: nil, adhan: .mini)
         case "Night":
             return (
                 title: "الثلث الأخير من اليل",
@@ -141,6 +141,12 @@ class NotificationManager {
                 title: "الفجر",
                 subtitle: "الصلاة خير من النوم",
                 adhan: .fajr
+            )
+        case "Jumuah":
+            return (
+                title: "الجُمْعَة",
+                subtitle: "یَـٰۤأَیُّهَا ٱلَّذِینَ ءَامَنُوۤا۟ إِذَا نُودِیَ لِلصَّلَوٰةِ مِن یَوۡمِ ٱلۡجُمُعَةِ فَٱسۡعَوۡا۟ إِلَىٰ ذِكۡرِ ٱللَّهِ",
+                adhan: .mini
             )
         default:
             return nil

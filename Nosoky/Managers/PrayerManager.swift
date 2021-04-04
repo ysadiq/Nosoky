@@ -84,8 +84,8 @@ class PrayerManager {
         let fajr = prayers.fajr else {
             return
         }
+
         calculateLastThirdNightTime(maghribTime: maghrib.time, fajrTime: fajr.time)
-        
         todaysPrayers = prayersList(of: prayers)
     }
 
@@ -123,7 +123,10 @@ class PrayerManager {
             prayersList.append(sunrise)
         }
 
-        if let dhuhr = prayers.dhuhr {
+        if var dhuhr = prayers.dhuhr {
+            if DateHelper.string(from: DateHelper.date(from: todayAsString), dateFormat: "EEEE") == "Friday" {
+                dhuhr.name = "Jumuah"
+            }
             prayersList.append(dhuhr)
         }
 

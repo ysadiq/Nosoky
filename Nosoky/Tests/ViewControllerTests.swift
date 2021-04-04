@@ -77,7 +77,7 @@ class ViewControllerTests: XCTestCase {
         XCTAssertEqual(viewController.lastThirdNightTimeLabel.text!, "1:7")
         XCTAssertEqual(viewController.lastUpdatedLabel.text!, "Last updated")
         XCTAssertEqual(viewController.lastUpdatedDateLabel.text!, "March 2021")
-        XCTAssertEqual((viewController.collectionView(viewController.otherPrayersCollectionView, cellForItemAt: IndexPath(item: 0, section: 0)) as! PrayerCollectionViewCell).name.text, "Dhuhr")
+        XCTAssertEqual((viewController.collectionView(viewController.otherPrayersCollectionView, cellForItemAt: IndexPath(item: 0, section: 0)) as! PrayerCollectionViewCell).name.text, "Jumuah")
     }
 
     func testPopulatedUIStatusWithMinutesTimeRemaining() {
