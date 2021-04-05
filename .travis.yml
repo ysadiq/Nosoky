@@ -3,7 +3,7 @@ language: swift
 osx_image: xcode12.4
 
 script:
-  - xcodebuild -scheme Nosoky -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone XR,OS=14.4' build test
+  - xcodebuild -scheme Nosoky -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 12 mini,OS=14.4' build test
   #- sonar-scanner
 after_success:
   - bash <(curl -s https://codecov.io/bash)
