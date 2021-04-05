@@ -29,11 +29,6 @@ class DataProvider: NSObject, DataProviderProtocol {
 
     var lastUpdated: Date?
     var completion: ((_ data: PrayerTimesModel.Results?, _ error: APIError?) -> Void)?
-    private let notificationManager: NotificationManager
-
-    init(notificationManager: NotificationManager = NotificationManager()) {
-        self.notificationManager = notificationManager
-    }
 
     func prayerTimes(completion: @escaping (_ data: PrayerTimesModel.Results?, _ error: APIError?
                      ) -> Void) {
@@ -46,10 +41,10 @@ class DataProvider: NSObject, DataProviderProtocol {
             }
 
             completion(prayerTimes, nil)
-            notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
             return
         }
 
+        // Fetch from API
         configureLocation()
     }
 
@@ -129,7 +124,6 @@ extension DataProvider: CLLocationManagerDelegate {
             }
 
             self?.completion?(prayerTimes, nil)
-            self?.notificationManager.addNotificationsIfNeeded(for: prayerTimes.datetime)
         }
     }
 }

@@ -10,11 +10,13 @@ import Foundation
 class PrayerManager {
     // MARK: - Initializer
     public static let shared = PrayerManager()
-    init(minuteUpdateInterval: Double = 60) {
+    init(minuteUpdateInterval: Double = 60, notificationManager: NotificationManager = NotificationManager()) {
+        self.notificationManager = notificationManager
         self.minuteUpdateInterval = minuteUpdateInterval
     }
 
     // MARK: - Private properties
+    private let notificationManager: NotificationManager
     private var todaysPrayers: [Prayer] = []
     private var tomorrowsPrayers: [Prayer] = []
     private var timer: Timer?
@@ -36,6 +38,7 @@ class PrayerManager {
         didSet {
             setTodaysPrayers()
             setTomorrowsPrayers()
+            notificationManager.addNotificationsIfNeeded(for: prayerDateTimes)
         }
     }
 
