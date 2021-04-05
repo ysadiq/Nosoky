@@ -118,7 +118,7 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(notificationCenter.requests.first?.content.title, "الثلث الأخير من اليل")
         var notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
         XCTAssertEqual(notificationDate?.hour, 1)
-        XCTAssertEqual(notificationDate?.minute, 9)
+        XCTAssertEqual(notificationDate?.minute, 0)
         XCTAssertEqual(notificationDate?.day, 1)
         XCTAssertEqual(notificationDate?.month, 4)
         XCTAssertEqual(notificationDate?.year, 2021)
@@ -207,16 +207,16 @@ class NotificationManagerTests: XCTestCase {
         // [10(days) * 6(prayers) = 60]
         // Night prayer of 10th/04/2021 is the expected last added notification
         XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.name, "Night")
-        XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.time.hour, 1)
-        XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.time.minute, 9)
+        XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.time.hour, 0)
+        XCTAssertEqual(notificationManager.lastAddedNotificationPrayer?.time.minute, 54)
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.day, 10)
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.month, 4)
         XCTAssertEqual(notificationManager.lastAddedNotificationDate?.year, 2021)
 
         XCTAssertEqual(notificationCenter.requests.last?.content.title, "الثلث الأخير من اليل")
         let notificationDate = (notificationCenter.requests.last?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
-        XCTAssertEqual(notificationDate?.hour, 1)
-        XCTAssertEqual(notificationDate?.minute, 9)
+        XCTAssertEqual(notificationDate?.hour, 0)
+        XCTAssertEqual(notificationDate?.minute, 54)
         XCTAssertEqual(notificationDate?.day, 10)
         XCTAssertEqual(notificationDate?.month, 4)
         XCTAssertEqual(notificationDate?.year, 2021)
@@ -240,7 +240,7 @@ class NotificationManagerTests: XCTestCase {
 
         XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.name, "Night")
         XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.time.hour, 1)
-        XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.time.minute, 9)
+        XCTAssertEqual(notificationManager.firstAddedNotificationPrayer?.time.minute, 0)
         XCTAssertEqual(notificationManager.firstAddedNotificationDate?.day, 1)
         XCTAssertEqual(notificationManager.firstAddedNotificationDate?.month, 4)
         XCTAssertEqual(notificationManager.firstAddedNotificationDate?.year, 2021)
@@ -249,7 +249,7 @@ class NotificationManagerTests: XCTestCase {
         XCTAssertEqual(notificationCenter.requests.first?.content.subtitle, "إِنَّ نَاشِئَةَ ٱلَّيْلِ هِىَ أَشَدُّ وَطْـًٔا وَأَقْوَمُ قِيلًا")
         let notificationDate = (notificationCenter.requests.first?.trigger as? UNCalendarNotificationTrigger)?.dateComponents
         XCTAssertEqual(notificationDate?.hour, 1)
-        XCTAssertEqual(notificationDate?.minute, 9)
+        XCTAssertEqual(notificationDate?.minute, 0)
         XCTAssertEqual(notificationDate?.day, 1)
         XCTAssertEqual(notificationDate?.month, 4)
         XCTAssertEqual(notificationDate?.year, 2021)

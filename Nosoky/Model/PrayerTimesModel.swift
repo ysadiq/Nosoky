@@ -48,7 +48,7 @@ struct DateClass: Codable {
 struct Times: Codable {
     let imsak, sunrise, fajr, dhuhr: Prayer?
     let asr, sunset, maghrib, isha: Prayer?
-    let midnight: Prayer?
+    let midnight, night: Prayer?
 
     enum CodingKeys: String, CodingKey {
         case imsak = "Imsak"
@@ -60,6 +60,7 @@ struct Times: Codable {
         case maghrib = "Maghrib"
         case isha = "Isha"
         case midnight = "Midnight"
+        case night = "Night"
     }
 
     public init(from decoder: Decoder) throws {
@@ -143,6 +144,15 @@ struct Times: Codable {
             name: CodingKeys.midnight.rawValue,
             time: Time(hour: Int(midnightTime?.first ?? "0"),
                        minute: Int(midnightTime?.last ?? "0")),
+            isMandatory: false
+        )
+
+        let nightTime = PrayerManager.lastThirdNightTime(maghribTime: maghrib?.time, fajrTime: fajr?.time)
+        self.night = Prayer(
+            id: UUID().uuidString,
+            name: CodingKeys.night.rawValue,
+            time: Time(hour: Int(nightTime?.hour ?? 0),
+                       minute: Int(nightTime?.minute ?? 0)),
             isMandatory: false
         )
     }
