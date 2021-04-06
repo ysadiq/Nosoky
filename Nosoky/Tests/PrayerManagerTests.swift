@@ -25,7 +25,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testPrayer() {
-        let prayer = Prayer(id: "", name: "Asr", time: Time(hour: 3, minute: 52), isMandatory: true)
+        let prayer = Prayer(name: "Asr", time: Time(hour: 3, minute: 52), isMandatory: true)
 
         XCTAssertEqual(prayer.name, "Asr")
         XCTAssertEqual(prayer.time.hour, 3)

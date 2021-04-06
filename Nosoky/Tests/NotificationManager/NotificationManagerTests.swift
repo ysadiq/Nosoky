@@ -266,8 +266,8 @@ class NotificationManagerMock: NotificationManager {
 
     var numberOfAddedNotifications: Int = 0
 
-    override func addNotification(for prayer: Prayer, at date: DateComponents) {
-        super.addNotification(for: prayer, at: date)
+    override func addNotification(for prayer: Prayer, _ prayerId: String, at date: DateComponents) {
+        super.addNotification(for: prayer, prayerId, at: date)
 
         if firstAddedNotificationDate == nil {
             firstAddedNotificationDate = date

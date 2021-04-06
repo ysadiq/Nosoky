@@ -21,7 +21,6 @@ struct PrayerTimesModel: Codable {
 }
 
 struct Prayer: Codable {
-    let id: String
     var name: String
     let time: Time
     let isMandatory: Bool
@@ -68,7 +67,6 @@ struct Times: Codable {
 
         let imsakTime = try? container.decode(String.self, forKey: .imsak).split(separator: ":")
         self.imsak = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.imsak.rawValue,
             time: Time(hour: Int(imsakTime?.first ?? "0"),
                        minute: Int(imsakTime?.last ?? "0")),
@@ -77,7 +75,6 @@ struct Times: Codable {
 
         let fajrTime = try? container.decode(String.self, forKey: .fajr).split(separator: ":")
         self.fajr = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.fajr.rawValue,
             time: Time(hour: Int(fajrTime?.first ?? "0"),
                        minute: Int(fajrTime?.last ?? "0")),
@@ -86,7 +83,6 @@ struct Times: Codable {
 
         let sunriseTime = try? container.decode(String.self, forKey: .sunrise).split(separator: ":")
         self.sunrise = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.sunrise.rawValue,
             time: Time(hour: Int(sunriseTime?.first ?? "0"),
                        minute: Int(sunriseTime?.last ?? "0")),
@@ -95,7 +91,6 @@ struct Times: Codable {
 
         let dhuhrTime = try? container.decode(String.self, forKey: .dhuhr).split(separator: ":")
         self.dhuhr = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.dhuhr.rawValue,
             time: Time(hour: Int(dhuhrTime?.first ?? "0"),
                        minute: Int(dhuhrTime?.last ?? "0")),
@@ -104,7 +99,6 @@ struct Times: Codable {
 
         let asrTime = try? container.decode(String.self, forKey: .asr).split(separator: ":")
         self.asr = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.asr.rawValue,
             time: Time(hour: Int(asrTime?.first ?? "0"),
                        minute: Int(asrTime?.last ?? "0")),
@@ -113,7 +107,6 @@ struct Times: Codable {
 
         let maghribTime = try? container.decode(String.self, forKey: .maghrib).split(separator: ":")
         self.maghrib = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.maghrib.rawValue,
             time: Time(hour: Int(maghribTime?.first ?? "0"),
                        minute: Int(maghribTime?.last ?? "0")),
@@ -122,7 +115,6 @@ struct Times: Codable {
 
         let ishaTime = try? container.decode(String.self, forKey: .isha).split(separator: ":")
         self.isha = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.isha.rawValue,
             time: Time(hour: Int(ishaTime?.first ?? "0"),
                        minute: Int(ishaTime?.last ?? "0")),
@@ -131,7 +123,6 @@ struct Times: Codable {
 
         let sunsetTime = try? container.decode(String.self, forKey: .sunset).split(separator: ":")
         self.sunset = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.sunset.rawValue,
             time: Time(hour: Int(sunsetTime?.first ?? "0"),
                        minute: Int(sunsetTime?.last ?? "0")),
@@ -140,7 +131,6 @@ struct Times: Codable {
 
         let midnightTime = try? container.decode(String.self, forKey: .midnight).split(separator: ":")
         self.midnight = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.midnight.rawValue,
             time: Time(hour: Int(midnightTime?.first ?? "0"),
                        minute: Int(midnightTime?.last ?? "0")),
@@ -149,7 +139,6 @@ struct Times: Codable {
 
         let nightTime = PrayerManager.lastThirdNightTime(maghribTime: maghrib?.time, fajrTime: fajr?.time)
         self.night = Prayer(
-            id: UUID().uuidString,
             name: CodingKeys.night.rawValue,
             time: Time(hour: Int(nightTime?.hour ?? 0),
                        minute: Int(nightTime?.minute ?? 0)),
