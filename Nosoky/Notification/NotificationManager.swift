@@ -28,12 +28,12 @@ class NotificationManager {
 
     // MARK: - Public methods
     func addNotificationsIfNeeded(for monthPrayers: [Datetime]) {
-        shouldAddNotifications { status, numberOfPendingNotifications in
-            guard status,
-                  var numberOfPendingNotifications = numberOfPendingNotifications else {
+        shouldAddNotifications { status, pendingNotifications in
+            guard status else {
                 return
             }
 
+            var numberOfPendingNotifications = pendingNotifications.count
             let currentDate = Calendar.current.dateComponents(
                 [.year, .month, .day, .hour, .minute],
                 from: self.addNotificationFromDate
@@ -57,16 +57,15 @@ class NotificationManager {
                 )
 
                 let dayPrayers = PrayerManager.shared.prayersList(of: dayPrayers.times)
-                for prayer in dayPrayers {
-                    guard numberOfPendingNotifications < self.maximumNumberOfNotification else {
-                        break
-                    }
-
-                    if prayerDate.day == currentDate.day && (currentDate.hour! > prayer.time.hour! || (currentDate.hour! == prayer.time.hour! && currentDate.minute! > prayer.time.minute!)) {
+                for prayer in dayPrayers where numberOfPendingNotifications < self.maximumNumberOfNotification {
+                    let prayerId = "\(prayer.name)\(prayerDate.year!)\(prayerDate.month!)\(prayerDate.day!)"
+                    if (pendingNotifications.first { $0.identifier == prayerId } != nil) ||
+                        prayerDate.day == currentDate.day && (currentDate.hour! > prayer.time.hour! ||
+                            (currentDate.hour! == prayer.time.hour! && currentDate.minute! > prayer.time.minute!)) {
                         continue
                     }
 
-                    self.addNotification(for: prayer, at: prayerDate)
+                    self.addNotification(for: prayer, prayerId, at: prayerDate)
                     numberOfPendingNotifications += 1
                 }
             }
@@ -74,21 +73,21 @@ class NotificationManager {
     }
 
     // MARK: - Internal Methods
-    func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ numberOfPendingNotifications: Int?) -> Void) {
+    func shouldAddNotifications(_ completion: @escaping (_ status: Bool, _ pendingNotifications: [UNNotificationRequest]) -> Void) {
         userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { [weak self] authorizationStatus, _ in
             guard let self = self,
                   authorizationStatus else {
-                completion(false, nil)
+                completion(false, [])
                 return
             }
 
             self.userNotificationCenter.getPendingNotificationRequests { pendingNotifications in
-                completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications.count)
+                completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications)
             }
         }
     }
 
-    func addNotification(for prayer: Prayer, at date: DateComponents) {
+    func addNotification(for prayer: Prayer, _ prayerId: String, at date: DateComponents) {
         guard let notificationContent = notificationContent(for: prayer) else {
             return
         }
@@ -110,12 +109,11 @@ class NotificationManager {
             content.subtitle = subtitle
         }
 
-        let randomIdentifier = prayer.id
-        let request = UNNotificationRequest(identifier: randomIdentifier, content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: "\(prayerId)", content: content, trigger: trigger)
 
         userNotificationCenter.add(request) { error in
             if error == nil {
-                print("\(prayer) at date \(date) notification did add for \(randomIdentifier)")
+                print("\(prayer) at date \(date) notification did add for \(prayerId)")
 
             } else {
                 print("\(prayer) at date \(date) notification did fail with error \(error!)")
