@@ -13,13 +13,14 @@ class PrayerManager {
     init(minuteUpdateInterval: Double = 60, notificationManager: NotificationManager = NotificationManager()) {
         self.notificationManager = notificationManager
         self.minuteUpdateInterval = minuteUpdateInterval
+        self.notificationManager.delegate = self
     }
 
     // MARK: - Private properties
     private let notificationManager: NotificationManager
     private var todaysPrayers: [Prayer] = []
     private var tomorrowsPrayers: [Prayer] = []
-    private var timer: Timer?
+    var timer: Timer?
 
     // MARK: - Public properties
     var lastNightThirdTime: Time? {
@@ -46,7 +47,7 @@ class PrayerManager {
         didSet {
             setTodaysPrayers()
             setTomorrowsPrayers()
-            notificationManager.addNotificationsIfNeeded(for: prayerDateTimes)
+            notificationManager.addNotificationsIfNeeded()
         }
     }
 
@@ -131,7 +132,7 @@ class PrayerManager {
         }
 
         if var dhuhr = prayers.dhuhr {
-            if DateHelper.string(from: DateHelper.date(from: todayAsString), dateFormat: "EEEE") == "Friday" {
+            if isFriday() {
                 dhuhr.name = "Jumuah"
             }
             prayersList.append(dhuhr)
@@ -152,28 +153,10 @@ class PrayerManager {
         return prayersList
     }
 
-    /*
-     calculate how long is the night
-        Maghrib time 18:27
-        Fajr time 4:27
+    func isFriday() -> Bool {
+        return DateHelper.string(from: DateHelper.date(from: todayAsString), dateFormat: "EEEE") == "Friday"
+    }
 
-        minutes 27 - 27 = 0
-        hours 4 - 18 = -14+24 = 10 (subtract 1 if its 24 instead of 10)
-        The night is 10 hours
-
-     calculate how long is the last third of the night
-        10/3 = 3.33 decimal
-        3.33*60 = 200 minutes
-
-     when does the 3rd part of the night start?
-        4.27 - 3.33 =
-        4 - 3 = 1
-        27 - 33 = -6
-        since the result is negative, add 60 to the minute and subtract 1 from the hour
-            -6 + 60 = 54
-            1 - 1 = 0
-        the last third of the night starts at 00:54
-    */
     class func lastThirdNightTime(maghribTime: Time?, fajrTime: Time?) -> Time? {
         // calculate how long is the night
         guard let maghribHour = maghribTime?.hour,
@@ -239,31 +222,5 @@ class PrayerManager {
                                                     currentTime.minute ?? 0,
                                                     &hoursDifference)
         return (Time(hour: hoursDifference, minute: minutesDifference), hoursDifference > 0 ? "" : "min")
-    }
-}
-
-// MARK: - Countdown Timer
-extension PrayerManager {
-    func startCountdownTimer() {
-        guard timer == nil,
-              onMinuteUpdate == nil else {
-            return
-        }
-
-        timer = Timer.scheduledTimer(
-            timeInterval: minuteUpdateInterval,
-            target: self,
-            selector: #selector(executeOnMinuteUpdate),
-            userInfo: nil,
-            repeats: true)
-    }
-
-    func stopCountdownTimer() {
-        timer?.invalidate()
-        timer = nil
-    }
-
-    @objc private func executeOnMinuteUpdate() {
-        onMinuteUpdate?()
     }
 }
