@@ -12,21 +12,22 @@ extension PrayerManager: NotificationManagerDelegate {
         var notificationContents: [NotificationContent] = []
 
         let _dayPrayers = prayerDateTimes.first { dayPrayersAndDate in
-            guard let prayersDay = Calendar.current.dateComponents(
-                [.day],
-                from: DateHelper.date(from: dayPrayersAndDate.date.gregorian)
-            ).day else { return false }
+            guard let prayersDate = DateHelper.date(from: dayPrayersAndDate.date.gregorian),
+                  let prayersDay = Calendar.current.dateComponents([.day], from: prayersDate).day else {
+                return false
+            }
 
             return prayersDay >= day
         }
 
-        guard let dayPrayers = _dayPrayers else {
+        guard let dayPrayers = _dayPrayers,
+              let prayersDate = DateHelper.date(from: dayPrayers.date.gregorian) else {
             return []
         }
 
         var prayersDateComponents = Calendar.current.dateComponents(
             [.year, .month, .day],
-            from: DateHelper.date(from: dayPrayers.date.gregorian)
+            from: prayersDate
         )
 
         func prayerId(_ prayer: Prayer) -> String {

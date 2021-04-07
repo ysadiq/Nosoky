@@ -20,7 +20,7 @@ class NotificationManagerTests: XCTestCase {
         notificationCenter = UserNotificationCenterMock()
         notificationManager = NotificationManagerMock(userNotificationCenter: notificationCenter)
         notificationManager.delegate = PrayerManager.shared
-        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-01")
+        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-01")!
         PrayerManager.shared.todayAsString = "2021-04-01"
     }
 
@@ -32,10 +32,8 @@ class NotificationManagerTests: XCTestCase {
     }
 
     func testAddNotificationsIfNeededWhenAuthorizationIsDisabled() {
-        var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
         DataProviderMock().prayerTimes { result, _ in
-            datetimes = result!.datetime
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.2)
@@ -49,10 +47,8 @@ class NotificationManagerTests: XCTestCase {
     }
 
     func testAddNotificationsIfNeeded() {
-        var datetimes: [Datetime] = []
         let expectation = XCTestExpectation(description: "fetch prayer times")
         DataProviderMock().prayerTimes { result, _ in
-            datetimes = result!.datetime
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 0.2)
@@ -72,7 +68,7 @@ class NotificationManagerTests: XCTestCase {
 
     func testFridayNotification() {
         PrayerManager.shared.todayAsString = "2021-04-09"
-        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-09")
+        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-09")!
 
         let expectation = XCTestExpectation(description: "fetch prayer times")
         DataProviderMock().prayerTimes { result, _ in
@@ -173,7 +169,7 @@ class NotificationManagerTests: XCTestCase {
 
     func testAddNotificationsIfNeededForLastFiveDaysOfTheMonth() {
         let expectation = XCTestExpectation(description: "fetch prayer times")
-        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-26")
+        notificationManager.addNotificationFromDate = DateHelper.date(from: "2021-04-26")!
         DataProviderMock().prayerTimes { result, _ in
             PrayerManager.shared.prayerDateTimes = Array(result!.datetime.dropFirst(25))
             expectation.fulfill()

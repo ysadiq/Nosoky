@@ -154,7 +154,7 @@ class PrayerManager {
     }
 
     func isFriday() -> Bool {
-        return DateHelper.string(from: DateHelper.date(from: todayAsString), dateFormat: "EEEE") == "Friday"
+        return DateHelper.string(from: DateHelper.date(from: todayAsString) ?? Date(), dateFormat: "EEEE") == "Friday"
     }
 
     class func lastThirdNightTime(maghribTime: Time?, fajrTime: Time?) -> Time? {
