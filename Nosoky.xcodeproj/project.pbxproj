@@ -19,13 +19,17 @@
 		76219F3126084E8800FE3B83 /* ViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F3026084E8800FE3B83 /* ViewControllerTests.swift */; };
 		76219F3C26084E8800FE3B83 /* NosokyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F3B26084E8800FE3B83 /* NosokyUITests.swift */; };
 		76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F4C26084EDC00FE3B83 /* PrayerManager.swift */; };
-		76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F5126084EEA00FE3B83 /* FastingManager.swift */; };
 		76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6026084FD000FE3B83 /* DataProvider.swift */; };
 		76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F652608501200FE3B83 /* PrayerTimesModel.swift */; };
 		76219F6B260852C800FE3B83 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F6A260852C800FE3B83 /* ViewModel.swift */; };
 		76219F84260872F200FE3B83 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F83260872F200FE3B83 /* DateHelper.swift */; };
 		763C25F12614CC97006F9EE6 /* PrayerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */; };
+		7640945F261962640096320B /* Debugger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7640945E261962640096320B /* Debugger.swift */; };
 		7640946426196EF30096320B /* Decodable+JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7640946326196EF30096320B /* Decodable+JSON.swift */; };
+		7654D0B9261D9ACA00242E19 /* FastingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76219F5126084EEA00FE3B83 /* FastingManager.swift */; };
+		7654D0BE261DBCD700242E19 /* NotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0BD261DBCD700242E19 /* NotificationContent.swift */; };
+		7654D0C6261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0C5261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift */; };
+		7654D0D2261DBDB600242E19 /* PrayerManager+Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0D1261DBDB600242E19 /* PrayerManager+Counter.swift */; };
 		7680DC5B2616383C008DE89D /* DataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DC5A2616383C008DE89D /* DataProviderMock.swift */; };
 		7680DC602616392C008DE89D /* april.json in Resources */ = {isa = PBXBuildFile; fileRef = 7680DC5F2616392C008DE89D /* april.json */; };
 		7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */; };
@@ -94,7 +98,11 @@
 		76219F9526087D4B00FE3B83 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		76219F9726087D4B00FE3B83 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		763C25F02614CC97006F9EE6 /* PrayerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerCollectionViewCell.swift; sourceTree = "<group>"; };
+		7640945E261962640096320B /* Debugger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debugger.swift; sourceTree = "<group>"; };
 		7640946326196EF30096320B /* Decodable+JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+JSON.swift"; sourceTree = "<group>"; };
+		7654D0BD261DBCD700242E19 /* NotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContent.swift; sourceTree = "<group>"; };
+		7654D0C5261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerManager+NotificationManagerDelegate.swift"; sourceTree = "<group>"; };
+		7654D0D1261DBDB600242E19 /* PrayerManager+Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerManager+Counter.swift"; sourceTree = "<group>"; };
 		7680DC5A2616383C008DE89D /* DataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderMock.swift; sourceTree = "<group>"; };
 		7680DC5F2616392C008DE89D /* april.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = april.json; sourceTree = "<group>"; };
 		7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManagerMock.swift; sourceTree = "<group>"; };
@@ -135,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				7601ABDB2614EBBF0049590A /* NotificationManager.swift */,
+				7654D0BD261DBCD700242E19 /* NotificationContent.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -212,7 +221,7 @@
 		76219F5626084EFE00FE3B83 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				76219F4C26084EDC00FE3B83 /* PrayerManager.swift */,
+				7654D0CD261DBD9300242E19 /* Prayer */,
 				76219F5126084EEA00FE3B83 /* FastingManager.swift */,
 			);
 			path = Managers;
@@ -266,6 +275,7 @@
 		76219F882608730100FE3B83 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7640945E261962640096320B /* Debugger.swift */,
 				76219F83260872F200FE3B83 /* DateHelper.swift */,
 			);
 			path = Helpers;
@@ -278,6 +288,16 @@
 				76219F9726087D4B00FE3B83 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7654D0CD261DBD9300242E19 /* Prayer */ = {
+			isa = PBXGroup;
+			children = (
+				76219F4C26084EDC00FE3B83 /* PrayerManager.swift */,
+				7654D0D1261DBDB600242E19 /* PrayerManager+Counter.swift */,
+				7654D0C5261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift */,
+			);
+			path = Prayer;
 			sourceTree = "<group>";
 		};
 		7680DCB22617553A008DE89D /* Extensions */ = {
@@ -463,14 +483,18 @@
 			files = (
 				7601ABDC2614EBBF0049590A /* NotificationManager.swift in Sources */,
 				760D3F492613E6A7004F5BB0 /* StorageManager.swift in Sources */,
-				76219F5226084EEA00FE3B83 /* FastingManager.swift in Sources */,
+				7640945F261962640096320B /* Debugger.swift in Sources */,
 				76219F84260872F200FE3B83 /* DateHelper.swift in Sources */,
 				7640946426196EF30096320B /* Decodable+JSON.swift in Sources */,
 				76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */,
+				7654D0B9261D9ACA00242E19 /* FastingManager.swift in Sources */,
+				7654D0C6261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift in Sources */,
 				76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */,
 				76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */,
 				7680DD4E26186FB9008DE89D /* UNUserNotificationCenter+UserNotificationCenter.swift in Sources */,
 				76219F1E26084E8700FE3B83 /* ViewController.swift in Sources */,
+				7654D0D2261DBDB600242E19 /* PrayerManager+Counter.swift in Sources */,
+				7654D0BE261DBCD700242E19 /* NotificationContent.swift in Sources */,
 				7680DC5B2616383C008DE89D /* DataProviderMock.swift in Sources */,
 				7680DD5526186FD9008DE89D /* UserNotificationCenterMock.swift in Sources */,
 				76219F1A26084E8700FE3B83 /* AppDelegate.swift in Sources */,

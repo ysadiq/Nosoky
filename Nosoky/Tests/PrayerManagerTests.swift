@@ -25,7 +25,7 @@ class PrayerManagerTests: XCTestCase {
     }
 
     func testPrayer() {
-        let prayer = Prayer(id: "", name: "Asr", time: Time(hour: 3, minute: 52))
+        let prayer = Prayer(name: "Asr", time: Time(hour: 3, minute: 52), isMandatory: true)
 
         XCTAssertEqual(prayer.name, "Asr")
         XCTAssertEqual(prayer.time.hour, 3)
@@ -36,7 +36,7 @@ class PrayerManagerTests: XCTestCase {
         fetch(at: Time(hour: 20, minute: 0))
         XCTAssertNil(prayerManager.nextPrayer)
 
-        XCTAssertEqual(prayerManager.otherPrayers.count, 4)
+        XCTAssertEqual(prayerManager.otherPrayers.count, 5)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Fajr")
         XCTAssertEqual(prayerManager.otherPrayers[1].name, "Dhuhr")
         XCTAssertEqual(prayerManager.otherPrayers[2].name, "Asr")
@@ -87,6 +87,13 @@ class PrayerManagerTests: XCTestCase {
         XCTAssertTrue(prayerManager.otherPrayers.isEmpty)
     }
 
+    func testFridayPrayer() {
+        prayerManager.todayAsString = "2021-04-09"
+        fetch(at: Time(hour: 8, minute: 0))
+        XCTAssertEqual(prayerManager.nextPrayer?.name, "Jumuah")
+        XCTAssertEqual(prayerManager.otherPrayers[0].name, "Asr")
+    }
+
     func testPrayerDateTimes() {
         prayerManager.currentTimeMock = Time(hour: 2, minute:0)
         prayerManager.prayerDateTimes =
@@ -132,7 +139,7 @@ extension PrayerManagerTests {
     func fetch(at time: Time) {
         prayerManager.currentTimeMock = Time(hour: time.hour!, minute: time.minute!)
         let promise = XCTestExpectation(description: #function)
-        DataProviderMock().prayerTimes(for: nil) { result, error in
+        DataProviderMock().prayerTimes { result, error in
             self.prayerManager.prayerDateTimes = result!.datetime
             promise.fulfill()
         }

@@ -11,7 +11,7 @@ import CoreLocation
 class DataProviderMock: DataProviderProtocol {
     var lastUpdated: Date?
 
-    func prayerTimes(for locationCoordinate: CLLocationCoordinate2D?, completion: @escaping (PrayerTimesModel.Results?, APIError?) -> Void) {
+    func prayerTimes(completion: @escaping (PrayerTimesModel.Results?, APIError?) -> Void) {
         guard let url = Bundle(for: DataProviderMock.self).url(forResource: "april", withExtension: "json") else {
             completion(nil, APIError.noNetwork)
             return

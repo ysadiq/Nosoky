@@ -1,0 +1,3 @@
+- Add sunrise as [next prayer + notification only]
+- Move location manager to data provider to use it when needed only
+- Show Jumuah in Friday
