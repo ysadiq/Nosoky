@@ -41,6 +41,48 @@ struct Datetime: Codable {
 struct DateClass: Codable {
     let timestamp: Int
     let gregorian, hijri: String
+    let isMonday, isThursday: Bool
+    let isWhiteDay, isAshura, isFirstSixDaysOfShawal: Bool
+    let isArafa, isFirstNineDaysOfHij: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case timestamp
+        case gregorian
+        case hijri
+        case isMonday
+        case isThursday
+        case isWhiteDay
+        case isAshura
+        case isFirstSixDaysOfShawal
+        case isArafa
+        case isFirstNineDaysOfHij
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        timestamp = try container.decode(Int.self, forKey: .timestamp)
+        gregorian = try container.decode(String.self, forKey: .gregorian)
+        hijri = try container.decode(String.self, forKey: .hijri)
+
+        let hijriDateString = try container.decode(String.self, forKey: .hijri).split(separator: "-")
+        let hijriDateComponents = DateComponents(calendar: Calendar.init(identifier: .islamic), year: Int(hijriDateString[0]), month: Int(hijriDateString[1]), day: Int(hijriDateString[2]))
+        let isRamadan = hijriDateComponents.month == 9
+
+        if let hijriDate = hijriDateComponents.date {
+            let day = DateHelper.string(from: hijriDate, dateFormat: "EEEE", calendar: .islamic)
+            isMonday = day == "Monday" && !isRamadan
+            isThursday = day == "Thursday" && !isRamadan
+        } else {
+            isMonday = false
+            isThursday = false
+        }
+        isWhiteDay = [13, 14, 15].contains(hijriDateComponents.day) && !isRamadan
+        isAshura = [9, 10].contains(hijriDateComponents.day) && hijriDateComponents.month == 1
+        isFirstSixDaysOfShawal = (2...7) ~= hijriDateComponents.day ?? 0 && hijriDateComponents.month == 8
+        isArafa = hijriDateComponents.day == 9 && hijriDateComponents.month == 12
+        isFirstNineDaysOfHij = (1...9) ~= hijriDateComponents.day ?? 0 && hijriDateComponents.month == 12
+    }
 }
 
 // MARK: - Times

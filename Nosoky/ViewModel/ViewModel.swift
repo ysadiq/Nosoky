@@ -17,6 +17,7 @@ public enum ContentState {
 class ViewModel {
     private let dataProvider: DataProviderProtocol
     private let prayerManager: PrayerManager
+    private let fastingManager: FastingManager
     var updateLoadingStatus: [(() -> Void)?] = [] 
     var lastUpdated: String? {
         guard let lastUpdated = dataProvider.lastUpdated else {
@@ -34,9 +35,12 @@ class ViewModel {
         }
     }
 
-    init(dataProvider: DataProviderProtocol = DataProvider(), prayerManager: PrayerManager = PrayerManager.shared) {
+    init(dataProvider: DataProviderProtocol = DataProvider(),
+         prayerManager: PrayerManager = PrayerManager.shared,
+         fastingManager: FastingManager = FastingManager.shared) {
         self.dataProvider = dataProvider
         self.prayerManager = prayerManager
+        self.fastingManager = fastingManager
     }
 
     func fetchData() {
@@ -48,6 +52,7 @@ class ViewModel {
                 return
             }
 
+            self.fastingManager.dates = result.datetime.map { $0.date }
             self.prayerManager.prayerDateTimes = result.datetime
             self.contentState = .populated
         }

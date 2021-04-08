@@ -123,10 +123,7 @@ class PrayerManagerTests: XCTestCase {
         prayerManager.prayerDateTimes = [
             Datetime(
                 times: Times(JSONString: "{\"times\":{\"Imsak\":\"\",\"Sunrise\":\"\",\"Fajr\":\"04:00\",\"Dhuhr\":\"\",\"Asr\":\"\",\"Sunset\":\"\",\"Maghrib\":\"18:00\",\"Isha\":\"\",\"Midnight\":\"\"}}")!,
-                date: DateClass(
-                    timestamp: 1,
-                    gregorian: DateHelper.string(from: Date()),
-                    hijri: "")
+                date: DateClass(JSONString: "{\"timestamp\":1617235200,\"gregorian\":\"2021-04-01\",\"hijri\":\"1442-08-19\"}")!
             )]
 
         XCTAssertEqual(prayerManager.lastNightThirdTime?.hour, 1)
