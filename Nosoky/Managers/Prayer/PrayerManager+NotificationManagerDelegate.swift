@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension PrayerManager: NotificationManagerDelegate {
-    func notificationContents(for day: Int) -> [NotificationContent] {
+extension PrayerManager: NotificationManagerDataSource {
+    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent] {
         var notificationContents: [NotificationContent] = []
 
         let _dayPrayers = prayerDateTimes.first { dayPrayersAndDate in
