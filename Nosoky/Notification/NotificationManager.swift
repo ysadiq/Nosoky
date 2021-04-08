@@ -13,13 +13,13 @@ enum Sound: String {
     case fajrAdhan = "Adhan-fajr.m4a"
 }
 
-protocol NotificationManagerDelegate: class {
-    func notificationContents(for day: Int) -> [NotificationContent]
+protocol NotificationManagerDataSource: class {
+    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent]
 }
 
 class NotificationManager {
     // MARK: - Public properties
-    weak var delegate: NotificationManagerDelegate?
+    weak var delegate: NotificationManagerDataSource?
 
     // MARK: - Private properties
     let maximumNumberOfNotification = 64
@@ -46,34 +46,15 @@ class NotificationManager {
                 from: self.addNotificationFromDate
             )
 
-            func isPast(_ notification: NotificationContent) -> Bool {
-                guard let notificationHour = notification.dateComponents.hour,
-                      let notificationMinute = notification.dateComponents.minute,
-                      let currentHour = currentDate.hour,
-                      let currentMinute = currentDate.minute else {
-                    print("Error: notification hour or minute is missing")
-                    return true
-                }
-
-                return notification.dateComponents.day == currentDate.day &&
-                    (currentHour > notificationHour ||
-                    (currentHour == notificationHour && currentMinute > notificationMinute))
-            }
-
-            func isDuplicate(_ notification: NotificationContent) -> Bool {
-                pendingNotifications.first { $0.identifier == notification.id } != nil
-            }
-
             guard let day = currentDate.day else { return }
 
             for day in day...31
             where numberOfPendingNotifications < self.maximumNumberOfNotification {
                 let notificationContents = delegate.notificationContents(for: self, at: day)
                 for notification in notificationContents where
-                    numberOfPendingNotifications < self.maximumNumberOfNotification {
-                    if isDuplicate(notification) || isPast(notification) {
-                        continue
-                    }
+                    numberOfPendingNotifications < self.maximumNumberOfNotification &&
+                    !self.isDuplicate(notification, pendingNotifications) &&
+                    !self.isPast(notification) {
 
                     self.addNotification(notification)
                     numberOfPendingNotifications += 1
@@ -95,6 +76,29 @@ class NotificationManager {
                 completion(pendingNotifications.count < self.maximumNumberOfNotification, pendingNotifications)
             }
         }
+    }
+
+    func isPast(_ notification: NotificationContent) -> Bool {
+        let currentDate = Calendar.current.dateComponents(
+            [.year, .month, .day, .hour, .minute],
+            from: self.addNotificationFromDate
+        )
+
+        guard let notificationHour = notification.dateComponents.hour,
+              let notificationMinute = notification.dateComponents.minute,
+              let currentHour = currentDate.hour,
+              let currentMinute = currentDate.minute else {
+            print("Error: notification hour or minute is missing")
+            return true
+        }
+
+        return notification.dateComponents.day == currentDate.day &&
+            (currentHour > notificationHour ||
+            (currentHour == notificationHour && currentMinute > notificationMinute))
+    }
+
+    func isDuplicate(_ notification: NotificationContent, _ pendingNotifications: [UNNotificationRequest]) -> Bool {
+        pendingNotifications.first { $0.identifier == notification.id } != nil
     }
 
     func addNotification(_ notificationContent: NotificationContent?) {
