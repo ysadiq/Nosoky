@@ -31,13 +31,17 @@
 		7654D0C6261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0C5261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift */; };
 		7654D0D2261DBDB600242E19 /* PrayerManager+Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0D1261DBDB600242E19 /* PrayerManager+Counter.swift */; };
 		7654D0E6261DD2CA00242E19 /* FastingManager+NotificationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D0E5261DD2CA00242E19 /* FastingManager+NotificationManagerDelegate.swift */; };
+		7654D21E261F8B7B00242E19 /* NotificationManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D216261F8B5600242E19 /* NotificationManagerMock.swift */; };
+		7654D230261F8C4000242E19 /* FastingNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D228261F8C2100242E19 /* FastingNotificationManagerTests.swift */; };
+		7654D238261F8C9200242E19 /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D237261F8C9200242E19 /* NotificationManagerTests.swift */; };
+		7654D2432620465300242E19 /* NotificationManagerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7654D2422620465300242E19 /* NotificationManagerDataSource.swift */; };
 		7680DC5B2616383C008DE89D /* DataProviderMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DC5A2616383C008DE89D /* DataProviderMock.swift */; };
 		7680DC602616392C008DE89D /* april.json in Resources */ = {isa = PBXBuildFile; fileRef = 7680DC5F2616392C008DE89D /* april.json */; };
 		7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */; };
 		7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */; };
 		7680DCCE261770E1008DE89D /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCC626176F78008DE89D /* ViewModelTests.swift */; };
 		7680DCD626177D60008DE89D /* PrayerManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCD526177D60008DE89D /* PrayerManagerTests.swift */; };
-		7680DCDE26185448008DE89D /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCDD26185448008DE89D /* NotificationManagerTests.swift */; };
+		7680DCDE26185448008DE89D /* PrayerNotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCDD26185448008DE89D /* PrayerNotificationManagerTests.swift */; };
 		7680DD4E26186FB9008DE89D /* UNUserNotificationCenter+UserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DD1F26186992008DE89D /* UNUserNotificationCenter+UserNotificationCenter.swift */; };
 		7680DD5526186FD9008DE89D /* UserNotificationCenterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7680DCFC26186223008DE89D /* UserNotificationCenterMock.swift */; };
 /* End PBXBuildFile section */
@@ -105,13 +109,17 @@
 		7654D0C5261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerManager+NotificationManagerDelegate.swift"; sourceTree = "<group>"; };
 		7654D0D1261DBDB600242E19 /* PrayerManager+Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerManager+Counter.swift"; sourceTree = "<group>"; };
 		7654D0E5261DD2CA00242E19 /* FastingManager+NotificationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FastingManager+NotificationManagerDelegate.swift"; sourceTree = "<group>"; };
+		7654D216261F8B5600242E19 /* NotificationManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerMock.swift; sourceTree = "<group>"; };
+		7654D228261F8C2100242E19 /* FastingNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FastingNotificationManagerTests.swift; sourceTree = "<group>"; };
+		7654D237261F8C9200242E19 /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
+		7654D2422620465300242E19 /* NotificationManagerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerDataSource.swift; sourceTree = "<group>"; };
 		7680DC5A2616383C008DE89D /* DataProviderMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderMock.swift; sourceTree = "<group>"; };
 		7680DC5F2616392C008DE89D /* april.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = april.json; sourceTree = "<group>"; };
 		7680DCA5261754F9008DE89D /* PrayerManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManagerMock.swift; sourceTree = "<group>"; };
 		7680DCAA2617551F008DE89D /* UIViewController+Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Storyboard.swift"; sourceTree = "<group>"; };
 		7680DCC626176F78008DE89D /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
 		7680DCD526177D60008DE89D /* PrayerManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerManagerTests.swift; sourceTree = "<group>"; };
-		7680DCDD26185448008DE89D /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
+		7680DCDD26185448008DE89D /* PrayerNotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerNotificationManagerTests.swift; sourceTree = "<group>"; };
 		7680DCFC26186223008DE89D /* UserNotificationCenterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationCenterMock.swift; sourceTree = "<group>"; };
 		7680DD1F26186992008DE89D /* UNUserNotificationCenter+UserNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UNUserNotificationCenter+UserNotificationCenter.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -145,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				7601ABDB2614EBBF0049590A /* NotificationManager.swift */,
+				7654D2422620465300242E19 /* NotificationManagerDataSource.swift */,
 				7654D0BD261DBCD700242E19 /* NotificationContent.swift */,
 			);
 			path = Notification;
@@ -351,7 +360,10 @@
 		7680DD4326186A25008DE89D /* NotificationManager */ = {
 			isa = PBXGroup;
 			children = (
-				7680DCDD26185448008DE89D /* NotificationManagerTests.swift */,
+				7654D237261F8C9200242E19 /* NotificationManagerTests.swift */,
+				7680DCDD26185448008DE89D /* PrayerNotificationManagerTests.swift */,
+				7654D228261F8C2100242E19 /* FastingNotificationManagerTests.swift */,
+				7654D216261F8B5600242E19 /* NotificationManagerMock.swift */,
 				7680DCFC26186223008DE89D /* UserNotificationCenterMock.swift */,
 				7680DD1F26186992008DE89D /* UNUserNotificationCenter+UserNotificationCenter.swift */,
 			);
@@ -499,6 +511,7 @@
 				7640946426196EF30096320B /* Decodable+JSON.swift in Sources */,
 				76219F4D26084EDC00FE3B83 /* PrayerManager.swift in Sources */,
 				7654D0B9261D9ACA00242E19 /* FastingManager.swift in Sources */,
+				7654D2432620465300242E19 /* NotificationManagerDataSource.swift in Sources */,
 				7654D0C6261DBD7C00242E19 /* PrayerManager+NotificationManagerDelegate.swift in Sources */,
 				76219F6126084FD000FE3B83 /* DataProvider.swift in Sources */,
 				76219F662608501200FE3B83 /* PrayerTimesModel.swift in Sources */,
@@ -520,11 +533,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7680DCD626177D60008DE89D /* PrayerManagerTests.swift in Sources */,
+				7654D230261F8C4000242E19 /* FastingNotificationManagerTests.swift in Sources */,
 				76219F3126084E8800FE3B83 /* ViewControllerTests.swift in Sources */,
-				7680DCDE26185448008DE89D /* NotificationManagerTests.swift in Sources */,
+				7680DCDE26185448008DE89D /* PrayerNotificationManagerTests.swift in Sources */,
 				7680DCBF26176A17008DE89D /* PrayerManagerMock.swift in Sources */,
 				7680DCCE261770E1008DE89D /* ViewModelTests.swift in Sources */,
 				7680DCBB2617562A008DE89D /* UIViewController+Storyboard.swift in Sources */,
+				7654D238261F8C9200242E19 /* NotificationManagerTests.swift in Sources */,
+				7654D21E261F8B7B00242E19 /* NotificationManagerMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
