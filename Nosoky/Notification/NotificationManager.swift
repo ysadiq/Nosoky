@@ -13,10 +13,6 @@ enum Sound: String {
     case fajrAdhan = "Adhan-fajr.m4a"
 }
 
-protocol NotificationManagerDataSource: class {
-    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent]
-}
-
 class NotificationManager {
     // MARK: - Public properties
     weak var delegate: NotificationManagerDataSource?
@@ -29,6 +25,8 @@ class NotificationManager {
     // MARK: - Initializer
     init(userNotificationCenter: UserNotificationCenter = UNUserNotificationCenter.current()) {
         self.userNotificationCenter = userNotificationCenter
+
+        userNotificationCenter.requestAuthorization(options: [.alert, .sound]) { _, _ in }
     }
 
     // MARK: - Public methods
@@ -48,9 +46,7 @@ class NotificationManager {
 
             guard let day = currentDate.day else { return }
 
-            for day in day...31
-            where numberOfPendingNotifications < self.maximumNumberOfNotification {
-                let notificationContents = delegate.notificationContents(for: self, at: day)
+            if let notificationContents = delegate.notificationContents(for: self) {
                 for notification in notificationContents where
                     numberOfPendingNotifications < self.maximumNumberOfNotification &&
                     !self.isDuplicate(notification, pendingNotifications) &&
@@ -58,6 +54,22 @@ class NotificationManager {
 
                     self.addNotification(notification)
                     numberOfPendingNotifications += 1
+                }
+            } else {
+                for day in day...31
+                where numberOfPendingNotifications < self.maximumNumberOfNotification {
+                    guard let notificationContents = delegate.notificationContents(for: self, at: day) else {
+                        return
+                    }
+
+                    for notification in notificationContents where
+                        numberOfPendingNotifications < self.maximumNumberOfNotification &&
+                        !self.isDuplicate(notification, pendingNotifications) &&
+                        !self.isPast(notification) {
+
+                        self.addNotification(notification)
+                        numberOfPendingNotifications += 1
+                    }
                 }
             }
         }

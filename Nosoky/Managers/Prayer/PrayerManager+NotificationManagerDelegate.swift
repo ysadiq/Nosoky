@@ -8,7 +8,7 @@
 import Foundation
 
 extension PrayerManager: NotificationManagerDataSource {
-    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent] {
+    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent]? {
         var notificationContents: [NotificationContent] = []
 
         let _dayPrayers = prayerDateTimes.first { dayPrayersAndDate in
@@ -22,7 +22,7 @@ extension PrayerManager: NotificationManagerDataSource {
 
         guard let dayPrayers = _dayPrayers,
               let prayersDate = DateHelper.date(from: dayPrayers.date.gregorian) else {
-            return []
+            return nil
         }
 
         var prayersDateComponents = Calendar.current.dateComponents(

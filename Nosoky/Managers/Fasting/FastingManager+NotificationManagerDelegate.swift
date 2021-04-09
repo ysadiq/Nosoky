@@ -8,11 +8,10 @@
 import Foundation
 
 extension FastingManager: NotificationManagerDataSource {
-    func notificationContents(for notificationManager: NotificationManager, at day: Int) -> [NotificationContent] {
-        var notificationContents: [NotificationContent] = []
-
-        whiteDaysDates.first {
-            $0.gregorian == "today"
-        }
+    func notificationContents(for notificationManager: NotificationManager) -> [NotificationContent]? {
+        return
+            whiteDaysNotifications +
+            weeklyNotifications +
+            shawwalNotifications
     }
 }
