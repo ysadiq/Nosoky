@@ -19,14 +19,30 @@ class PrayerManager {
     // MARK: - Private properties
     private let notificationManager: NotificationManager
     private var todaysPrayers: [Prayer] = []
-    private var tomorrowsPrayers: [Prayer] = []
+    private var tomorrowPrayers: [Prayer] {
+        guard let prayers = prayerDateTimes.first(where: { dateTime in
+            dateTime.date.gregorian == tomorrowAsString
+        })?.times else {
+            // if tomorrow is a new month, get today's prayer too :)
+            // I think there's not much difference
+            if let prayers = prayerDateTimes.filter({ dateTime in
+                dateTime.date.gregorian == todayAsString
+            }).first?.times {
+                return prayersList(of: prayers)
+            }
+
+            return []
+        }
+
+        return prayersList(of: prayers)
+    }
     var timer: Timer?
 
     // MARK: - Public properties
     var lastNightThirdTime: Time? {
         if let nightPrayer = todaysPrayers.filter({ $0.name == "Night" }).first?.time {
             return nightPrayer
-        } else if let nightPrayer = tomorrowsPrayers.filter({ $0.name == "Night" }).first?.time {
+        } else if let nightPrayer = tomorrowPrayers.filter({ $0.name == "Night" }).first?.time {
             return nightPrayer
         }
 
@@ -46,7 +62,6 @@ class PrayerManager {
     var prayerDateTimes: [Datetime] = [] {
         didSet {
             setTodaysPrayers()
-            setTomorrowsPrayers()
             notificationManager.addNotificationsIfNeeded()
         }
     }
@@ -60,7 +75,7 @@ class PrayerManager {
         )
     }
 
-    var nextPrayer: Prayer? {
+    var nextPrayer: Prayer {
         while let prayer = todaysPrayers.first {
             guard let prayerTimeHour = prayer.time.hour, let prayerTimeMinute = prayer.time.minute,
                   let currentTimeHour = currentTime.hour, let currentTimeMinute = currentTime.minute else {
@@ -75,45 +90,23 @@ class PrayerManager {
             }
         }
 
-        return nil
+        todaysPrayers = tomorrowPrayers
+        return todaysPrayers[0]
     }
 
     var otherPrayers: [Prayer] {
-        if let nextPrayer = nextPrayer {
-            return todaysPrayers.filter { $0.name != nextPrayer.name && $0.isMandatory }
-        } else {
-            return tomorrowsPrayers.filter { $0.isMandatory }
-        }
+        return todaysPrayers.filter { $0.name != nextPrayer.name && $0.isMandatory }
     }
 
     // MARK: - Private methods
     private func setTodaysPrayers() {
-        guard let prayers = prayerDateTimes.filter({ dateTime in
+        guard let prayers = prayerDateTimes.first(where: { dateTime in
             dateTime.date.gregorian == todayAsString
-        }).first?.times else {
+        })?.times else {
             return
         }
 
         todaysPrayers = prayersList(of: prayers)
-    }
-
-    private func setTomorrowsPrayers() {
-        // set tomorrow's prayer
-        guard let prayers = prayerDateTimes.filter({ dateTime in
-            dateTime.date.gregorian == tomorrowAsString
-        }).first?.times else {
-            // if tomorrow is a new month, get today's prayer too :)
-            // I think there's not much difference
-            if let prayers = prayerDateTimes.filter({ dateTime in
-                dateTime.date.gregorian == todayAsString
-            }).first?.times {
-                tomorrowsPrayers = prayersList(of: prayers)
-            }
-
-            return
-        }
-
-        tomorrowsPrayers = prayersList(of: prayers)
     }
 
     func prayersList(of prayers: Times) -> [Prayer] {

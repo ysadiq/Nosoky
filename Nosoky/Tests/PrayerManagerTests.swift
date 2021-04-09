@@ -32,9 +32,32 @@ class PrayerManagerTests: XCTestCase {
         XCTAssertEqual(prayer.time.minute, 52)
     }
 
+    func testNextPrayerOnTimeChange() {
+        fetch(at: Time(hour: 11, minute: 30))
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Dhuhr")
+
+        prayerManager.currentTimeMock = Time(hour: 14, minute: 0)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Asr")
+
+        prayerManager.currentTimeMock = Time(hour: 16, minute: 0)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Maghrib")
+
+        prayerManager.currentTimeMock = Time(hour: 18, minute: 40)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Isha")
+
+        prayerManager.currentTimeMock = Time(hour: 20, minute: 0)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Night")
+
+        prayerManager.currentTimeMock = Time(hour: 0, minute: 24)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Night")
+
+        prayerManager.currentTimeMock = Time(hour: 1, minute: 24)
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Fajr")
+    }
+
     func testNightPrayer() {
         fetch(at: Time(hour: 20, minute: 0))
-        XCTAssertNil(prayerManager.nextPrayer)
+        XCTAssertNotNil(prayerManager.nextPrayer)
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 5)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Fajr")
@@ -45,7 +68,7 @@ class PrayerManagerTests: XCTestCase {
 
     func testFajrPrayer() {
         fetch(at: Time(hour: 3, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Fajr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Dhuhr")
@@ -56,7 +79,7 @@ class PrayerManagerTests: XCTestCase {
 
     func testDhuhurPrayer() {
         fetch(at: Time(hour: 11, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Dhuhr")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Dhuhr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 3)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Asr")
@@ -66,7 +89,7 @@ class PrayerManagerTests: XCTestCase {
 
     func testAsrPrayer() {
         fetch(at: Time(hour: 14, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Asr")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Asr")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 2)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Maghrib")
@@ -75,7 +98,7 @@ class PrayerManagerTests: XCTestCase {
 
     func testMaghribPrayer() {
         fetch(at: Time(hour: 16, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Maghrib")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Maghrib")
 
         XCTAssertEqual(prayerManager.otherPrayers.count, 1)
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Isha")
@@ -83,14 +106,14 @@ class PrayerManagerTests: XCTestCase {
 
     func testIshaPrayer() {
         fetch(at: Time(hour: 19, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Isha")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Isha")
         XCTAssertTrue(prayerManager.otherPrayers.isEmpty)
     }
 
     func testFridayPrayer() {
         prayerManager.todayAsString = "2021-04-09"
         fetch(at: Time(hour: 8, minute: 0))
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Jumuah")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Jumuah")
         XCTAssertEqual(prayerManager.otherPrayers[0].name, "Asr")
     }
 
@@ -99,7 +122,7 @@ class PrayerManagerTests: XCTestCase {
         prayerManager.prayerDateTimes =
             PrayerTimesModel(JSONString: "{\"code\":200,\"status\":\"OK\",\"results\":{\"datetime\":[{\"times\":{\"Imsak\":\"04:13\",\"Sunrise\":\"05:43\",\"Fajr\":\"05:00\",\"Dhuhr\":\"11:58\",\"Asr\":\"15:30\",\"Sunset\":\"18:14\",\"Maghrib\":\"18:14\",\"Isha\":\"19:34\",\"Midnight\":\"23:59\"},\"date\":{\"timestamp\":1617235200,\"gregorian\":\"2021-04-01\",\"hijri\":\"1442-08-19\"}}],\"location\":{\"latitude\":30.086594,\"longitude\":31.3445356,\"elevation\":30,\"country\":\"\",\"country_code\":\"EG\",\"timezone\":\"Africa/Cairo\",\"local_offset\":2},\"settings\":{\"timeformat\":\"HH:mm\",\"school\":\"Egyptian General Authority of Survey\",\"juristic\":\"Shafii\",\"highlat\":\"None\",\"fajr_angle\":18,\"isha_angle\":18}}}")!.results.datetime
 
-        XCTAssertEqual(prayerManager.nextPrayer?.name, "Fajr")
+        XCTAssertEqual(prayerManager.nextPrayer.name, "Fajr")
         XCTAssertEqual(prayerManager.otherPrayers.count, 4)
     }
 

@@ -137,4 +137,50 @@ class ViewControllerTests: XCTestCase {
         XCTAssertTrue(viewController.prayerNameLabel.isHidden)
         XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
     }
+
+    func testNextPrayerOnTimeChange() {
+        prayerManagerMock.todayAsString = "2021-04-01"
+        let promise = XCTestExpectation(description: #function)
+        promise.expectedFulfillmentCount = 2
+
+        let updateLoadingStatus = {
+            promise.fulfill()
+        }
+
+        viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
+        viewController.initViewModel()
+
+        wait(for: [promise], timeout: 0.1)
+        prayerManagerMock.currentTimeMock = Time(hour: 11, minute: 0)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Dhuhr")
+
+        prayerManagerMock.currentTimeMock = Time(hour: 14, minute: 0)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Asr")
+
+        prayerManagerMock.currentTimeMock = Time(hour: 16, minute: 0)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Maghrib")
+
+        prayerManagerMock.currentTimeMock = Time(hour: 18, minute: 40)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Isha")
+
+        prayerManagerMock.currentTimeMock = Time(hour: 20, minute: 0)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text, "The last third of the night starts in")
+        XCTAssertTrue(viewController.prayerNameLabel.isHidden)
+        XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
+
+        prayerManagerMock.currentTimeMock = Time(hour: 0, minute: 24)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.nextPrayerTitleLabel.text, "The last third of the night starts in")
+        XCTAssertTrue(viewController.prayerNameLabel.isHidden)
+        XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
+
+        prayerManagerMock.currentTimeMock = Time(hour: 1, minute: 24)
+        prayerManagerMock.onMinuteUpdate?()
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Fajr")
+    }
 }

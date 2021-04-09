@@ -56,17 +56,30 @@ class ViewController: UIViewController {
     }
 
     func updateNextPrayer() {
-        guard let nextPrayer = prayerManager.nextPrayer,
-              nextPrayer.name != "Night" else {
-            configureLastThirdNightView()
+        let nextPrayer = prayerManager.nextPrayer
+        
+        if nextPrayer.name == "Night" {
+            nextPrayerTitleLabel.text = "The last third of the night starts in"
+            setPrayerTimeLabel(nextPrayer.time)
+            prayerNameLabel.isHidden = true
+            lastThirdNightStackView.isHidden = true
+
             otherPrayersCollectionView.reloadData()
             return
+        } else if nextPrayerTitleLabel.text == "The last third of the night starts in" {
+            nextPrayerTitleLabel.text = "Next Prayer"
+            prayerNameLabel.text = nextPrayer.name
+            prayerNameLabel.isHidden = false
+            lastThirdNightStackView.isHidden = false
+
+            otherPrayersCollectionView.reloadData()
         }
 
         if nextPrayer.name != prayerNameLabel.text {
             prayerNameLabel.text = nextPrayer.name
             otherPrayersCollectionView.reloadData()
         }
+        
         setPrayerTimeLabel(nextPrayer.time)
     }
 
@@ -82,18 +95,6 @@ class ViewController: UIViewController {
         lastUpdatedLabel.isHidden = false
         lastUpdatedDateLabel.isHidden = false
 
-    }
-
-    func configureLastThirdNightView() {
-        guard let lastNightThirdTime = prayerManager.lastNightThirdTime else {
-            return
-        }
-
-        nextPrayerTitleLabel.text = "The last third of the night starts in"
-        setPrayerTimeLabel(lastNightThirdTime)
-
-        prayerNameLabel.isHidden = true
-        lastThirdNightStackView.isHidden = true
     }
 
     func setPrayerTimeLabel(_ time: Time) {
