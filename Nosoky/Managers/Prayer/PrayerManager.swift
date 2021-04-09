@@ -132,7 +132,7 @@ class PrayerManager {
         }
 
         if var dhuhr = prayers.dhuhr {
-            if isFriday() {
+            if isFriday(dhuhr) {
                 dhuhr.name = "Jumuah"
             }
             prayersList.append(dhuhr)
@@ -153,8 +153,9 @@ class PrayerManager {
         return prayersList
     }
 
-    func isFriday() -> Bool {
+    func isFriday(_ prayer: Prayer) -> Bool {
         return DateHelper.string(from: DateHelper.date(from: todayAsString) ?? Date(), dateFormat: "EEEE") == "Friday"
+            && prayer.time.hour ?? 0 > currentTime.hour ?? 0
     }
 
     class func lastThirdNightTime(maghribTime: Time?, fajrTime: Time?) -> Time? {
