@@ -1,3 +1,10 @@
+0.3.0
+- Add unit tests
+- Refactor ViewModel
+	- Inject PrayerManager into ViewModel
+	- Allow multiple listeners
+- Refactor PrayerManager
+- Fix duplicate notifications bug
 - Add sunrise as [next prayer + notification only]
 - Move location manager to data provider to use it when needed only
 - Show Jumuah in Friday
