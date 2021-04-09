@@ -34,7 +34,9 @@ class FastingManager {
             guard let dateString = DateHelper.date(from: $0.gregorian) else {
                 return
             }
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            dateComponents.hour = 12
+            dateComponents.minute = 0
             guard let day = dateComponents.day, let month = dateComponents.month else {
                 return
             }
@@ -62,7 +64,9 @@ class FastingManager {
                 return
             }
 
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            dateComponents.hour = 12
+            dateComponents.minute = 0
             guard let day = dateComponents.day, let month = dateComponents.month else {
                 return
             }
@@ -89,7 +93,9 @@ class FastingManager {
                 return
             }
 
-            let dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            var dateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateString)
+            dateComponents.hour = 12
+            dateComponents.minute = 0
             guard let day = dateComponents.day, let month = dateComponents.month else {
                 return
             }
