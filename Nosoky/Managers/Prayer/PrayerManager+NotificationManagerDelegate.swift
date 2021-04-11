@@ -89,7 +89,7 @@ extension PrayerManager: NotificationManagerDataSource {
                 dateComponents: prayersDateComponents
             )
 
-            if isFriday(dhuhr) {
+            if DateHelper.string(from: prayersDate, dateFormat: "EEEE") == "Friday" {
                 notification.title = "الجُمْعَة"
                 notification.body = "یَـٰۤأَیُّهَا ٱلَّذِینَ ءَامَنُوۤا۟ إِذَا نُودِیَ لِلصَّلَوٰةِ مِن یَوۡمِ ٱلۡجُمُعَةِ فَٱسۡعَوۡا۟ إِلَىٰ ذِكۡرِ ٱللَّهِ"
             }

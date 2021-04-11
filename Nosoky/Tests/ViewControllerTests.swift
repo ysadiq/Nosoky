@@ -12,13 +12,13 @@ import CoreLocation
 class ViewControllerTests: XCTestCase {
     var viewController: ViewController!
     var prayerManagerMock: PrayerManagerMock!
-    let coordinate = CLLocationCoordinate2D(latitude: 30.086594, longitude: 31.344536)
 
     override func setUp() {
         super.setUp()
 
         prayerManagerMock = PrayerManagerMock()
         prayerManagerMock.todayAsString = "2021-04-02"
+        prayerManagerMock.tomorrowAsString = "2021-04-03"
         
         let viewController = ViewController.instance(
             from: "Main",
@@ -113,7 +113,7 @@ class ViewControllerTests: XCTestCase {
 
         wait(for: [promise], timeout: 0.1)
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")
-        XCTAssertEqual(viewController.prayerTimeLabel.text!, "2:7")
+        XCTAssertEqual(viewController.prayerTimeLabel.text!, "1:59")
         XCTAssertTrue(viewController.prayerNameLabel.isHidden)
         XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
     }
@@ -133,13 +133,12 @@ class ViewControllerTests: XCTestCase {
 
         wait(for: [promise], timeout: 0.1)
         XCTAssertEqual(viewController.nextPrayerTitleLabel.text!, "The last third of the night starts in")
-        XCTAssertEqual(viewController.prayerTimeLabel.text!, "8")
+        XCTAssertEqual(viewController.prayerTimeLabel.text!, "1")
         XCTAssertTrue(viewController.prayerNameLabel.isHidden)
         XCTAssertTrue(viewController.lastThirdNightStackView.isHidden)
     }
 
     func testNextPrayerOnTimeChange() {
-        prayerManagerMock.todayAsString = "2021-04-01"
         let promise = XCTestExpectation(description: #function)
         promise.expectedFulfillmentCount = 2
 
@@ -150,10 +149,10 @@ class ViewControllerTests: XCTestCase {
         viewController.viewModel.updateLoadingStatus.append(updateLoadingStatus)
         viewController.initViewModel()
 
-        wait(for: [promise], timeout: 0.1)
+        wait(for: [promise], timeout: 1)
         prayerManagerMock.currentTimeMock = Time(hour: 11, minute: 0)
         prayerManagerMock.onMinuteUpdate?()
-        XCTAssertEqual(viewController.prayerNameLabel.text, "Dhuhr")
+        XCTAssertEqual(viewController.prayerNameLabel.text, "Jumuah")
 
         prayerManagerMock.currentTimeMock = Time(hour: 14, minute: 0)
         prayerManagerMock.onMinuteUpdate?()

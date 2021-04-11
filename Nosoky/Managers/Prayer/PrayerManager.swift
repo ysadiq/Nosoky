@@ -75,7 +75,7 @@ class PrayerManager {
         )
     }
 
-    var nextPrayer: Prayer {
+    var nextPrayer: Prayer? {
         while let prayer = todaysPrayers.first {
             guard let prayerTimeHour = prayer.time.hour, let prayerTimeMinute = prayer.time.minute,
                   let currentTimeHour = currentTime.hour, let currentTimeMinute = currentTime.minute else {
@@ -91,11 +91,11 @@ class PrayerManager {
         }
 
         todaysPrayers = tomorrowPrayers
-        return todaysPrayers[0]
+        return todaysPrayers.first
     }
 
     var otherPrayers: [Prayer] {
-        return todaysPrayers.filter { $0.name != nextPrayer.name && $0.isMandatory }
+        return todaysPrayers.filter { $0.name != nextPrayer?.name && $0.isMandatory }
     }
 
     // MARK: - Private methods

@@ -58,9 +58,9 @@ class ViewController: UIViewController {
     func updateNextPrayer() {
         let nextPrayer = prayerManager.nextPrayer
         
-        if nextPrayer.name == "Night" {
+        if nextPrayer?.name == "Night" {
             nextPrayerTitleLabel.text = "The last third of the night starts in"
-            setPrayerTimeLabel(nextPrayer.time)
+            setPrayerTimeLabel(nextPrayer?.time)
             prayerNameLabel.isHidden = true
             lastThirdNightStackView.isHidden = true
 
@@ -68,19 +68,19 @@ class ViewController: UIViewController {
             return
         } else if nextPrayerTitleLabel.text == "The last third of the night starts in" {
             nextPrayerTitleLabel.text = "Next Prayer"
-            prayerNameLabel.text = nextPrayer.name
+            prayerNameLabel.text = nextPrayer?.name
             prayerNameLabel.isHidden = false
             lastThirdNightStackView.isHidden = false
 
             otherPrayersCollectionView.reloadData()
         }
 
-        if nextPrayer.name != prayerNameLabel.text {
-            prayerNameLabel.text = nextPrayer.name
+        if nextPrayer?.name != prayerNameLabel.text {
+            prayerNameLabel.text = nextPrayer?.name
             otherPrayersCollectionView.reloadData()
         }
         
-        setPrayerTimeLabel(nextPrayer.time)
+        setPrayerTimeLabel(nextPrayer?.time)
     }
 
     func updateLastNightThird() {
@@ -97,8 +97,9 @@ class ViewController: UIViewController {
 
     }
 
-    func setPrayerTimeLabel(_ time: Time) {
-        guard let timeRemaining = prayerManager.timeRemainingTo(time),
+    func setPrayerTimeLabel(_ time: Time?) {
+        guard let time = time,
+              let timeRemaining = prayerManager.timeRemainingTo(time),
               let timeRemainingHour = timeRemaining.time.hour,
               let timeRemainingMinute = timeRemaining.time.minute else {
             return
