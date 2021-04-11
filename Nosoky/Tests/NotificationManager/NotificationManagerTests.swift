@@ -56,7 +56,7 @@ class NotificationManagerTests: XCTestCase {
         notificationManager.addNotificationExpectation.expectedFulfillmentCount = 64
         notificationCenter.grantAuthorization = true
         notificationManager.addNotificationsIfNeeded()
-        wait(for: [notificationManager.addNotificationExpectation], timeout: 1)
+        wait(for: [notificationManager.addNotificationExpectation], timeout: 5)
         XCTAssertEqual(notificationManager.numberOfAddedNotifications, 64)
 
         // Test that no notification is added when maximum is reached
