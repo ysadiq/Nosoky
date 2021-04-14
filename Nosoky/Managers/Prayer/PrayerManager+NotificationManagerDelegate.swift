@@ -58,7 +58,7 @@ extension PrayerManager: NotificationManagerDataSource {
                     id: prayerId(fajr),
                     title: "الفجر",
                     subtitle: "الصلاة خير من النوم",
-                    sound: .miniAdhan,
+                    sound: .fajrAdhan,
                     dateComponents: prayersDateComponents
                 )
             )
